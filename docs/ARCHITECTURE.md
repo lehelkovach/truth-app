@@ -1,0 +1,94 @@
+# Architecture
+
+```
+source material (debate, paper, conversation, manual authoring)
+        │
+        ▼
+compact case (fixtures/<case>/source/case.json)  ──compileCase──▶  TruthPatch
+        │                                                             │
+        ▼                                                             ▼
+   AJV schema validation  +  referential invariants  (src/domain/validate.mjs)
+        │
+        ▼
+   applyPatch  →  immutable snapshot  →  commit (content-hashed, parent-linked)
+        │                                        │
+        │                                        ├──▶ semantic diff between commits
+        │                                        └──▶ KSG adapter (mirror units/relations/commit)
+        ▼
+   evaluator registry  →  grounded argumentation  →  Evaluation artifact (pins commit + evaluator)
+        │
+        ▼
+   projections: Markdown / HTML report, CLI, (next PR) graph UI
+```
+
+## Modules
+
+| Path | Owns |
+|---|---|
+| `schema/` | TruthIR profile, TruthPatch, TruthCommit JSON Schemas (draft-07). |
+| `src/domain/ids.mjs` | `kind:name` references. |
+| `src/domain/canonicalize.mjs` | Canonical JSON, `sha256:` content hashes, deep freeze. |
+| `src/domain/validate.mjs` | AJV validators plus invariants (refs resolve, premise kinds, undermine targets). |
+| `src/domain/truth-patch.mjs` | Pure `applyPatch`; per-unit revision counters and hashes. |
+| `src/domain/commit.mjs` | Repository, commits, branches, history, `verifyCommit`. |
+| `src/domain/semantic-diff.mjs` | Added / removed / revised with diff classes. |
+| `src/domain/argumentation.mjs` | `evaluateGrounded`, `evaluateSnapshot`, structural findings. |
+| `src/domain/fallacies.mjs` | Fallacy catalogue (name, category, definition, test). |
+| `src/domain/evaluation.mjs` | Evaluation artifact with pinned provenance. |
+| `src/domain/authoring.mjs` | Compact case → TruthPatch compiler. |
+| `src/services/truth-store.mjs` | `createTruthStore({ ksg })`: commitPatch, getSnapshot, diff, evaluate, explainUnit, getEvidence, listHistory. |
+| `src/services/evaluator-registry.mjs` | Pluggable evaluators. |
+| `src/adapters/ksg.mjs` | The one KnowShowGo boundary, plus a deterministic fake client. |
+| `src/adapters/local-fixture-store.mjs` | Replay `fixtures/<name>/commits/*.json` into a store. |
+| `src/report/` | Markdown and HTML projections. |
+| `src/cli.mjs` | `truth validate | evaluate | report | history | diff | verify | compile | fallacies | ksg-push | demo`. |
+
+## Evaluation semantics
+
+Grounded labelling (Dung 1995), extended with premise support:
+
+- An argument is **accepted** when every attacker is rejected and every
+  premise is established.
+- **Rejected** when some attacker is accepted or some premise is defeated.
+- **Undecided** otherwise (mutual rebuttal, odd cycles).
+- A claim with `basis` evidence / definition / assumption is **established**
+  unless an argument using it is undermined; a `derived` claim is
+  established when some argument concluding it is accepted, **defeated** when
+  every such argument is rejected, **open** while any is undecided.
+
+Attack relations: `rebut` (conclusion), `undercut` (inference), `undermine`
+(a named premise; `to: "argument:*"` expands to every argument using it).
+`supports`, `qualifies`, `cites`, `tested_by`, `replicates` and the rest of the
+vocabulary are recorded and shown but do not move labels.
+
+Structural findings (automated, conservative):
+
+| Code | Meaning |
+|---|---|
+| `MODAL_OVERREACH` | Conclusion asserted more strongly than the weakest premise (major for deductive or a two-step gap). |
+| `CIRCULAR` | The support chain for a conclusion returns to itself. |
+| `UNSOURCED_PREMISE` | `basis: evidence` with no sources (major); unsourced assumption in use (info). |
+| `DERIVED_UNSUPPORTED` | A derived claim with no argument for it. |
+| `UNCONTESTED` | A standing argument nobody has attacked: where the other side should push next. |
+| `STANDOFF` | Mutual rebuttal with neither side defeated. |
+| `NO_WARRANT` | Argument does not say why premises support the conclusion. |
+| `UNKNOWN_FALLACY` | Annotation names a fallacy outside the catalogue. |
+
+Modalities record how strongly the *proponent* asserts a claim
+(speculative < possible < plausible < probable < certain). They are not the
+analyst's belief and not a probability.
+
+## KnowShowGo mapping
+
+| TruthApp | KSG call | Notes |
+|---|---|---|
+| unit revision | `upsert_object` | `category_name = kind`, `object_lineage_key = unit id`, `previous_object_uuid` = prior revision. |
+| argument | also `create_syllogism` | premises / conclusion texts with ids. |
+| relation | `create_assertion` | subject = from, predicate = operator, obj = to, `prev_assertion_id` chains revisions. |
+| commit | `create_assertion` | `commit:… commits repo:…` with hashes in provenance. |
+| contract | `connect({ expected_release })` | mismatch fails closed (KSG-003). |
+
+## What is not here yet
+
+Graph UI (Vite + Cytoscape), proposal-review flow, AI translator, Logic IR
+bindings, ASP / Bayesian / LNN evaluators. See `docs/ROADMAP.md`.

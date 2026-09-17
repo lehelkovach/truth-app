@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/lehelkovach/truth-app/schema/truth-commit-v0.1.schema.json",
+  "title": "TruthCommit v0.1",
+  "type": "object",
+  "required": ["schema", "version", "id", "parentRefs", "branch", "message", "createdAt", "patchRef", "patchHash", "snapshotHash", "provenance", "immutable"],
+  "properties": {
+    "schema": { "const": "truth-commit" },
+    "version": { "const": "0.1" },
+    "id": { "type": "string", "pattern": "^commit:[a-f0-9]{12,64}$" },
+    "parentRefs": { "type": "array", "items": { "type": "string" } },
+    "branch": { "type": "string" },
+    "message": { "type": "string" },
+    "createdAt": { "type": "string" },
+    "authorRef": { "type": "string" },
+    "patchRef": { "type": "string" },
+    "patchHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "snapshotHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "provenance": { "$ref": "truthir-profile-v0.1.schema.json#/definitions/provenance" },
+    "immutable": { "const": true }
+  },
+  "additionalProperties": false
+}

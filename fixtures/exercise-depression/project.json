@@ -1,0 +1,8 @@
+{
+  "id": "repo:exercise-depression",
+  "title": "Does regular aerobic exercise reduce depressive symptoms?",
+  "question": "Does regular aerobic exercise reduce depressive symptoms?",
+  "description": "Scientific mini-graph from the handoff appendix: claims backed by evidence, a hypothesis with a falsification criterion, then a second commit that adds a replication, a limitation and narrows the hypothesis scope.",
+  "authorRef": "actor:demo-user",
+  "createdAt": "2026-08-07T21:00:00Z"
+}

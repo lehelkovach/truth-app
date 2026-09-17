@@ -1,0 +1,18 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:exercise-0002",
+  "message": "Add replication S3 and limitation L1; narrow H1 scope",
+  "createdAt": "2026-08-08T21:00:00Z",
+  "provenance": { "sourceType": "fixture", "sourceRef": "conversation:demo-002", "method": "reviewed_semantic_commit" },
+  "operations": [
+    { "op": "addUnit", "unit": { "id": "source:S3", "kind": "source", "status": "accepted", "title": "Preregistered replication S3 of S1", "year": 2024, "provenance": { "sourceType": "import", "sourceRef": "doi:10.0000/demo-s3" } } },
+    { "op": "addUnit", "unit": { "id": "evidence:E3", "kind": "evidence", "status": "accepted", "sourceRef": "source:S3", "text": "S3 replicates the S1 effect in an independent adult sample with mild-to-moderate symptoms.", "provenance": { "sourceType": "llm", "sourceRef": "doi:10.0000/demo-s3", "method": "llm_extract_then_user_review", "model": "demo" } } },
+    { "op": "addRelation", "relation": { "id": "rel:S3-replicates-S1", "operator": "replicates", "from": "source:S3", "to": "source:S1", "status": "accepted", "provenance": { "sourceType": "user", "sourceRef": "conversation:demo-002" } } },
+    { "op": "addRelation", "relation": { "id": "rel:E3-supports-C2", "operator": "supports", "from": "evidence:E3", "to": "claim:C2", "status": "accepted", "provenance": { "sourceType": "user", "sourceRef": "conversation:demo-002" } } },
+    { "op": "addUnit", "unit": { "id": "claim:C4", "kind": "claim", "status": "accepted", "text": "Several of the trials behind C1 have a high risk of bias (unblinded outcome assessment, small samples).", "claimKind": "empirical", "modality": "probable", "basis": "evidence", "sourceRefs": ["source:S1"], "provenance": { "sourceType": "user", "sourceRef": "conversation:demo-002" } } },
+    { "op": "addUnit", "unit": { "id": "claim:C5", "kind": "claim", "status": "accepted", "text": "The trial evidence for C1 is weaker than the headline results suggest.", "claimKind": "empirical", "modality": "plausible", "basis": "derived", "provenance": { "sourceType": "user", "sourceRef": "conversation:demo-002" } } },
+    { "op": "addUnit", "unit": { "id": "argument:L1", "kind": "argument", "status": "accepted", "title": "Limitation: risk of bias", "premiseRefs": ["claim:C4"], "conclusionRef": "claim:C5", "scheme": "inductive", "strict": false, "warrant": "Unblinded, small trials overestimate effects.", "provenance": { "sourceType": "user", "sourceRef": "conversation:demo-002" } } },
+    { "op": "addRelation", "relation": { "id": "rel:L1-qualifies-A1", "operator": "qualifies", "from": "argument:L1", "to": "argument:A1", "targetRef": "claim:C1", "status": "accepted", "note": "Narrows, does not defeat: the replication S3 was preregistered and blinded.", "provenance": { "sourceType": "user", "sourceRef": "conversation:demo-002" } } },
+    { "op": "reviseUnit", "target": { "id": "hypothesis:H1", "revision": 1 }, "next": { "scope": "adults with mild-to-moderate depressive symptoms", "prediction": "A sufficiently powered randomised intervention in adults with mild-to-moderate symptoms produces lower symptom scores than control." }, "reason": "Scope narrowed after replication S3." }
+  ]
+}

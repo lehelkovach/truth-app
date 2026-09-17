@@ -1,0 +1,43 @@
+{
+  "name": "truth-app",
+  "version": "0.1.0",
+  "description": "Version-controlled reasoning workbench: claims, arguments, evidence and attacks as inspectable semantic data with provenance, revisions and deterministic evaluators.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "src/app.mjs",
+  "bin": {
+    "truth": "src/cli.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "lint": "node --check src/app.mjs && node --check src/cli.mjs",
+    "check": "npm run lint && npm test",
+    "validate": "node src/cli.mjs validate",
+    "evaluate": "node src/cli.mjs evaluate",
+    "report": "node src/cli.mjs report",
+    "demo": "node src/cli.mjs demo fixtures/ai-risk"
+  },
+  "keywords": [
+    "argumentation",
+    "reasoning",
+    "claims",
+    "evidence",
+    "knowledge-graph",
+    "semantic-versioning",
+    "knowshowgo",
+    "truthir"
+  ],
+  "author": "Lehel Kovach",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lehelkovach/truth-app.git"
+  },
+  "dependencies": {
+    "@lehelkovach/knowshowgo-client": "github:lehelkovach/knowshowgo-client#v0.2.20-client",
+    "ajv": "^8.17.1"
+  }
+}

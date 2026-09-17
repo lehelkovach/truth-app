@@ -1,0 +1,580 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/lehelkovach/truth-app/schema/truthir-profile-v0.1.schema.json",
+  "title": "TruthIR TruthApp profile v0.1",
+  "description": "Semantic units and relations that TruthApp v0.1 stores, versions and evaluates. A unit is one immutable semantic object; a relation joins two units with an operator from the relationship vocabulary.",
+  "definitions": {
+    "ref": {
+      "type": "string",
+      "pattern": "^[a-z]+:[A-Za-z0-9_.-]+$"
+    },
+    "refList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ref"
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "accepted",
+        "retracted",
+        "deprecated"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "sourceType"
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "user",
+            "llm",
+            "import",
+            "evaluator",
+            "fixture"
+          ]
+        },
+        "sourceRef": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "actorRef": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "fragment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "unitBase": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "status",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ref"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "issue",
+            "position",
+            "claim",
+            "argument",
+            "evidence",
+            "source",
+            "assumption",
+            "hypothesis",
+            "theory",
+            "annotation",
+            "actor"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/status"
+        },
+        "provenance": {
+          "$ref": "#/definitions/provenance"
+        },
+        "text": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "issue": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "issue"
+            },
+            "question": {
+              "type": "string"
+            },
+            "thesisRef": {
+              "$ref": "#/definitions/ref"
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      ]
+    },
+    "position": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "position"
+            },
+            "issueRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "issueRef",
+            "name"
+          ]
+        }
+      ]
+    },
+    "claim": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "claim"
+            },
+            "claimKind": {
+              "type": "string",
+              "enum": [
+                "empirical",
+                "predictive",
+                "normative",
+                "definitional",
+                "conceptual"
+              ]
+            },
+            "modality": {
+              "type": "string",
+              "enum": [
+                "speculative",
+                "possible",
+                "plausible",
+                "probable",
+                "certain"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "enum": [
+                "evidence",
+                "definition",
+                "assumption",
+                "derived"
+              ]
+            },
+            "positionRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "sourceRefs": {
+              "$ref": "#/definitions/refList"
+            }
+          },
+          "required": [
+            "text",
+            "claimKind",
+            "modality",
+            "basis"
+          ]
+        }
+      ]
+    },
+    "argument": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "argument"
+            },
+            "premiseRefs": {
+              "$ref": "#/definitions/refList",
+              "minItems": 1
+            },
+            "conclusionRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "scheme": {
+              "type": "string",
+              "enum": [
+                "deductive",
+                "inductive",
+                "abductive",
+                "analogical",
+                "expected-value",
+                "authority",
+                "extrapolation"
+              ]
+            },
+            "strict": {
+              "type": "boolean"
+            },
+            "warrant": {
+              "type": "string"
+            },
+            "positionRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "sourceRefs": {
+              "$ref": "#/definitions/refList"
+            }
+          },
+          "required": [
+            "title",
+            "premiseRefs",
+            "conclusionRef",
+            "scheme"
+          ]
+        }
+      ]
+    },
+    "evidence": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "evidence"
+            },
+            "sourceRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "fragment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "text",
+            "sourceRef"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "source"
+            },
+            "who": {
+              "type": "string"
+            },
+            "year": {
+              "type": "integer"
+            },
+            "url": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            },
+            "doi": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title"
+          ]
+        }
+      ]
+    },
+    "assumption": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "assumption"
+            },
+            "positionRef": {
+              "$ref": "#/definitions/ref"
+            }
+          },
+          "required": [
+            "text"
+          ]
+        }
+      ]
+    },
+    "hypothesis": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "hypothesis"
+            },
+            "claimRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "prediction": {
+              "type": "string"
+            },
+            "falsificationCriterion": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claimRef",
+            "prediction"
+          ]
+        }
+      ]
+    },
+    "theory": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "theory"
+            },
+            "hypothesisRefs": {
+              "$ref": "#/definitions/refList"
+            },
+            "assumptionRefs": {
+              "$ref": "#/definitions/refList"
+            }
+          },
+          "required": [
+            "title"
+          ]
+        }
+      ]
+    },
+    "annotation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "annotation"
+            },
+            "annotationType": {
+              "type": "string",
+              "enum": [
+                "fallacy",
+                "note"
+              ]
+            },
+            "targetRef": {
+              "$ref": "#/definitions/ref"
+            },
+            "name": {
+              "type": "string"
+            },
+            "where": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "fatal",
+                "weakens",
+                "note"
+              ]
+            },
+            "byRef": {
+              "$ref": "#/definitions/ref"
+            }
+          },
+          "required": [
+            "annotationType",
+            "targetRef",
+            "text"
+          ]
+        }
+      ]
+    },
+    "actor": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "actor"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    },
+    "unit": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/issue"
+        },
+        {
+          "$ref": "#/definitions/position"
+        },
+        {
+          "$ref": "#/definitions/claim"
+        },
+        {
+          "$ref": "#/definitions/argument"
+        },
+        {
+          "$ref": "#/definitions/evidence"
+        },
+        {
+          "$ref": "#/definitions/source"
+        },
+        {
+          "$ref": "#/definitions/assumption"
+        },
+        {
+          "$ref": "#/definitions/hypothesis"
+        },
+        {
+          "$ref": "#/definitions/theory"
+        },
+        {
+          "$ref": "#/definitions/annotation"
+        },
+        {
+          "$ref": "#/definitions/actor"
+        }
+      ]
+    },
+    "relation": {
+      "type": "object",
+      "required": [
+        "id",
+        "operator",
+        "from",
+        "to",
+        "status",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ref"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "supports",
+            "attacks",
+            "rebut",
+            "undercut",
+            "undermine",
+            "contradicts",
+            "depends_on",
+            "derived_from",
+            "tested_by",
+            "replicates",
+            "falsifies",
+            "qualifies",
+            "assumes",
+            "competes_with",
+            "supersedes",
+            "cites"
+          ]
+        },
+        "from": {
+          "$ref": "#/definitions/ref"
+        },
+        "to": {
+          "type": "string",
+          "pattern": "^[a-z]+:([A-Za-z0-9_.-]+|\\*)$"
+        },
+        "targetRef": {
+          "$ref": "#/definitions/ref"
+        },
+        "note": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/status"
+        },
+        "provenance": {
+          "$ref": "#/definitions/provenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "snapshot": {
+      "type": "object",
+      "required": [
+        "units",
+        "relations"
+      ],
+      "properties": {
+        "units": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/unit"
+          }
+        },
+        "relations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/relation"
+          }
+        }
+      }
+    }
+  },
+  "$ref": "#/definitions/snapshot"
+}

@@ -1,0 +1,54 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:ai-risk-2026-0002",
+  "message": "Risk side replies to B3: automated AI research compounds within fixed compute (A15 undercuts B3)",
+  "createdAt": "2026-09-18T00:00:00Z",
+  "provenance": { "sourceType": "fixture", "sourceRef": "case:ai-risk-2026", "method": "manual_authoring", "actorRef": "actor:lehel" },
+  "operations": [
+    {
+      "op": "addUnit",
+      "unit": {
+        "id": "claim:R5", "kind": "claim", "status": "accepted",
+        "claimKind": "predictive", "modality": "plausible", "basis": "assumption",
+        "positionRef": "position:risk", "sourceRefs": ["source:ai2027"],
+        "text": "Once AI systems can run most of AI research, algorithmic progress can compound within a fixed compute budget, so the physical bottlenecks on compute and energy do not cap the loop for the first several doublings.",
+        "provenance": { "sourceType": "fixture", "sourceRef": "case:ai-risk-2026", "method": "manual_authoring", "actorRef": "actor:lehel" }
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "id": "claim:R5c", "kind": "claim", "status": "accepted",
+        "claimKind": "conceptual", "modality": "plausible", "basis": "derived",
+        "positionRef": "position:risk",
+        "text": "Resource bounds on compute and energy do not rule out a fast capability jump driven by automated AI research.",
+        "provenance": { "sourceType": "fixture", "sourceRef": "case:ai-risk-2026", "method": "manual_authoring", "actorRef": "actor:lehel" }
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "id": "argument:A15", "kind": "argument", "status": "accepted",
+        "title": "Automated AI research compounds within fixed compute",
+        "premiseRefs": ["claim:R5", "claim:P18"], "conclusionRef": "claim:R5c",
+        "scheme": "inductive", "strict": false, "positionRef": "position:risk", "sourceRefs": ["source:ai2027"],
+        "warrant": "B3 assumes each round of improvement needs more compute and energy. If most of AI research is automated (R5) and autonomous task horizons keep doubling (P18), algorithmic gains substitute for hardware for a while, so S4 does not bound the loop.",
+        "provenance": { "sourceType": "fixture", "sourceRef": "case:ai-risk-2026", "method": "manual_authoring", "actorRef": "actor:lehel" }
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "id": "rel:X19", "operator": "undercut", "from": "argument:A15", "to": "argument:B3", "status": "accepted",
+        "note": "Physical bounds do not apply while algorithmic progress substitutes for hardware.",
+        "provenance": { "sourceType": "fixture", "sourceRef": "case:ai-risk-2026", "method": "manual_authoring", "actorRef": "actor:lehel" }
+      }
+    },
+    {
+      "op": "reviseUnit",
+      "target": { "id": "argument:B3", "revision": 1 },
+      "next": { "notes": "Now contested by A15 (automated AI research). The skeptic's next move is to attack R5: does algorithmic progress really substitute for compute across several doublings?" },
+      "reason": "The frontier note is stale once A15 is entered."
+    }
+  ]
+}

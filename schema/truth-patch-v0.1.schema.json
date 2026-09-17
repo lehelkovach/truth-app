@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/lehelkovach/truth-app/schema/truth-patch-v0.1.schema.json",
+  "title": "TruthPatch v0.1",
+  "description": "An atomic semantic change set applied to a snapshot. Units and relations follow the TruthIR profile.",
+  "type": "object",
+  "required": ["patchVersion", "operations", "message"],
+  "properties": {
+    "patchVersion": { "const": "0.1" },
+    "id": { "type": "string" },
+    "baseCommitRef": { "type": ["string", "null"] },
+    "message": { "type": "string" },
+    "provenance": { "$ref": "truthir-profile-v0.1.schema.json#/definitions/provenance" },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          { "type": "object", "required": ["op", "unit"], "properties": { "op": { "const": "addUnit" }, "unit": { "$ref": "truthir-profile-v0.1.schema.json#/definitions/unit" } }, "additionalProperties": false },
+          { "type": "object", "required": ["op", "target", "next"], "properties": { "op": { "const": "reviseUnit" }, "target": { "$ref": "#/definitions/target" }, "next": { "type": "object" }, "reason": { "type": "string" } }, "additionalProperties": false },
+          { "type": "object", "required": ["op", "target"], "properties": { "op": { "const": "retractUnit" }, "target": { "$ref": "#/definitions/target" }, "reason": { "type": "string" } }, "additionalProperties": false },
+          { "type": "object", "required": ["op", "relation"], "properties": { "op": { "const": "addRelation" }, "relation": { "$ref": "truthir-profile-v0.1.schema.json#/definitions/relation" } }, "additionalProperties": false },
+          { "type": "object", "required": ["op", "target", "next"], "properties": { "op": { "const": "reviseRelation" }, "target": { "$ref": "#/definitions/target" }, "next": { "type": "object" }, "reason": { "type": "string" } }, "additionalProperties": false },
+          { "type": "object", "required": ["op", "target"], "properties": { "op": { "const": "retractRelation" }, "target": { "$ref": "#/definitions/target" }, "reason": { "type": "string" } }, "additionalProperties": false }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "target": {
+      "type": "object",
+      "required": ["id"],
+      "properties": { "id": { "type": "string" }, "revision": { "type": ["integer", "string"] } },
+      "additionalProperties": false
+    }
+  }
+}

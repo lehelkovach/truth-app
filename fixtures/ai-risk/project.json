@@ -1,0 +1,8 @@
+{
+  "id": "repo:ai-risk-2026",
+  "title": "Is AI an existential threat? The doom case and its counter-case",
+  "question": "Do current arguments justify high confidence that advanced AI will cause human extinction or permanent disempowerment, and therefore justify drastic intervention now?",
+  "description": "Seed argumentation fixture. The existential-risk position is stated in the strongest form its proponents use; the proportionate-risk position is the author's counter-case. Modalities record how strongly each side asserts a proposition, not the analyst's belief.",
+  "authorRef": "actor:lehel",
+  "createdAt": "2026-09-17T00:00:00Z"
+}

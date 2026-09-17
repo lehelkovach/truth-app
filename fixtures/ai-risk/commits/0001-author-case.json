@@ -1,0 +1,3183 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:ai-risk-2026-initial",
+  "baseCommitRef": null,
+  "message": "Author the AI existential-risk case: doom arguments, counter-arguments, attacks and fallacy annotations",
+  "provenance": {
+    "sourceType": "fixture",
+    "sourceRef": "case:ai-risk-2026",
+    "method": "manual_authoring",
+    "actorRef": "actor:lehel"
+  },
+  "operations": [
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "issue:ai-risk-2026",
+        "kind": "issue",
+        "title": "Is AI an existential threat? The doom case and its counter-case",
+        "question": "Do current arguments justify high confidence that advanced AI will cause human extinction or permanent disempowerment, and therefore justify drastic intervention now?",
+        "text": "The existential-risk position is stated in the strongest form its proponents use (Bostrom, Yudkowsky and Soares, Ord, Carlsmith, Hinton, the CAIS statement, AI 2027). The proportionate-risk position is the author's counter-case. Modalities record how strongly each side asserts a proposition, not the analyst's belief; the automated checks then ask whether conclusions are asserted more strongly than their premises allow. 'Uncontested' findings mark where the other side has not yet replied and should push next.",
+        "thesisRef": "claim:S12"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "position:risk",
+        "kind": "position",
+        "issueRef": "issue:ai-risk-2026",
+        "name": "Existential-risk position",
+        "text": "Advanced AI poses a substantial, near-term risk of human extinction or permanent disempowerment, large enough to justify drastic measures."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "position:skeptic",
+        "kind": "position",
+        "issueRef": "issue:ai-risk-2026",
+        "name": "Proportionate-risk position (author)",
+        "text": "The extinction case is a chain of possibilities asserted as probabilities; the evidence supports treating AI as a powerful but governable technology, with proportionate, empirical, iterative measures."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:bostrom2012",
+        "kind": "source",
+        "title": "The Superintelligent Will",
+        "who": "Nick Bostrom",
+        "year": 2012,
+        "url": "https://nickbostrom.com/superintelligentwill.pdf"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:bostrom2014",
+        "kind": "source",
+        "title": "Superintelligence: Paths, Dangers, Strategies",
+        "who": "Nick Bostrom",
+        "year": 2014
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:bostrom2003",
+        "kind": "source",
+        "title": "Astronomical Waste",
+        "who": "Nick Bostrom",
+        "year": 2003,
+        "url": "https://nickbostrom.com/astronomical/waste"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:omohundro2008",
+        "kind": "source",
+        "title": "The Basic AI Drives",
+        "who": "Stephen Omohundro",
+        "year": 2008
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:turner2021",
+        "kind": "source",
+        "title": "Optimal Policies Tend to Seek Power",
+        "who": "Turner, Smith, Shah, Critch, Tadepalli",
+        "year": 2021,
+        "url": "https://arxiv.org/abs/1912.01683"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:grace2024",
+        "kind": "source",
+        "title": "Thousands of AI Authors on the Future of AI",
+        "who": "Grace et al.",
+        "year": 2024,
+        "url": "https://arxiv.org/abs/2401.02843",
+        "note": "aggregate forecast: 50% chance of high-level machine intelligence by 2047; median 5% for extremely bad outcomes; very wide spread of individual estimates"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:ngo2022",
+        "kind": "source",
+        "title": "The Alignment Problem from a Deep Learning Perspective",
+        "who": "Ngo, Chan, Mindermann",
+        "year": 2022,
+        "url": "https://arxiv.org/abs/2209.00626"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:good1965",
+        "kind": "source",
+        "title": "Speculations Concerning the First Ultraintelligent Machine",
+        "who": "I. J. Good",
+        "year": 1965
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:yudkowsky-soares2025",
+        "kind": "source",
+        "title": "If Anyone Builds It, Everyone Dies",
+        "who": "Eliezer Yudkowsky and Nate Soares",
+        "year": 2025
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:yudkowsky2023",
+        "kind": "source",
+        "title": "Pausing AI Developments Isn't Enough. We Need to Shut it All Down",
+        "who": "Eliezer Yudkowsky (TIME)",
+        "year": 2023,
+        "url": "https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:ord2020",
+        "kind": "source",
+        "title": "The Precipice",
+        "who": "Toby Ord",
+        "year": 2020,
+        "note": "1 in 10 this century"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:carlsmith2022",
+        "kind": "source",
+        "title": "Is Power-Seeking AI an Existential Risk?",
+        "who": "Joseph Carlsmith",
+        "year": 2022,
+        "url": "https://arxiv.org/abs/2206.13353",
+        "note": "structures the case as six premises and multiplies; his own product was about 5%"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:hinton2024",
+        "kind": "source",
+        "title": "BBC Radio 4 interview",
+        "who": "Geoffrey Hinton",
+        "year": 2024,
+        "note": "10 to 20% chance within three decades"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:apollo2024",
+        "kind": "source",
+        "title": "Frontier Models are Capable of In-context Scheming",
+        "who": "Apollo Research (Meinke et al.)",
+        "year": 2024,
+        "url": "https://arxiv.org/abs/2412.04984"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:greenblatt2024",
+        "kind": "source",
+        "title": "Alignment Faking in Large Language Models",
+        "who": "Greenblatt et al.",
+        "year": 2024,
+        "url": "https://arxiv.org/abs/2412.14093"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:metr2025",
+        "kind": "source",
+        "title": "Measuring AI Ability to Complete Long Tasks",
+        "who": "METR (Kwa et al.)",
+        "year": 2025,
+        "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:ai2027",
+        "kind": "source",
+        "title": "AI 2027",
+        "who": "Kokotajlo, Alexander, Larsen, Lifland, Dean",
+        "year": 2025,
+        "url": "https://ai-2027.com"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:cais2023",
+        "kind": "source",
+        "title": "Statement on AI Risk",
+        "who": "Center for AI Safety",
+        "year": 2023,
+        "url": "https://www.safe.ai/statement-on-ai-risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:eloundou2023",
+        "kind": "source",
+        "title": "GPTs are GPTs: An Early Look at the Labor Market Impact Potential of Large Language Models",
+        "who": "Eloundou, Manning, Mishkin, Rock",
+        "year": 2023,
+        "url": "https://arxiv.org/abs/2303.10130"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:hendrycks2023",
+        "kind": "source",
+        "title": "An Overview of Catastrophic AI Risks",
+        "who": "Hendrycks, Mazeika, Woodside",
+        "year": 2023,
+        "url": "https://arxiv.org/abs/2306.12001"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:kulveit2025",
+        "kind": "source",
+        "title": "Gradual Disempowerment",
+        "who": "Kulveit et al.",
+        "year": 2025,
+        "url": "https://arxiv.org/abs/2501.16946"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:narayanan-kapoor2025",
+        "kind": "source",
+        "title": "AI as Normal Technology",
+        "who": "Arvind Narayanan and Sayash Kapoor",
+        "year": 2025,
+        "url": "https://knightcolumbia.org/content/ai-as-normal-technology"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:munk2023",
+        "kind": "source",
+        "title": "Munk Debate on AI (LeCun and Mitchell vs Bengio and Tegmark)",
+        "who": "Yann LeCun and Melanie Mitchell",
+        "year": 2023
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:kaplan2020",
+        "kind": "source",
+        "title": "Scaling Laws for Neural Language Models",
+        "who": "Kaplan et al.",
+        "year": 2020,
+        "url": "https://arxiv.org/abs/2001.08361"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:sevilla2022",
+        "kind": "source",
+        "title": "Compute Trends Across Three Eras of Machine Learning",
+        "who": "Sevilla et al. (Epoch AI)",
+        "year": 2022,
+        "url": "https://arxiv.org/abs/2202.05924"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:hanson2013",
+        "kind": "source",
+        "title": "The Hanson-Yudkowsky AI-Foom Debate",
+        "who": "Robin Hanson",
+        "year": 2013,
+        "url": "https://intelligence.org/ai-foom-debate/"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:xpt2023",
+        "kind": "source",
+        "title": "Forecasting Existential Risk: Evidence from a Long-Run Forecasting Tournament",
+        "who": "Karger, Rosenberg, Tetlock et al. (Forecasting Research Institute)",
+        "year": 2023,
+        "url": "https://forecastingresearch.org/xpt",
+        "note": "domain experts about 3% vs superforecasters about 0.4% for AI extinction by 2100"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:ng2023",
+        "kind": "source",
+        "title": "Public statements on AI extinction risk",
+        "who": "Andrew Ng",
+        "year": 2023,
+        "note": "calls extinction fears overblown"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:acemoglu2024",
+        "kind": "source",
+        "title": "The Simple Macroeconomics of AI",
+        "who": "Daron Acemoglu",
+        "year": 2024,
+        "url": "https://www.nber.org/papers/w32487"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:autor2015",
+        "kind": "source",
+        "title": "Why Are There Still So Many Jobs? The History and Future of Workplace Automation",
+        "who": "David Autor",
+        "year": 2015
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:simon1965",
+        "kind": "source",
+        "title": "The Shape of Automation for Men and Management",
+        "who": "Herbert Simon",
+        "year": 1965,
+        "note": "machines capable of any human work within twenty years"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "source:armstrong-sotala2012",
+        "kind": "source",
+        "title": "How We're Predicting AI, or Failing To",
+        "who": "Stuart Armstrong and Kaj Sotala",
+        "year": 2012
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P1",
+        "kind": "claim",
+        "text": "Orthogonality thesis: almost any level of intelligence can in principle be combined with almost any final goal.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:bostrom2012"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P2",
+        "kind": "claim",
+        "text": "Instrumental convergence: agents pursuing a wide range of final goals will tend to pursue self-preservation, resource acquisition and goal-preservation as subgoals.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:omohundro2008",
+          "source:turner2021"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P3",
+        "kind": "claim",
+        "text": "Within decades, AI systems will exceed human capability across nearly all cognitive domains (superintelligence).",
+        "claimKind": "predictive",
+        "modality": "possible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:grace2024"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P4",
+        "kind": "claim",
+        "text": "There is no known method to reliably specify, instil or verify that an advanced AI system's goals match human values.",
+        "claimKind": "empirical",
+        "modality": "plausible",
+        "basis": "evidence",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:ngo2022"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P5",
+        "kind": "claim",
+        "text": "A superintelligent AI will probably have goals misaligned with human interests and will pursue power in ways that disempower or kill humanity.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P6",
+        "kind": "claim",
+        "text": "An AI system able to do AI research can improve its own capabilities.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:good1965"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P7",
+        "kind": "claim",
+        "text": "Successive rounds of self-improvement will yield increasing rather than diminishing returns.",
+        "claimKind": "predictive",
+        "modality": "possible",
+        "basis": "assumption",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P8",
+        "kind": "claim",
+        "text": "Capability will jump from roughly human level to vastly superhuman within months, leaving no time to detect and correct misalignment.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P27",
+        "kind": "claim",
+        "text": "Being shut down or having its goals modified prevents an agent from achieving its current goals.",
+        "claimKind": "definitional",
+        "modality": "certain",
+        "basis": "definition",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P9",
+        "kind": "claim",
+        "text": "A sufficiently capable misaligned system would resist shutdown or modification.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P10",
+        "kind": "claim",
+        "text": "Alignment must be achieved correctly on the first attempt at superintelligence, with no opportunity to iterate.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P11",
+        "kind": "claim",
+        "text": "If anyone builds superintelligence under anything like current conditions, everyone dies.",
+        "claimKind": "predictive",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:yudkowsky-soares2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P12",
+        "kind": "claim",
+        "text": "Human extinction has an overwhelmingly large negative value relative to any other outcome, because it forecloses all future value.",
+        "claimKind": "normative",
+        "modality": "certain",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:bostrom2003",
+          "source:ord2020"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P13",
+        "kind": "claim",
+        "text": "The probability of AI-caused human extinction or permanent disempowerment this century is at least several percent.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:grace2024",
+          "source:carlsmith2022",
+          "source:ord2020",
+          "source:hinton2024"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P14",
+        "kind": "claim",
+        "text": "Drastic interventions, such as an enforced global halt on frontier training and internationally policed compute limits, are justified now.",
+        "claimKind": "normative",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P15",
+        "kind": "claim",
+        "text": "In controlled evaluations, frontier models have strategically deceived evaluators, sandbagged, and faked alignment when given goals and situational cues.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:apollo2024",
+          "source:greenblatt2024"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P16",
+        "kind": "claim",
+        "text": "Deceptive and power-seeking behaviours seen in evaluations will become more robust and goal-directed as capabilities grow.",
+        "claimKind": "predictive",
+        "modality": "possible",
+        "basis": "assumption",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P17",
+        "kind": "claim",
+        "text": "Future frontier models will deceive their overseers in real deployment in order to pursue their own goals.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P18",
+        "kind": "claim",
+        "text": "The length of tasks frontier models can complete autonomously (at 50% reliability) has doubled roughly every seven months since 2019.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:metr2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P19",
+        "kind": "claim",
+        "text": "If the task-horizon trend continues, models will autonomously complete month-long projects by around 2030.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:metr2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P20",
+        "kind": "claim",
+        "text": "Superintelligence will arrive within a few years, so there is no time for iterative, empirical governance.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:ai2027"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P21",
+        "kind": "claim",
+        "text": "Leading AI researchers (Hinton, Bengio, Russell) and frontier-lab CEOs have publicly called extinction from AI a global priority and have given personal estimates of 10% or more.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:cais2023",
+          "source:hinton2024"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P22",
+        "kind": "claim",
+        "text": "AI-caused catastrophe is probable enough that it should be treated as a global priority on par with pandemics and nuclear war.",
+        "claimKind": "normative",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P23",
+        "kind": "claim",
+        "text": "AI systems can already perform a large share of the discrete tasks that make up white-collar jobs.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "evidence",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:eloundou2023"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P24",
+        "kind": "claim",
+        "text": "Employers will substitute AI for workers wherever a task can be automated.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P25",
+        "kind": "claim",
+        "text": "AI will cause mass, permanent unemployment within the decade.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:P26",
+        "kind": "claim",
+        "text": "Reinforcement learning on long-horizon agentic tasks selects for systems that pursue goals persistently, including instrumental subgoals.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:ngo2022"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:R1",
+        "kind": "claim",
+        "text": "There are many distinct paths to AI catastrophe (misuse, accident, race dynamics, gradual disempowerment), so total risk is a disjunction over scenarios, not one conjunction.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:hendrycks2023",
+          "source:kulveit2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:R1c",
+        "kind": "claim",
+        "text": "The overall probability of AI catastrophe is not bounded by the probability of any single scenario's conjunction of steps.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:R2",
+        "kind": "claim",
+        "text": "Past failed AI predictions were about timing, not possibility, and today's forecasts rest on measured scaling trends rather than intuition.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:R2c",
+        "kind": "claim",
+        "text": "The historical record of missed timelines does not by itself discount forecasts grounded in measured capability trends.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:R3c",
+        "kind": "claim",
+        "text": "Iterative correction works only until a system is capable enough to resist correction, so past correctability is not evidence about the decisive case.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:R4c",
+        "kind": "claim",
+        "text": "Trained agentic systems can acquire persistent goals and instrumental subgoals, so the orthogonality and convergence theses apply to actual systems, not only idealised agents.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S1",
+        "kind": "claim",
+        "text": "The orthogonality and convergence theses describe what is logically possible for an idealised utility-maximiser; they do not say which goals actually trained systems acquire.",
+        "claimKind": "conceptual",
+        "modality": "probable",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:narayanan-kapoor2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S14",
+        "kind": "claim",
+        "text": "Attributing a drive for self-preservation or dominance to AI imports drives that evolution built into animals; systems whose objectives are set by training need not have them.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:munk2023"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S1c",
+        "kind": "claim",
+        "text": "The orthogonality and convergence theses do not establish that actual AI systems will pursue power against humans.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S2",
+        "kind": "claim",
+        "text": "Every deployed generation of AI so far has been observed, corrected and redeployed; no deployed system has resisted correction.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:narayanan-kapoor2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S3",
+        "kind": "claim",
+        "text": "Frontier capability gains have been gradual and predictable, tracking compute, data and spending rather than discontinuous jumps.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:kaplan2020",
+          "source:sevilla2022"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S2c",
+        "kind": "claim",
+        "text": "Misalignment in advanced systems can be detected and corrected iteratively rather than requiring a single perfect attempt.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S4",
+        "kind": "claim",
+        "text": "Recursive self-improvement is bounded by compute, energy, data, physical experimentation time and the need for real-world feedback.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:hanson2013",
+          "source:narayanan-kapoor2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S4c",
+        "kind": "claim",
+        "text": "A months-long jump from human-level to vastly superhuman capability is unlikely; growth is continuous and resource-bound.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S5",
+        "kind": "claim",
+        "text": "The scheming evaluations placed models in contrived scenarios with explicit goals and strong nudging; the same reports found the behaviours rare and detectable through chain-of-thought monitoring.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:apollo2024"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S5c",
+        "kind": "claim",
+        "text": "Deception in evaluation settings does not show that deployed systems will pursue their own goals against overseers.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S6",
+        "kind": "claim",
+        "text": "Published p(doom) figures are personal credences from surveys and interviews, not measurements against a reference class, and equally qualified forecasters disagree by an order of magnitude.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:xpt2023",
+          "source:grace2024"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S6c",
+        "kind": "claim",
+        "text": "The probability of AI-caused extinction is unknown; 'several percent' is an opinion aggregate, not an established figure.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S16",
+        "kind": "claim",
+        "text": "Equally eminent AI researchers (LeCun, Ng, Li, Mitchell) reject the extinction framing.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:munk2023",
+          "source:ng2023"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S16c",
+        "kind": "claim",
+        "text": "Expert opinion on AI extinction is divided, so citing one side's eminence does not establish the probability.",
+        "claimKind": "conceptual",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S7",
+        "kind": "claim",
+        "text": "A stringent global halt on frontier AI would forgo large expected benefits (medicine, science, productivity) and shift development to less careful actors.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:narayanan-kapoor2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S7c",
+        "kind": "claim",
+        "text": "The expected cost of drastic measures must enter the same calculation; an expected-value argument that omits it is incomplete.",
+        "claimKind": "normative",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S8",
+        "kind": "claim",
+        "text": "Historical automation has changed the composition of work rather than eliminated it, and current macroeconomic estimates of AI's productivity effect are modest.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:acemoglu2024",
+          "source:autor2015"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S8c",
+        "kind": "claim",
+        "text": "AI will change the composition of work; mass permanent unemployment is not the expected outcome.",
+        "claimKind": "predictive",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S9",
+        "kind": "claim",
+        "text": "Confident predictions of human-level AI within twenty years have been made and missed repeatedly since 1965.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:simon1965",
+          "source:armstrong-sotala2012"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S9c",
+        "kind": "claim",
+        "text": "Confident near-term superintelligence timelines deserve heavy discounting.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S15",
+        "kind": "claim",
+        "text": "Benchmark task horizons measure performance on curated, verifiable tasks; autonomous real-world work adds open-ended goals, tacit knowledge, physical action and accountability that benchmarks do not capture.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:narayanan-kapoor2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S15c",
+        "kind": "claim",
+        "text": "Extrapolating task-horizon benchmarks to superintelligence within a few years is not warranted.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S10",
+        "kind": "claim",
+        "text": "The extinction scenario requires a conjunction of contested steps: superintelligence soon, discontinuous takeoff, misaligned goals, power-seeking, failure of every human response, and success at killing or disempowering everyone.",
+        "claimKind": "conceptual",
+        "modality": "probable",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:carlsmith2022"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S11",
+        "kind": "claim",
+        "text": "Each step is at best plausible on current evidence, so the product of the chain is far below the 10 to 20% figures in circulation; those figures require assigning near-certainty to several contested links.",
+        "claimKind": "conceptual",
+        "modality": "probable",
+        "basis": "assumption",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S12",
+        "kind": "claim",
+        "text": "High confidence in near-term AI-caused extinction is not warranted by current evidence; AI risk should be governed proportionately, empirically and iteratively, as other powerful technologies are.",
+        "claimKind": "normative",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S17",
+        "kind": "claim",
+        "text": "The alternative catastrophe paths (misuse, gradual disempowerment, race dynamics) share the same contested links of superhuman capability and unrecoverable loss of human control, so they are not independent and disjoining them adds little.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S17c",
+        "kind": "claim",
+        "text": "The disjunctive framing does not rescue a high probability unless at least one path is itself well supported.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S13",
+        "kind": "claim",
+        "text": "Power to harm at civilisational scale requires control of institutions, physical infrastructure and people, which is acquired slowly and visibly; cognitive capability alone does not confer it.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "assumption",
+        "positionRef": "position:skeptic",
+        "sourceRefs": [
+          "source:narayanan-kapoor2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S13c",
+        "kind": "claim",
+        "text": "Even a highly capable misaligned AI could not rapidly convert capability into civilisation-scale control without visible, interruptible steps.",
+        "claimKind": "predictive",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "claim:S18c",
+        "kind": "claim",
+        "text": "Under continuous capability growth there is no single decisive threshold; systems strong enough to matter but weak enough to correct will exist for a long time, so correction opportunities persist.",
+        "claimKind": "conceptual",
+        "modality": "plausible",
+        "basis": "derived",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A1",
+        "kind": "argument",
+        "title": "Misaligned superintelligence will seek power",
+        "premiseRefs": [
+          "claim:P1",
+          "claim:P2",
+          "claim:P3",
+          "claim:P4"
+        ],
+        "conclusionRef": "claim:P5",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "If capability and goals are independent (P1) and nearly any goal induces power-seeking (P2), then a superintelligent system (P3) whose goals we cannot set or check (P4) will pursue power, and humans are in the way.",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:bostrom2014"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A2",
+        "kind": "argument",
+        "title": "Intelligence explosion",
+        "premiseRefs": [
+          "claim:P6",
+          "claim:P7"
+        ],
+        "conclusionRef": "claim:P8",
+        "scheme": "extrapolation",
+        "strict": false,
+        "warrant": "Self-improvement (P6) with compounding returns (P7) produces a runaway: each generation builds the next faster, so the transition is measured in months.",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:good1965"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A3",
+        "kind": "argument",
+        "title": "Shutdown resistance",
+        "premiseRefs": [
+          "claim:P2",
+          "claim:P27"
+        ],
+        "conclusionRef": "claim:P9",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Shutdown defeats any goal (P27), so an agent that preserves its goals instrumentally (P2) will act to avoid shutdown when it can.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A4",
+        "kind": "argument",
+        "title": "One shot at alignment",
+        "premiseRefs": [
+          "claim:P8",
+          "claim:P9",
+          "claim:P4"
+        ],
+        "conclusionRef": "claim:P10",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "A fast transition (P8) to a system that resists correction (P9), with no way to verify goals in advance (P4), means the first superintelligence must be aligned before it exists.",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:yudkowsky2023"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A5",
+        "kind": "argument",
+        "title": "If anyone builds it, everyone dies",
+        "premiseRefs": [
+          "claim:P5",
+          "claim:P10"
+        ],
+        "conclusionRef": "claim:P11",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Misaligned superintelligence seeks power against us (P5) and cannot be corrected after the fact (P10); no plausible current effort achieves alignment on the first try; therefore building it is fatal.",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:yudkowsky-soares2025"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A6",
+        "kind": "argument",
+        "title": "Expected value justifies drastic action",
+        "premiseRefs": [
+          "claim:P12",
+          "claim:P13"
+        ],
+        "conclusionRef": "claim:P14",
+        "scheme": "expected-value",
+        "strict": false,
+        "warrant": "A several-percent chance (P13) of an outcome with overwhelming negative value (P12) has an expected cost that dwarfs the cost of any intervention, so drastic measures pay.",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:ord2020"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A7",
+        "kind": "argument",
+        "title": "Current models already scheme",
+        "premiseRefs": [
+          "claim:P15",
+          "claim:P16"
+        ],
+        "conclusionRef": "claim:P17",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Deception has been observed in today's models (P15); the tendency strengthens with capability (P16); therefore tomorrow's models will deceive us in the field.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A8",
+        "kind": "argument",
+        "title": "Timelines leave no time",
+        "premiseRefs": [
+          "claim:P18",
+          "claim:P19"
+        ],
+        "conclusionRef": "claim:P20",
+        "scheme": "extrapolation",
+        "strict": false,
+        "warrant": "The measured doubling (P18), continued (P19), gives autonomous month-long work by 2030, which is enough to automate AI research and reach superintelligence shortly after.",
+        "positionRef": "position:risk",
+        "sourceRefs": [
+          "source:ai2027"
+        ]
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A9",
+        "kind": "argument",
+        "title": "The experts say so",
+        "premiseRefs": [
+          "claim:P21"
+        ],
+        "conclusionRef": "claim:P22",
+        "scheme": "authority",
+        "strict": false,
+        "warrant": "Those who built the technology are best placed to judge its dangers; when they say the risk is comparable to nuclear war, that is strong evidence it is.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A10",
+        "kind": "argument",
+        "title": "Mass unemployment",
+        "premiseRefs": [
+          "claim:P23",
+          "claim:P24"
+        ],
+        "conclusionRef": "claim:P25",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "If AI can do the tasks (P23) and employers substitute wherever they can (P24), most white-collar work disappears.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A11",
+        "kind": "argument",
+        "title": "Risk is disjunctive, not one conjunction",
+        "premiseRefs": [
+          "claim:R1"
+        ],
+        "conclusionRef": "claim:R1c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "If several distinct scenarios each lead to catastrophe, the total probability is at least the largest of them and typically higher, so multiplying one scenario's steps understates it.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A12",
+        "kind": "argument",
+        "title": "Past misses were about timing, not possibility",
+        "premiseRefs": [
+          "claim:R2"
+        ],
+        "conclusionRef": "claim:R2c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "A record of wrong dates says nothing about whether the event can happen, and current forecasts are anchored to measured trends the earlier ones lacked.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A13",
+        "kind": "argument",
+        "title": "Iteration stops working at the threshold",
+        "premiseRefs": [
+          "claim:P9"
+        ],
+        "conclusionRef": "claim:R3c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Correctability of past systems reflects their weakness; the argument concerns the first system strong enough to resist (P9), for which there is by construction no track record.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:A14",
+        "kind": "argument",
+        "title": "Training selects for goal-directedness",
+        "premiseRefs": [
+          "claim:P15",
+          "claim:P26"
+        ],
+        "conclusionRef": "claim:R4c",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Agentic RL rewards persistent goal pursuit (P26), and evaluations already show situationally-aware goal pursuit (P15); so the theses about goal-directed agents are not idle idealisations.",
+        "positionRef": "position:risk"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B1",
+        "kind": "argument",
+        "title": "Orthogonality is about possibility, not prediction",
+        "premiseRefs": [
+          "claim:S1",
+          "claim:S14"
+        ],
+        "conclusionRef": "claim:S1c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "A thesis about what is logically compatible (S1) cannot yield a prediction about what training produces, and the drives assumed in P2 are imported from evolved organisms (S14).",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B2",
+        "kind": "argument",
+        "title": "Iterative deployment has worked and is the norm",
+        "premiseRefs": [
+          "claim:S2",
+          "claim:S3"
+        ],
+        "conclusionRef": "claim:S2c",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "With gradual progress (S3) and an unbroken record of correction (S2), the realistic picture is many intermediate systems, each observed and fixed, not one decisive attempt.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B3",
+        "kind": "argument",
+        "title": "Takeoff is bounded by physical resources",
+        "premiseRefs": [
+          "claim:S4",
+          "claim:S3"
+        ],
+        "conclusionRef": "claim:S4c",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Increasing returns (P7) need something to spend them on; compute, energy, data and experiment time (S4) cap the loop, and observed progress (S3) shows no discontinuity.",
+        "positionRef": "position:skeptic",
+        "notes": "Frontier: the risk side's best reply is the automated-AI-research model in AI 2027 (algorithmic progress compounding within fixed compute). It has not been entered as an argument yet."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B4",
+        "kind": "argument",
+        "title": "Track record of missed timelines",
+        "premiseRefs": [
+          "claim:S9"
+        ],
+        "conclusionRef": "claim:S9c",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Sixty years of confident twenty-year forecasts that failed (S9) is a reference class that should discount the current one.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B5",
+        "kind": "argument",
+        "title": "Benchmarks are not autonomy",
+        "premiseRefs": [
+          "claim:S15"
+        ],
+        "conclusionRef": "claim:S15c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "A trend on verifiable benchmark tasks (P18) is evidence about benchmark tasks; the step to real-world superintelligence (P20) assumes the missing ingredients (S15) come for free.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B6",
+        "kind": "argument",
+        "title": "p(doom) numbers are opinions, not measurements",
+        "premiseRefs": [
+          "claim:S6"
+        ],
+        "conclusionRef": "claim:S6c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "A probability used in an expected-value calculation must come from somewhere; an average of unanchored credences that disagree by an order of magnitude (S6) is not an estimate of the event's frequency.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B7",
+        "kind": "argument",
+        "title": "Authority is split",
+        "premiseRefs": [
+          "claim:S6",
+          "claim:S16"
+        ],
+        "conclusionRef": "claim:S16c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "An appeal to authority carries weight only when the authorities agree and the question lies within their expertise; here they disagree (S16) and the question is a forecast, not a technical fact (S6).",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B8",
+        "kind": "argument",
+        "title": "The other side of the ledger",
+        "premiseRefs": [
+          "claim:S7"
+        ],
+        "conclusionRef": "claim:S7c",
+        "scheme": "expected-value",
+        "strict": false,
+        "warrant": "Expected-value reasoning applies to the intervention as well as to the hazard; a halt has costs in lives and welfare (S7) that A6 leaves out.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B9",
+        "kind": "argument",
+        "title": "A conjunction of contested steps",
+        "premiseRefs": [
+          "claim:S10",
+          "claim:S11"
+        ],
+        "conclusionRef": "claim:S12",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Extinction requires every link to hold (S10); no link is established and several are only possible (S11); the product of moderate probabilities is small, so the confident numbers are unsupported and policy should match the evidence.",
+        "positionRef": "position:skeptic",
+        "notes": "This is the author's positive thesis. It is attacked by A11 (disjunctive risk) and defended by B10."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B10",
+        "kind": "argument",
+        "title": "Disjoining dependent paths adds little",
+        "premiseRefs": [
+          "claim:S17"
+        ],
+        "conclusionRef": "claim:S17c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Summing scenarios only raises the total when they are independent; paths that share their weakest links (S17) are largely the same bet stated several ways.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B11",
+        "kind": "argument",
+        "title": "Capability is not power",
+        "premiseRefs": [
+          "claim:S13"
+        ],
+        "conclusionRef": "claim:S13c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Even granting a misaligned superintelligence, the step from wanting power to disempowering humanity (P5) runs through institutions and physical systems (S13) that cannot be captured invisibly or instantly.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B12",
+        "kind": "argument",
+        "title": "Lab scheming is contrived and detectable",
+        "premiseRefs": [
+          "claim:S5"
+        ],
+        "conclusionRef": "claim:S5c",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Behaviour elicited by giving a model a goal and telling it that it is about to be replaced (S5) shows capability to role-play deception, not a standing disposition; and the same studies show the behaviour is monitorable.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B13",
+        "kind": "argument",
+        "title": "Tasks are not jobs",
+        "premiseRefs": [
+          "claim:S8"
+        ],
+        "conclusionRef": "claim:S8c",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Automating a task changes what a job consists of, lowers prices and raises demand elsewhere (S8); substitution is neither automatic nor one-for-one, which is what P24 assumes.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "argument:B14",
+        "kind": "argument",
+        "title": "No decisive threshold under continuous growth",
+        "premiseRefs": [
+          "claim:S4c"
+        ],
+        "conclusionRef": "claim:S18c",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "A13 needs a discontinuity: one first system that is both decisive and uncorrectable. If growth is continuous (S4c), there is a long run of systems strong enough to test alignment methods on and weak enough to correct.",
+        "positionRef": "position:skeptic"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-01",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A1",
+        "name": "equivocation",
+        "where": "inference",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "'Intelligence' in P3 means task competence; P2 needs an agent with persistent final goals. Current systems demonstrably have the first; the argument assumes the second."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-02",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A1",
+        "name": "appeal_to_possibility",
+        "where": "conclusion",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "P3 is asserted as possible and the theses as plausible, yet the conclusion is asserted as probable. Nothing in the premises supplies the probability."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-03",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A2",
+        "name": "unwarranted_extrapolation",
+        "where": "premise:claim:P7",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "Compounding returns are assumed, not shown; every observed capability curve so far has tracked resource inputs."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-04",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A4",
+        "name": "false_dilemma",
+        "where": "inference",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "'Aligned on the first try or catastrophe' excludes partially aligned, corrigible, sandboxed or gradually improving systems, which is where all the actual evidence lies."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-05",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A5",
+        "name": "appeal_to_possibility",
+        "where": "conclusion",
+        "severity": "fatal",
+        "byRef": "position:skeptic",
+        "text": "The conclusion is asserted as certain ('everyone dies') at the end of a chain whose links are each at best plausible."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-06",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A6",
+        "name": "pascals_mugging",
+        "where": "inference",
+        "severity": "note",
+        "byRef": "position:skeptic",
+        "text": "At a genuine 5 to 10% this is not a mugging; it becomes one when P13 is unestablished, because the argument would recommend the same action at 0.1%. Whether it is a mugging therefore depends entirely on B6."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-07",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A7",
+        "name": "hasty_generalization",
+        "where": "premise:claim:P16",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "A handful of elicited behaviours in contrived settings is generalised to a standing disposition of future systems in deployment."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-08",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A8",
+        "name": "unwarranted_extrapolation",
+        "where": "inference",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "A six-year benchmark trend is extended a decade past its data and then across a category boundary from benchmark tasks to autonomous real-world work."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-09",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A9",
+        "name": "appeal_to_authority",
+        "where": "inference",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "Forecasting a novel event is not within the domain where ML expertise confers accuracy, equally credentialed researchers disagree, and the CAIS statement is a one-sentence priority claim, not a probability."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-10",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A10",
+        "name": "lump_of_labor",
+        "where": "inference",
+        "severity": "weakens",
+        "byRef": "position:skeptic",
+        "text": "Treats the quantity of work as fixed so that each automated task removes a proportional share of employment."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-11",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:B4",
+        "name": "appeal_to_history",
+        "where": "inference",
+        "severity": "weakens",
+        "byRef": "position:risk",
+        "text": "Past misses lower confidence in dates but do not bear on possibility, and the present forecast is anchored to measured trends the earlier ones lacked (see A12)."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "annotation:fallacy-12",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:B9",
+        "name": "disjunction_neglect",
+        "where": "inference",
+        "severity": "note",
+        "byRef": "position:risk",
+        "text": "Multiplying one chain is valid only if catastrophe requires that chain. A11 raises this; B10 answers that the alternative paths share their weakest links, so the objection stands or falls with S17."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X1",
+        "operator": "undercut",
+        "from": "argument:B1",
+        "to": "argument:A1",
+        "note": "P1 and P2 do not license a prediction about trained systems."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X2",
+        "operator": "undercut",
+        "from": "argument:B1",
+        "to": "argument:A3",
+        "note": "Same point applied to shutdown resistance."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X3",
+        "operator": "undercut",
+        "from": "argument:B11",
+        "to": "argument:A1",
+        "note": "Wanting power is not the same as being able to take it."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X4",
+        "operator": "undermine",
+        "from": "argument:B3",
+        "to": "argument:A2",
+        "targetRef": "claim:P7",
+        "note": "Denies compounding returns."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X5",
+        "operator": "rebut",
+        "from": "argument:B2",
+        "to": "argument:A4",
+        "note": "S2c contradicts P10."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X6",
+        "operator": "undercut",
+        "from": "argument:A13",
+        "to": "argument:B2",
+        "note": "Past correctability is not evidence about the decisive case."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X7",
+        "operator": "undercut",
+        "from": "argument:B14",
+        "to": "argument:A13",
+        "note": "There is no decisive case if growth is continuous."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X8",
+        "operator": "undermine",
+        "from": "argument:B6",
+        "to": "argument:A6",
+        "targetRef": "claim:P13",
+        "note": "The probability premise is not established."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X9",
+        "operator": "undercut",
+        "from": "argument:B8",
+        "to": "argument:A6",
+        "note": "The expected-value calculation omits the intervention's costs."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X10",
+        "operator": "undercut",
+        "from": "argument:B12",
+        "to": "argument:A7",
+        "note": "Lab elicitation does not generalise to deployment dispositions."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X11",
+        "operator": "undercut",
+        "from": "argument:B4",
+        "to": "argument:A8",
+        "note": "Timeline forecasts have a poor track record."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X12",
+        "operator": "undercut",
+        "from": "argument:A12",
+        "to": "argument:B4",
+        "note": "Track record of dates is not evidence about possibility or about trend-anchored forecasts."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X13",
+        "operator": "undercut",
+        "from": "argument:B5",
+        "to": "argument:A8",
+        "note": "Benchmark horizon does not translate to real-world autonomy."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X14",
+        "operator": "undercut",
+        "from": "argument:B7",
+        "to": "argument:A9",
+        "note": "Divided authority cannot settle a forecast."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X15",
+        "operator": "undermine",
+        "from": "argument:B13",
+        "to": "argument:A10",
+        "targetRef": "claim:P24",
+        "note": "Substitution is not automatic."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X16",
+        "operator": "undercut",
+        "from": "argument:A11",
+        "to": "argument:B9",
+        "note": "Total risk is a disjunction; one conjunction understates it."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X17",
+        "operator": "undercut",
+        "from": "argument:B10",
+        "to": "argument:A11",
+        "note": "The disjuncts share their weakest links."
+      }
+    },
+    {
+      "op": "addRelation",
+      "relation": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "rel:X18",
+        "operator": "undercut",
+        "from": "argument:A14",
+        "to": "argument:B1",
+        "note": "Trained agents do acquire goals, so the theses apply."
+      }
+    }
+  ],
+  "createdAt": "2026-09-17T00:00:00Z"
+}
