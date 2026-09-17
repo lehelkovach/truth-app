@@ -209,6 +209,6 @@ function renderInspector(diag = null) {
   for (const a of el.querySelectorAll('a[data-sel]')) a.onclick = () => select(a.dataset.sel);
 }
 
-for (const b of document.querySelectorAll('#tabs button')) b.onclick = () => { for (const x of document.querySelectorAll('#tabs button')) x.classList.toggle('active', x === b); for (const p of document.querySelectorAll('.panel')) p.classList.toggle('active', p.id === `panel-${b.dataset.tab}`); if (b.dataset.tab === 'graph' && cy) cy.resize(); };
+for (const b of document.querySelectorAll('#tabs button')) b.onclick = () => { for (const x of document.querySelectorAll('#tabs button')) x.classList.toggle('active', x === b); for (const p of document.querySelectorAll('.panel')) p.classList.toggle('active', p.id === `panel-${b.dataset.tab}`); if (b.dataset.tab === 'graph' && cy) { cy.resize(); cy.fit(undefined, 24); if (state.selected && cy.getElementById(state.selected).length) cy.center(cy.getElementById(state.selected)); } };
 
 loadIndex().catch((e) => { $('#issue').innerHTML = `<p class="badge red">failed to load bundle: ${esc(e.message)}</p>`; });
