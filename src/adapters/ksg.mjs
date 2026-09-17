@@ -13,6 +13,9 @@
  *   commit    -> create_assertion(subject=commit id, predicate='commits', obj=project)
  */
 
+/** Write order: things referenced before things that reference them. */
+const KIND_ORDER = { actor: 0, source: 1, issue: 2, position: 3, evidence: 4, claim: 5, assumption: 5, hypothesis: 6, theory: 7, argument: 8, annotation: 9 };
+
 export function createKsgAdapter({ client, source = 'truth-app', ownerUserId = null }) {
   if (!client) throw new TypeError('createKsgAdapter needs a client');
   const objectUuids = new Map(); // unit id -> last KSG object uuid
@@ -65,12 +68,22 @@ export function createKsgAdapter({ client, source = 'truth-app', ownerUserId = n
     return id;
   }
 
-  /** Mirror one commit: only the units and relations the patch touched. */
+  /**
+   * Mirror one commit: only the units and relations the patch touched, in
+   * dependency order (sources and claims before the arguments that reference
+   * them, relations last) so a later cast to KSG prototypes can point at
+   * uuids that already exist.
+   */
   async function mirrorCommit({ commit, patch, snapshot, project }) {
     const touched = new Set();
     for (const op of patch.operations) touched.add(op.unit?.id ?? op.relation?.id ?? op.target?.id);
     const written = { units: 0, relations: 0 };
-    for (const id of [...touched].sort()) {
+    const ordered = [...touched].sort((a, b) => {
+      const ra = KIND_ORDER[snapshot.units[a]?.kind] ?? (snapshot.relations[a] ? 99 : 50);
+      const rb = KIND_ORDER[snapshot.units[b]?.kind] ?? (snapshot.relations[b] ? 99 : 50);
+      return ra - rb || a.localeCompare(b);
+    });
+    for (const id of ordered) {
       if (snapshot.units[id]) {
         await putUnitRevision(snapshot.units[id], { commitId: commit.id, snapshot });
         written.units += 1;

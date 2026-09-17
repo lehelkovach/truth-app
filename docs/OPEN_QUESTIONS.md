@@ -5,14 +5,15 @@
    `iac-bus` or `yolo-online-learner`. v0.1 uses a flat profile
    (`schema/truthir-profile-v0.1.schema.json`). If the frame schema lives
    elsewhere, point to it and the profile will be re-expressed as frames.
-2. **KSG object category for units.** The adapter writes every unit with
-   `category_name = unit.kind` under parent `TruthUnit`. Should these be
-   prototypes (per the KSG Truth Foundation handoff, "claims are not
-   intrinsic types") once prototype matching is exposed in the client?
-3. **Semantic bindings / Logic IR.** The Logic IR v0.0.1 handoff belongs to
-   the KSG server repo, not here. TruthApp claims carry surface text only;
-   `formalized_as` links will be added when the client exposes Logic IR
-   persistence (client R1/R2 rungs).
+2. **KSG object category for units.** The adapter still writes
+   `category_name = unit.kind`. KSG already seeds `Utterance` / `Claim` /
+   `Proposition` / `Argument` prototypes; switching to them is T1–T2 in
+   `docs/KSG-LOGIC-IR-STATUS.md`. Confirm that TruthApp should cast rather
+   than keep its own categories.
+3. **Semantic bindings / Logic IR.** Resolved 2026-09-17: KSG `dev` has R1/R2
+   shipped and a seeded `Proposition` prototype. Assessment and build list in
+   `docs/KSG-LOGIC-IR-STATUS.md`. Remaining question for the owner: which
+   AI-risk claims should be formalised first (T5 there needs Concept uuids).
 4. **Rebuttal symmetry.** A `rebut` is authored as a directed relation. Should
    the evaluator add the reverse edge automatically (Pollock) or leave it to
    the author? v0.1 leaves it to the author and reports STANDOFF only when

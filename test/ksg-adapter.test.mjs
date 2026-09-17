@@ -51,3 +51,15 @@ test('adapter only mirrors the units a commit touched', async () => {
   const second = [...client.objects.values()].filter((o) => o.provenance.truthCommit === commits[1].id).map((o) => o.object_lineage_key).sort();
   assert.deepEqual(second, ['argument:A15', 'argument:B3', 'claim:R5', 'claim:R5c']);
 });
+
+test('units are mirrored in dependency order: sources and claims before arguments, relations last', async () => {
+  const client = createFakeKsgClient();
+  const ksg = createKsgAdapter({ client });
+  await loadFixture(fixture('exercise-depression'), { ksg });
+  const order = client.calls.map(([name, args]) => name === 'upsert_object' ? args.object_lineage_key : name === 'create_assertion' ? `rel:${args.predicate}` : null).filter(Boolean);
+  const idx = (id) => order.indexOf(id);
+  assert.ok(idx('source:S1') < idx('claim:C1'), 'source before claim');
+  assert.ok(idx('claim:C1') < idx('argument:A1'), 'claim before argument');
+  assert.ok(idx('argument:A1') < idx('rel:supports'), 'units before relations');
+  assert.ok(idx('claim:C4') < idx('argument:L1'), 'second commit keeps the order');
+});
