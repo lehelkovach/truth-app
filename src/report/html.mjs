@@ -64,6 +64,13 @@ export function renderHtml({ snapshot, evaluation, project = {}, history = [], d
       if (a.notes) add(`<p>${e(a.notes)}</p>`);
       const d = r.derivation[a.id];
       if (d) add(`<p class="small">Derivation: ${e(d.reason)}.</p>`);
+      const L = r.logic?.arguments?.[a.id];
+      if (L) {
+        add(`<p class="small"><span class="badge ${L.result === 'entailed' ? 'accepted' : L.result === 'outside_coverage' ? 'undecided' : 'rejected'}">${e(L.result.replace('_', ' '))}</span> ${e(L.evaluator)}@${e(L.evaluatorVersion)}${L.expression ? ' · <code>' + e(L.expression) + '</code>' : ''}</p>`);
+        if (L.proof?.length) add(`<details class="small"><summary>Proof (${L.proof.length} steps)</summary><ol>${L.proof.map((s) => `<li><code>${e(s.expression)}</code> <span class="muted">${e(s.rule)}${s.from.length ? ' from ' + e(s.from.join(', ')) : ''}</span></li>`).join('')}</ol></details>`);
+        if (L.missingCondition?.hints?.length) add(`<p class="small">Missing condition: <code>${L.missingCondition.hints.map(e).join('</code> or <code>')}</code></p>`);
+        if (L.missing?.length) add(`<p class="small">Outside coverage: ${L.missing.map((m) => `${e(m.claim)} (${e(m.reason)})`).join('; ')}</p>`);
+      }
       const atk = r.edges.filter((x) => x.to === a.id);
       if (atk.length) add(`<p class="small">Attacked by: ${atk.map((x) => `<a href="#${e(x.from)}">${e(x.from)}</a> (${e(x.operator)}${x.targetRef ? ' ' + e(x.targetRef) : ''}, ${e(LABEL_WORD[r.labels[x.from]])})`).join(', ')}</p>`);
       for (const f of annotations.filter((x) => x.targetRef === a.id)) { const def = FALLACIES[f.name]; add(`<div class="fallacy"><b>${e(f.name)}</b> at ${e(f.where)} · ${e(f.severity)}. ${e(f.text)}${def ? ` <span class="small">${e(def.definition)}</span>` : ''}</div>`); }
@@ -71,6 +78,11 @@ export function renderHtml({ snapshot, evaluation, project = {}, history = [], d
       add('</div>');
     }
   }
+  const diags = r.diagnostics ?? [];
+  const dc = { red: 0, yellow: 0, green: 0 };
+  for (const d of diags) dc[d.state] += 1;
+  add(`<h2>Diagnostics</h2><p class="small">${dc.red} red · ${dc.yellow} yellow · ${dc.green} green. Colour is diagnostic state under a named evaluator, not a truth label.</p>`);
+  for (const d of diags.filter((x) => x.state !== 'green')) add(`<div class="card diag-${e(d.state)}"><p><span class="badge ${d.state === 'red' ? 'rejected' : 'undecided'}">${e(d.state)}</span> <code>${e(d.code)}</code> <a href="#${e(d.target ?? '')}">${e(d.target ?? '')}</a> <span class="small">${e(d.evaluator)}</span><br>${e(d.message)}</p><p class="small">${e(d.explanation?.why ?? '')}${d.explanation?.options?.length ? '<br>Options: ' + d.explanation.options.map(e).join(' · ') : ''}</p></div>`);
   add('<h2>Automated findings</h2>');
   if (!r.findings.length) add('<p>None.</p>');
   for (const f of r.findings) add(`<p><span class="${f.severity}">${e(f.severity)}</span> <code>${e(f.code)}</code> ${e(f.argument ?? f.claim ?? '')}: ${e(f.message)}</p>`);
@@ -78,7 +90,9 @@ export function renderHtml({ snapshot, evaluation, project = {}, history = [], d
   for (const c of claims) { const st = r.claims[c.id] ?? 'established'; add(`<tr><td>${e(c.id)}</td><td>${e(c.text)}</td><td>${e(c.claimKind)}</td><td>${e(c.modality)}</td><td>${e(c.basis)}</td><td><span class="badge ${st}">${e(st)}</span></td><td class="small">${(c.sourceRefs ?? []).map((s) => src(units[s])).join('; ')}</td></tr>`); }
   add('</table>');
   if (history.length) { add('<h2>History</h2><table><tr><th>Commit</th><th>When</th><th>Message</th><th>Snapshot</th></tr>'); for (const c of history) add(`<tr><td><code>${e(c.id)}</code></td><td class="small">${e(c.createdAt)}</td><td>${e(c.message)}</td><td class="small"><code>${e(c.snapshotHash.slice(7, 19))}</code></td></tr>`); add('</table>'); }
-  if (diff && !diff.empty) add(`<h2>Semantic diff (previous → this commit)</h2><p class="small">classes: ${diff.classes.map(e).join(', ')}</p><pre>${e(diff.text)}</pre>`);
+  if (diff && !diff.empty) add(`<h2>Semantic diff (previous → this commit)</h2><p class="small">classes: ${diff.classes.map(e).join(', ')}</p><pre>${e(diff.text)}${diff.evaluationText ? '\n' + e(diff.evaluationText) : ''}</pre>`);
+  const concepts = unitsOfKind(snapshot, 'concept');
+  if (concepts.length) { add('<h2>Concepts (grounding)</h2><table><tr><th>Concept</th><th>Label</th><th>Sense of</th><th>KSG</th><th>Definition</th></tr>'); for (const k of concepts) add(`<tr><td><code>${e(k.id)}</code></td><td>${e(k.label)}</td><td class="small">${e(k.senseOf ?? '')}</td><td class="small">${e(k.ksgRef ?? 'local')}</td><td class="small">${e(k.definition ?? '')}</td></tr>`); add('</table>'); }
   const used = [...new Set(annotations.map((a) => a.name).filter((n) => n in FALLACIES))].sort();
   if (used.length) { add('<h2>Fallacy catalogue used</h2><table><tr><th>Name</th><th>Category</th><th>Definition</th><th>Test</th></tr>'); for (const n of used) { const d = FALLACIES[n]; add(`<tr><td><code>${e(d.name)}</code></td><td>${e(d.category)}</td><td>${e(d.definition)}</td><td>${e(d.test)}</td></tr>`); } add('</table>'); }
   add('</main></body></html>');

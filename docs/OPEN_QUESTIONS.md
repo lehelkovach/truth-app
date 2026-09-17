@@ -20,3 +20,16 @@
    both directions exist.
 5. **Client pin.** Pinned to `v0.2.20-client` from GitHub (package is not on
    npm). Confirm this is the intended release channel for TruthApp.
+6. **Comparisons in Logic IR.** Spec v1.1 §6.1 lists comparisons in the
+   first-slice subset. KSG's v0.0.1 AST has no comparison node and adding one
+   here would fork the IR (D14). Proposal for KSG: a `Compare` kind
+   (`{ kind: 'Compare', op: '<'|'<='|'='|'>='|'>', left, right }` over
+   literal or bound values) in Logic IR v0.0.2, with canonicalisation rules.
+7. **Export the Logic IR core from the client.** `src/logic/ir.mjs` mirrors
+   `knowshowgo/src/logic_ir/core.js` and is parity-tested, but it is a copy.
+   The August handoff §46 puts the logic facade in `knowshowgo-client`; once
+   `core.js` is exported there, this file becomes a re-export.
+8. **Quantifier domain.** The local evaluator answers `∀`/`∃` over the
+   snapshot's entities and labels the result `domain: 'snapshot'`. Confirm
+   this is acceptable for TruthApp (closed snapshot) while KSG refuses until
+   KG4 (open graph).

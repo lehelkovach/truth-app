@@ -1,0 +1,309 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:hermione-initial",
+  "baseCommitRef": null,
+  "message": "Author the Hermione syllogism with grounded Logic IR",
+  "provenance": {
+    "sourceType": "fixture",
+    "sourceRef": "case:hermione",
+    "method": "manual_authoring",
+    "actorRef": "actor:demo-user"
+  },
+  "operations": [
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "issue:hermione",
+        "kind": "issue",
+        "title": "Is Hermione warm-blooded? (native evaluator fixture)",
+        "question": "Does the conclusion follow from the premises under the native deterministic evaluator?",
+        "thesisRef": "claim:C3"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "position:author",
+        "kind": "position",
+        "issueRef": "issue:hermione",
+        "name": "Author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:mammal",
+        "kind": "concept",
+        "label": "mammal",
+        "definition": "An animal of the class Mammalia.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "An animal of the class Mammalia."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:warm_blooded",
+        "kind": "concept",
+        "label": "warm-blooded",
+        "aliases": [
+          "warm_blooded",
+          "endothermic"
+        ],
+        "definition": "Maintains body temperature internally.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Maintains body temperature internally."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:has_fur",
+        "kind": "concept",
+        "label": "has fur",
+        "aliases": [
+          "has_fur",
+          "furred"
+        ],
+        "conceptKind": "predicate",
+        "ksgRef": null
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:hermione",
+        "kind": "concept",
+        "label": "Hermione",
+        "definition": "A particular cat.",
+        "conceptKind": "entity",
+        "ksgRef": null,
+        "text": "A particular cat."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C1",
+        "kind": "claim",
+        "text": "Every mammal is warm-blooded.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "definition",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "mammal",
+            "conceptRef": "concept:mammal"
+          },
+          {
+            "symbol": "warm-blooded",
+            "conceptRef": "concept:warm_blooded"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:mammal"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:warm_blooded"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: mammal(x) -> warm_blooded(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C2",
+        "kind": "claim",
+        "text": "Hermione is a mammal.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Hermione",
+            "conceptRef": "concept:hermione"
+          },
+          {
+            "symbol": "mammal",
+            "conceptRef": "concept:mammal"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:mammal"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:hermione"
+            }
+          ]
+        },
+        "logicText": "mammal(hermione)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C3",
+        "kind": "claim",
+        "text": "Hermione is warm-blooded.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Hermione",
+            "conceptRef": "concept:hermione"
+          },
+          {
+            "symbol": "warm-blooded",
+            "conceptRef": "concept:warm_blooded"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:warm_blooded"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:hermione"
+            }
+          ]
+        },
+        "logicText": "warm_blooded(hermione)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:hermione",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A1",
+        "kind": "argument",
+        "title": "Hermione is warm-blooded",
+        "premiseRefs": [
+          "claim:C1",
+          "claim:C2"
+        ],
+        "conclusionRef": "claim:C3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Universal instantiation of C1 at Hermione, then modus ponens with C2.",
+        "positionRef": "position:author"
+      }
+    }
+  ],
+  "createdAt": "2026-09-17T00:00:00Z"
+}

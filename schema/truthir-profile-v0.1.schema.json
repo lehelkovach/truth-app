@@ -86,7 +86,8 @@
             "hypothesis",
             "theory",
             "annotation",
-            "actor"
+            "actor",
+            "concept"
           ]
         },
         "status": {
@@ -203,6 +204,21 @@
             },
             "sourceRefs": {
               "$ref": "#/definitions/refList"
+            },
+            "terms": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/term"
+              }
+            },
+            "proposition": {
+              "$ref": "#/definitions/proposition"
+            },
+            "logicIr": {
+              "$ref": "#/definitions/logicIr"
+            },
+            "logicText": {
+              "type": "string"
             }
           },
           "required": [
@@ -494,6 +510,9 @@
         },
         {
           "$ref": "#/definitions/actor"
+        },
+        {
+          "$ref": "#/definitions/concept"
         }
       ]
     },
@@ -529,7 +548,11 @@
             "assumes",
             "competes_with",
             "supersedes",
-            "cites"
+            "cites",
+            "evidence_for",
+            "evidence_against",
+            "defines",
+            "uses_concept"
           ]
         },
         "from": {
@@ -574,6 +597,157 @@
           }
         }
       }
+    },
+    "term": {
+      "type": "object",
+      "required": [
+        "symbol"
+      ],
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "conceptRef": {
+          "$ref": "#/definitions/ref"
+        },
+        "candidates": {
+          "$ref": "#/definitions/refList"
+        },
+        "sourceSpan": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "integer"
+            },
+            "end": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "proposition": {
+      "type": "object",
+      "required": [
+        "predicateRef"
+      ],
+      "properties": {
+        "predicateRef": {
+          "$ref": "#/definitions/ref"
+        },
+        "roles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ref"
+          }
+        },
+        "polarity": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "negative"
+          ]
+        },
+        "context": {
+          "type": "object",
+          "properties": {
+            "population": {
+              "type": "string"
+            },
+            "geography": {
+              "type": "string"
+            },
+            "time": {
+              "type": "string"
+            },
+            "modality": {
+              "type": "string"
+            },
+            "conditions": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "logicIr": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "logicIrVersion": {
+          "const": "0.0.1"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ConceptRef",
+            "EntityRef",
+            "Variable",
+            "Predicate",
+            "Not",
+            "And",
+            "Or",
+            "Implies",
+            "ForAll",
+            "Exists"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "concept": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/unitBase"
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "concept"
+            },
+            "label": {
+              "type": "string"
+            },
+            "aliases": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "definition": {
+              "type": "string"
+            },
+            "conceptKind": {
+              "type": "string",
+              "enum": [
+                "concept",
+                "entity",
+                "predicate"
+              ]
+            },
+            "ksgRef": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "senseOf": {
+              "type": "string"
+            },
+            "sourceRefs": {
+              "$ref": "#/definitions/refList"
+            }
+          },
+          "required": [
+            "label"
+          ]
+        }
+      ]
     }
   },
   "$ref": "#/definitions/snapshot"

@@ -644,6 +644,206 @@
           "method": "manual_authoring",
           "actorRef": "actor:lehel"
         },
+        "id": "concept:intelligence",
+        "kind": "concept",
+        "label": "intelligence (unspecified sense)",
+        "definition": "Umbrella term; the two senses below are what arguments actually use.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "text": "Umbrella term; the two senses below are what arguments actually use."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:intelligence-competence",
+        "kind": "concept",
+        "label": "intelligence (task competence)",
+        "aliases": [
+          "capability",
+          "competence"
+        ],
+        "definition": "Ability to perform cognitive tasks at or above human level, measured by benchmarks and task horizons.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "senseOf": "concept:intelligence",
+        "text": "Ability to perform cognitive tasks at or above human level, measured by benchmarks and task horizons."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:intelligence-agency",
+        "kind": "concept",
+        "label": "intelligence (goal-directed agency)",
+        "aliases": [
+          "agency"
+        ],
+        "definition": "Being an agent with persistent final goals that it pursues across situations; what instrumental convergence needs.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "senseOf": "concept:intelligence",
+        "text": "Being an agent with persistent final goals that it pursues across situations; what instrumental convergence needs."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:ai-system",
+        "kind": "concept",
+        "label": "AI system",
+        "aliases": [
+          "AI",
+          "AI systems",
+          "frontier model",
+          "frontier models"
+        ],
+        "definition": "A trained machine-learning system deployed to perform tasks.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "text": "A trained machine-learning system deployed to perform tasks."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:superintelligence",
+        "kind": "concept",
+        "label": "superintelligence",
+        "definition": "An AI system exceeding human capability across nearly all cognitive domains.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "text": "An AI system exceeding human capability across nearly all cognitive domains."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:power-seeking",
+        "kind": "concept",
+        "label": "power-seeking",
+        "aliases": [
+          "seek power",
+          "pursue power"
+        ],
+        "definition": "Acquiring resources, influence and self-preservation as instrumental subgoals.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Acquiring resources, influence and self-preservation as instrumental subgoals."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:alignment",
+        "kind": "concept",
+        "label": "alignment",
+        "aliases": [
+          "aligned"
+        ],
+        "definition": "Correspondence between a system's goals and human values, as specified and verified.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "text": "Correspondence between a system's goals and human values, as specified and verified."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:extinction",
+        "kind": "concept",
+        "label": "human extinction",
+        "aliases": [
+          "extinction",
+          "everyone dies"
+        ],
+        "definition": "Death of all humans, or permanent loss of human control over the future.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "text": "Death of all humans, or permanent loss of human control over the future."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
+        "id": "concept:p-doom",
+        "kind": "concept",
+        "label": "p(doom)",
+        "aliases": [
+          "probability of AI-caused extinction"
+        ],
+        "definition": "A person's credence that AI causes human extinction or permanent disempowerment.",
+        "conceptKind": "concept",
+        "ksgRef": null,
+        "text": "A person's credence that AI causes human extinction or permanent disempowerment."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:ai-risk-2026",
+          "method": "manual_authoring",
+          "actorRef": "actor:lehel"
+        },
         "id": "claim:P1",
         "kind": "claim",
         "text": "Orthogonality thesis: almost any level of intelligence can in principle be combined with almost any final goal.",
@@ -653,6 +853,15 @@
         "positionRef": "position:risk",
         "sourceRefs": [
           "source:bostrom2012"
+        ],
+        "terms": [
+          {
+            "symbol": "intelligence",
+            "candidates": [
+              "concept:intelligence-competence",
+              "concept:intelligence-agency"
+            ]
+          }
         ]
       }
     },
@@ -676,6 +885,16 @@
         "sourceRefs": [
           "source:omohundro2008",
           "source:turner2021"
+        ],
+        "terms": [
+          {
+            "symbol": "intelligence",
+            "conceptRef": "concept:intelligence-agency"
+          },
+          {
+            "symbol": "power-seeking",
+            "conceptRef": "concept:power-seeking"
+          }
         ]
       }
     },
@@ -698,6 +917,20 @@
         "positionRef": "position:risk",
         "sourceRefs": [
           "source:grace2024"
+        ],
+        "terms": [
+          {
+            "symbol": "intelligence",
+            "conceptRef": "concept:intelligence-competence"
+          },
+          {
+            "symbol": "AI systems",
+            "conceptRef": "concept:ai-system"
+          },
+          {
+            "symbol": "superintelligence",
+            "conceptRef": "concept:superintelligence"
+          }
         ]
       }
     },
@@ -720,6 +953,16 @@
         "positionRef": "position:risk",
         "sourceRefs": [
           "source:ngo2022"
+        ],
+        "terms": [
+          {
+            "symbol": "AI system",
+            "conceptRef": "concept:ai-system"
+          },
+          {
+            "symbol": "alignment",
+            "conceptRef": "concept:alignment"
+          }
         ]
       }
     },
@@ -739,7 +982,21 @@
         "claimKind": "predictive",
         "modality": "probable",
         "basis": "derived",
-        "positionRef": "position:risk"
+        "positionRef": "position:risk",
+        "terms": [
+          {
+            "symbol": "superintelligence",
+            "conceptRef": "concept:superintelligence"
+          },
+          {
+            "symbol": "power-seeking",
+            "conceptRef": "concept:power-seeking"
+          },
+          {
+            "symbol": "human extinction",
+            "conceptRef": "concept:extinction"
+          }
+        ]
       }
     },
     {
@@ -837,7 +1094,13 @@
         "claimKind": "predictive",
         "modality": "plausible",
         "basis": "derived",
-        "positionRef": "position:risk"
+        "positionRef": "position:risk",
+        "terms": [
+          {
+            "symbol": "AI system",
+            "conceptRef": "concept:ai-system"
+          }
+        ]
       }
     },
     {
@@ -856,7 +1119,17 @@
         "claimKind": "predictive",
         "modality": "probable",
         "basis": "derived",
-        "positionRef": "position:risk"
+        "positionRef": "position:risk",
+        "terms": [
+          {
+            "symbol": "alignment",
+            "conceptRef": "concept:alignment"
+          },
+          {
+            "symbol": "superintelligence",
+            "conceptRef": "concept:superintelligence"
+          }
+        ]
       }
     },
     {
@@ -878,6 +1151,16 @@
         "positionRef": "position:risk",
         "sourceRefs": [
           "source:yudkowsky-soares2025"
+        ],
+        "terms": [
+          {
+            "symbol": "superintelligence",
+            "conceptRef": "concept:superintelligence"
+          },
+          {
+            "symbol": "everyone dies",
+            "conceptRef": "concept:extinction"
+          }
         ]
       }
     },
@@ -926,6 +1209,16 @@
           "source:carlsmith2022",
           "source:ord2020",
           "source:hinton2024"
+        ],
+        "terms": [
+          {
+            "symbol": "p(doom)",
+            "conceptRef": "concept:p-doom"
+          },
+          {
+            "symbol": "human extinction",
+            "conceptRef": "concept:extinction"
+          }
         ]
       }
     },
@@ -1314,7 +1607,13 @@
         "claimKind": "conceptual",
         "modality": "plausible",
         "basis": "derived",
-        "positionRef": "position:risk"
+        "positionRef": "position:risk",
+        "terms": [
+          {
+            "symbol": "AI system",
+            "conceptRef": "concept:ai-system"
+          }
+        ]
       }
     },
     {
@@ -1336,6 +1635,12 @@
         "positionRef": "position:skeptic",
         "sourceRefs": [
           "source:narayanan-kapoor2025"
+        ],
+        "terms": [
+          {
+            "symbol": "intelligence",
+            "conceptRef": "concept:intelligence-agency"
+          }
         ]
       }
     },
@@ -1547,6 +1852,12 @@
         "sourceRefs": [
           "source:xpt2023",
           "source:grace2024"
+        ],
+        "terms": [
+          {
+            "symbol": "p(doom)",
+            "conceptRef": "concept:p-doom"
+          }
         ]
       }
     },
@@ -1566,7 +1877,13 @@
         "claimKind": "empirical",
         "modality": "probable",
         "basis": "derived",
-        "positionRef": "position:skeptic"
+        "positionRef": "position:skeptic",
+        "terms": [
+          {
+            "symbol": "human extinction",
+            "conceptRef": "concept:extinction"
+          }
+        ]
       }
     },
     {
@@ -1894,6 +2211,12 @@
         "positionRef": "position:skeptic",
         "sourceRefs": [
           "source:narayanan-kapoor2025"
+        ],
+        "terms": [
+          {
+            "symbol": "capability",
+            "conceptRef": "concept:intelligence-competence"
+          }
         ]
       }
     },
@@ -1913,7 +2236,13 @@
         "claimKind": "predictive",
         "modality": "plausible",
         "basis": "derived",
-        "positionRef": "position:skeptic"
+        "positionRef": "position:skeptic",
+        "terms": [
+          {
+            "symbol": "AI system",
+            "conceptRef": "concept:ai-system"
+          }
+        ]
       }
     },
     {

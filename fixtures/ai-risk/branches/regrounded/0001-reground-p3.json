@@ -1,0 +1,14 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:ai-risk-regrounded-0001",
+  "message": "Re-ground 'intelligence' in P3 from the task-competence sense to the goal-directed-agency sense",
+  "createdAt": "2026-09-19T00:00:00Z",
+  "authorRef": "actor:lehel",
+  "provenance": { "sourceType": "user", "sourceRef": "case:ai-risk-2026", "method": "manual_authoring" },
+  "operations": [
+    { "op": "reviseUnit", "target": { "id": "claim:P3", "revision": 1 },
+      "next": { "text": "Within decades, AI systems will be goal-directed agents that exceed human capability across nearly all cognitive domains (superintelligence).",
+                "terms": [{ "symbol": "intelligence", "conceptRef": "concept:intelligence-agency" }, { "symbol": "AI system", "conceptRef": "concept:ai-system" }, { "symbol": "superintelligence", "conceptRef": "concept:superintelligence" }] },
+      "reason": "A1 needs P3 in the agency sense; stating it that way makes the premise weaker evidentially but the argument univocal." }
+  ]
+}

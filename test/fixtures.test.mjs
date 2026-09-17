@@ -24,7 +24,8 @@ test('ai-risk commit 1: thesis stands, doom chain breaks at takeoff, probability
   assert.equal(r.claims['claim:P9'], 'established', 'shutdown resistance stands');
   const overreach = r.findings.filter((f) => f.code === 'MODAL_OVERREACH').map((f) => f.argument.split(':')[1]).sort();
   assert.deepEqual(overreach, ['A1', 'A10', 'A2', 'A4', 'A5', 'A7', 'A8']);
-  assert.equal(r.findings.filter((f) => f.severity === 'major').length, 5);
+  assert.equal(r.findings.filter((f) => f.severity === 'major' && f.code !== 'W001').length, 5);
+  assert.ok(r.findings.some((f) => f.code === 'W001' && f.argument === 'argument:A1'), 'A1 equivocates on intelligence');
 });
 
 test('ai-risk commit 2: A15 flips the takeoff chain; thesis still stands', async () => {

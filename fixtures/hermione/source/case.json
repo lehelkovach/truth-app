@@ -1,0 +1,27 @@
+{
+  "id": "hermione",
+  "title": "Is Hermione warm-blooded? (native evaluator fixture)",
+  "question": "Does the conclusion follow from the premises under the native deterministic evaluator?",
+  "thesis": "C3",
+  "parties": [{"id": "author", "name": "Author"}],
+  "concepts": {
+    "mammal": {"label": "mammal", "kind": "predicate", "definition": "An animal of the class Mammalia."},
+    "warm_blooded": {"label": "warm-blooded", "aliases": ["warm_blooded", "endothermic"], "kind": "predicate", "definition": "Maintains body temperature internally."},
+    "has_fur": {"label": "has fur", "aliases": ["has_fur", "furred"], "kind": "predicate"},
+    "hermione": {"label": "Hermione", "kind": "entity", "definition": "A particular cat."}
+  },
+  "propositions": [
+    {"id": "C1", "party": "author", "kind": "empirical", "modality": "certain", "basis": "definition", "terms": ["mammal", "warm-blooded"],
+     "text": "Every mammal is warm-blooded.", "logic": "forall x: mammal(x) -> warm_blooded(x)"},
+    {"id": "C2", "party": "author", "kind": "empirical", "modality": "certain", "basis": "evidence", "terms": ["Hermione", "mammal"],
+     "text": "Hermione is a mammal.", "logic": "mammal(hermione)"},
+    {"id": "C3", "party": "author", "kind": "empirical", "modality": "certain", "basis": "derived", "terms": ["Hermione", "warm-blooded"],
+     "text": "Hermione is warm-blooded.", "logic": "warm_blooded(hermione)"}
+  ],
+  "arguments": [
+    {"id": "A1", "party": "author", "title": "Hermione is warm-blooded", "scheme": "deductive", "premises": ["C1", "C2"], "conclusion": "C3",
+     "warrant": "Universal instantiation of C1 at Hermione, then modus ponens with C2."}
+  ],
+  "attacks": [],
+  "fallacies": []
+}

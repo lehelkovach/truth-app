@@ -89,6 +89,22 @@ export function snapshotInvariantProblems(snapshot) {
       case 'claim':
         need(id, u.positionRef, ['position'], 'positionRef');
         for (const s of u.sourceRefs || []) need(id, s, ['source'], 'sourceRef');
+        for (const t of u.terms || []) {
+          need(id, t.conceptRef, ['concept'], `term '${t.symbol}' conceptRef`);
+          for (const c of t.candidates || []) need(id, c, ['concept'], `term '${t.symbol}' candidate`);
+        }
+        if (u.proposition) {
+          need(id, u.proposition.predicateRef, ['concept'], 'proposition.predicateRef');
+          for (const [role, ref] of Object.entries(u.proposition.roles || {})) need(id, ref, ['concept'], `proposition.roles.${role}`);
+        }
+        if (u.logicIr) {
+          const walkRefs = (n) => { if (!n || typeof n !== 'object') return; if ((n.kind === 'ConceptRef' || n.kind === 'EntityRef') && typeof n.uuid === 'string' && n.uuid.startsWith('concept:')) need(id, n.uuid, ['concept'], 'logicIr ref'); for (const v of Object.values(n)) if (v && typeof v === 'object') (Array.isArray(v) ? v : [v]).forEach(walkRefs); };
+          walkRefs(u.logicIr);
+        }
+        break;
+      case 'concept':
+        need(id, u.senseOf, ['concept'], 'senseOf');
+        for (const s of u.sourceRefs || []) need(id, s, ['source'], 'sourceRef');
         break;
       case 'argument':
         for (const p of u.premiseRefs || []) need(id, p, ['claim', 'assumption'], 'premise');

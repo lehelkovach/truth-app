@@ -5,3 +5,5 @@ dist/
 *.log
 out/
 .DS_Store
+public/data/*.json
+public/vendor/

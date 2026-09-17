@@ -26,6 +26,6 @@ export function listEvaluators() {
 registerEvaluator({
   id: EVALUATOR_ID,
   version: EVALUATOR_VERSION,
-  description: 'Grounded argumentation semantics with premise support and structural findings.',
+  description: 'Grounded argumentation + native Logic IR entailment + grounding/equivocation + diagnostics.',
   run: evaluateSnapshot
 });

@@ -13,12 +13,15 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "lint": "node --check src/app.mjs && node --check src/cli.mjs",
+    "lint": "node --check src/app.mjs && node --check src/cli.mjs && node --check public/app.mjs",
     "check": "npm run lint && npm test",
     "validate": "node src/cli.mjs validate",
     "evaluate": "node src/cli.mjs evaluate",
     "report": "node src/cli.mjs report",
-    "demo": "node src/cli.mjs demo fixtures/ai-risk"
+    "demo": "node src/cli.mjs demo fixtures/ai-risk",
+    "bundles": "node scripts/build-bundles.mjs",
+    "serve": "node scripts/build-bundles.mjs && node scripts/serve.mjs",
+    "vectors": "node scripts/gen-logic-ir-vectors.mjs ../knowshowgo"
   },
   "keywords": [
     "argumentation",
@@ -38,6 +41,7 @@
   },
   "dependencies": {
     "@lehelkovach/knowshowgo-client": "github:lehelkovach/knowshowgo-client#v0.2.20-client",
-    "ajv": "^8.17.1"
+    "ajv": "^8.17.1",
+    "cytoscape": "^3.30.2"
   }
 }

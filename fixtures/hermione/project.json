@@ -1,0 +1,8 @@
+{
+  "id": "repo:hermione",
+  "title": "Is Hermione warm-blooded? (native evaluator fixture)",
+  "question": "Does the conclusion follow from the premises under the native deterministic evaluator?",
+  "description": "The spec's canonical example (§6.3). Every claim carries Logic IR grounded to local concepts, so the native evaluator can derive, refuse, and explain. Commit 2 adds an argument whose conclusion does not follow and a claim with an unresolved term; the 'repair' branch supplies the missing premise so the evaluation flips.",
+  "authorRef": "actor:demo-user",
+  "createdAt": "2026-09-17T00:00:00Z"
+}

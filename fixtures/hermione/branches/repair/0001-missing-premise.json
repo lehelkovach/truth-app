@@ -1,0 +1,14 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:hermione-repair-0001",
+  "message": "Add C7 (every mammal has fur) and use it as a premise of A2",
+  "createdAt": "2026-09-19T00:00:00Z",
+  "authorRef": "actor:lehel",
+  "provenance": { "sourceType": "user", "sourceRef": "case:hermione", "method": "manual_authoring" },
+  "operations": [
+    { "op": "addUnit", "unit": { "id": "claim:C7", "kind": "claim", "status": "accepted", "provenance": { "sourceType": "user", "sourceRef": "case:hermione" }, "text": "Every mammal has fur.", "claimKind": "empirical", "modality": "probable", "basis": "assumption", "positionRef": "position:author",
+      "terms": [{ "symbol": "mammal", "conceptRef": "concept:mammal" }, { "symbol": "has fur", "conceptRef": "concept:has_fur" }],
+      "logicText": "forall x: mammal(x) -> has_fur(x)", "logicIr": { "logicIrVersion": "0.0.1", "kind": "ForAll", "variable": { "kind": "Variable", "name": "x" }, "body": { "kind": "Implies", "if": { "kind": "Predicate", "predicate": { "kind": "ConceptRef", "uuid": "concept:mammal" }, "args": [{ "kind": "Variable", "name": "x" }] }, "then": { "kind": "Predicate", "predicate": { "kind": "ConceptRef", "uuid": "concept:has_fur" }, "args": [{ "kind": "Variable", "name": "x" }] } } } } },
+    { "op": "reviseUnit", "target": { "id": "argument:A2", "revision": 1 }, "next": { "premiseRefs": ["claim:C2", "claim:C7"], "warrant": "Universal instantiation of C7 at Hermione, then modus ponens with C2." }, "reason": "C1 was irrelevant to fur; C7 is the premise that was missing." }
+  ]
+}

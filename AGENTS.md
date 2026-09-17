@@ -22,7 +22,14 @@ npm test                                   # node --test test/
 node src/cli.mjs demo fixtures/ai-risk     # validate, history, verify, evaluate, diff
 node src/cli.mjs report fixtures/ai-risk --format html --out out/ai-risk.html
 node src/cli.mjs ksg-push fixtures/ai-risk # fake client; add --live with KSG_API_URL set
+node src/cli.mjs compare fixtures/hermione main repair
+node src/cli.mjs logic fixtures/hermione   # Logic IR + Prolog projection per claim
+npm run serve                              # bundles + static UI on http://127.0.0.1:8787
+npm run vectors                            # regenerate Logic IR parity vectors from ../knowshowgo
 ```
+
+`src/logic/ir.mjs` must stay byte-compatible with `knowshowgo/src/logic_ir/core.js`;
+`test/logic.test.mjs` LOGIC-000 enforces it. Never add a node kind here.
 
 ## Layout
 

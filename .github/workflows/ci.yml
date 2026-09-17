@@ -19,3 +19,5 @@ jobs:
       - run: npm test
       - run: node src/cli.mjs demo fixtures/ai-risk
       - run: node src/cli.mjs demo fixtures/exercise-depression
+      - run: node src/cli.mjs demo fixtures/hermione
+      - run: npm run bundles

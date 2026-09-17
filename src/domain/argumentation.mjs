@@ -17,9 +17,13 @@
 
 import { liveRelations, unitsOfKind } from './truth-patch.mjs';
 import { FALLACIES } from './fallacies.mjs';
+import { equivocations, groundingReport } from './grounding.mjs';
+import { buildDiagnostics, dimensions } from './diagnostics.mjs';
+import { entails, evaluateClaim } from '../logic/evaluate.mjs';
+import { buildKb, saturate } from '../logic/kb-saturate.mjs';
 
-export const EVALUATOR_ID = 'argumentation.grounded';
-export const EVALUATOR_VERSION = '0.1.0';
+export const EVALUATOR_ID = 'truth.native';
+export const EVALUATOR_VERSION = '0.2.0';
 
 export const MODALITIES = ['speculative', 'possible', 'plausible', 'probable', 'certain'];
 const ATTACK_OPERATORS = ['attacks', 'rebut', 'undercut', 'undermine'];
@@ -201,7 +205,7 @@ export function structuralFindings(snapshot, edges, labels) {
  * Evaluate a whole snapshot. Returns labels per argument, status per claim,
  * expanded attack edges, structural findings and a verdict per argued claim.
  */
-export function evaluateSnapshot(snapshot) {
+export function evaluateSnapshot(snapshot, options = {}) {
   const args = unitsOfKind(snapshot, 'argument');
   const edges = attackEdges(snapshot);
   const premises = Object.fromEntries(args.map((a) => [a.id, a.premiseRefs]));
@@ -225,9 +229,16 @@ export function evaluateSnapshot(snapshot) {
     };
   }
   const findings = structuralFindings(snapshot, edges, result.labels);
+  findings.push(...equivocations(snapshot, edges));
+  const grounding = groundingReport(snapshot);
+  const logic = { arguments: {}, claims: {} };
+  for (const a of args) logic.arguments[a.id] = entails(snapshot, a);
+  const kb = buildKb(snapshot);
+  const saturated = saturate(kb);
+  for (const c of unitsOfKind(snapshot, 'claim')) logic.claims[c.id] = evaluateClaim(snapshot, c.id, { kb, saturated });
   const issue = unitsOfKind(snapshot, 'issue')[0] ?? null;
   const thesis = issue?.thesisRef ? { claim: issue.thesisRef, status: result.claims[issue.thesisRef] ?? (independent.has(issue.thesisRef) ? 'established' : 'open'), supporting: verdicts[issue.thesisRef]?.supporting ?? [] } : null;
-  return {
+  const evaluation = {
     evaluator: EVALUATOR_ID,
     evaluatorVersion: EVALUATOR_VERSION,
     accepted: result.accepted,
@@ -239,6 +250,11 @@ export function evaluateSnapshot(snapshot) {
     edges,
     verdicts,
     thesis,
-    findings
+    findings,
+    grounding,
+    logic
   };
+  evaluation.diagnostics = buildDiagnostics({ snapshot, evaluation, commitId: options.commitId ?? null });
+  evaluation.dimensions = dimensions({ snapshot, evaluation });
+  return evaluation;
 }

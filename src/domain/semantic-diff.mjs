@@ -15,6 +15,14 @@ const CLASS_BY_FIELD = {
   modality: 'claim content',
   claimKind: 'claim content',
   basis: 'grounding',
+  terms: 'grounding',
+  proposition: 'claim content',
+  logicIr: 'claim content',
+  logicText: 'claim content',
+  ksgRef: 'grounding',
+  label: 'claim content',
+  aliases: 'grounding',
+  definition: 'claim content',
   sourceRefs: 'evidence',
   sourceRef: 'evidence',
   fragment: 'evidence',
@@ -96,5 +104,43 @@ export function formatDiff(diff) {
   for (const r of diff.relations.removed) lines.push(`- ${r.id} ${r.unit.from} ${r.unit.operator} ${r.unit.to}`);
   for (const r of diff.relations.revised) lines.push(`~ ${r.id} ${r.fields.join(', ')}`);
   if (!lines.length) lines.push('(no semantic change)');
+  return lines.join('\n');
+}
+
+
+/**
+ * Differences between two evaluations of two snapshots: argument labels,
+ * native logic results, claim statuses and grounding states (spec v1.1 §13.2).
+ */
+export function evaluationDiff(before, after) {
+  const changes = [];
+  const ids = (a, b) => [...new Set([...Object.keys(a ?? {}), ...Object.keys(b ?? {})])].sort();
+  for (const id of ids(before.labels, after.labels)) if (before.labels?.[id] !== after.labels?.[id]) changes.push({ id, dimension: 'argument', before: before.labels?.[id] ?? null, after: after.labels?.[id] ?? null });
+  for (const id of ids(before.logic?.arguments, after.logic?.arguments)) {
+    const a = before.logic?.arguments?.[id]?.result ?? null;
+    const b = after.logic?.arguments?.[id]?.result ?? null;
+    if (a !== b) changes.push({ id, dimension: 'logical', before: a, after: b, evaluator: after.logic?.arguments?.[id]?.evaluator ?? before.logic?.arguments?.[id]?.evaluator });
+  }
+  for (const id of ids(before.claims, after.claims)) if (before.claims?.[id] !== after.claims?.[id]) changes.push({ id, dimension: 'claim', before: before.claims?.[id] ?? null, after: after.claims?.[id] ?? null });
+  for (const id of ids(before.grounding, after.grounding)) {
+    const a = before.grounding?.[id];
+    const b = after.grounding?.[id];
+    const ta = JSON.stringify((a?.terms ?? []).map((t) => [t.symbol, t.conceptRef]));
+    const tb = JSON.stringify((b?.terms ?? []).map((t) => [t.symbol, t.conceptRef]));
+    if (ta !== tb) changes.push({ id, dimension: 'grounding', before: (a?.terms ?? []).map((t) => `${t.symbol} → ${t.conceptRef ?? '?'}`), after: (b?.terms ?? []).map((t) => `${t.symbol} → ${t.conceptRef ?? '?'}`) });
+  }
+  const dcount = (ev) => { const c = { red: 0, yellow: 0, green: 0 }; for (const d of ev.diagnostics ?? []) c[d.state] += 1; return c; };
+  return { changes, diagnostics: { before: dcount(before), after: dcount(after) }, thesis: { before: before.thesis?.status ?? null, after: after.thesis?.status ?? null } };
+}
+
+export function formatEvaluationDiff(ed) {
+  const lines = [];
+  for (const c of ed.changes) {
+    if (c.dimension === 'grounding') { lines.push(`GROUNDING ${c.id}`); for (const b of c.before) lines.push(`- ${b}`); for (const a of c.after) lines.push(`+ ${a}`); }
+    else lines.push(`EVALUATION ${c.id} [${c.dimension}${c.evaluator ? ' ' + c.evaluator : ''}]: ${c.before ?? '—'} → ${c.after ?? '—'}`);
+  }
+  if (ed.thesis.before !== ed.thesis.after) lines.push(`THESIS: ${ed.thesis.before ?? '—'} → ${ed.thesis.after ?? '—'}`);
+  const b = ed.diagnostics.before; const a = ed.diagnostics.after;
+  lines.push(`DIAGNOSTICS red ${b.red}→${a.red} · yellow ${b.yellow}→${a.yellow} · green ${b.green}→${a.green}`);
   return lines.join('\n');
 }

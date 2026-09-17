@@ -11,13 +11,21 @@
  *   truth compile   <case.json> [--out patch.json] [--message TEXT]
  *   truth fallacies [--verbose]
  *   truth ksg-push  <fixture-dir> [--live] [--expect-release vX.Y.Z]
+ *   truth compare   <fixture-dir> <ref> <ref>        ref = branch | branch@n | commit id
+ *   truth logic     <fixture-dir> [claim id] [--ref R] [--datalog] [--json]
+ *   truth concept   <fixture-dir> [concept id] [--ref R]
+ *   truth bundle    <fixture-dir> --out public/data/<name>.json
  *   truth demo      <fixture-dir>
  */
 
 import { readFileSync, writeFileSync, statSync } from 'node:fs';
 import { compileCase } from './domain/authoring.mjs';
 import { FALLACIES } from './domain/fallacies.mjs';
-import { formatDiff } from './domain/semantic-diff.mjs';
+import { formatDiff, formatEvaluationDiff } from './domain/semantic-diff.mjs';
+import { render as renderIr } from './logic/ir.mjs';
+import { toProlog, toDatalog } from './logic/text.mjs';
+import { claimExpression } from './logic/kb.mjs';
+import { buildBundle } from './services/bundle.mjs';
 import { assertValidPatch, snapshotProblems } from './domain/validate.mjs';
 import { applyPatch, emptySnapshot } from './domain/truth-patch.mjs';
 import { createFakeKsgClient, createKsgAdapter, createKsgClientFromEnv } from './adapters/ksg.mjs';
@@ -99,23 +107,82 @@ const commands = {
 
   async report({ positional, flags }) {
     const { store, commits, project } = await withFixture(positional[0]);
-    const c = commitAt(commits, flags.commit);
-    const idx = commits.indexOf(c);
-    const evaluation = store.evaluate(c.id);
-    const snapshot = store.getSnapshot(c.id);
-    const history = store.listHistory(c.id);
-    const prev = idx > 0 ? commits[idx - 1] : null;
-    const d = prev ? store.diff(prev.id, c.id) : null;
-    const diff = d ? { ...d, text: formatDiff(d) } : null;
+    const ref = flags.ref ?? (flags.commit ? commitAt(commits, flags.commit).id : 'main');
+    const commitId = store.resolveRef(ref);
+    const history = store.listHistory(commitId);
+    const evaluation = store.evaluate(commitId);
+    const snapshot = store.getSnapshot(commitId);
+    const prev = history[1] ?? null;
+    const cmp = prev ? store.compare(prev.id, commitId) : null;
+    const diff = cmp ? { ...cmp.diff, text: formatDiff(cmp.diff), evaluationText: formatEvaluationDiff(cmp.evaluation) } : null;
     const render = flags.format === 'html' ? renderHtml : renderMarkdown;
     const text = render({ snapshot, evaluation, project, history, diff });
     if (flags.out) { writeFileSync(flags.out, text); console.log(`wrote ${flags.out}`); } else process.stdout.write(text);
     return 0;
   },
 
-  async history({ positional }) {
+  async history({ positional, flags }) {
     const { store } = await withFixture(positional[0]);
-    for (const c of store.listHistory().reverse()) console.log(`${c.id}  ${c.createdAt}  ${c.message}\n    patch ${c.patchHash.slice(7, 19)}  snapshot ${c.snapshotHash.slice(7, 19)}  parents ${c.parentRefs.join(',') || '-'}`);
+    for (const b of store.listBranches()) {
+      console.log(`branch ${b.name} (${b.commits} commits, head ${b.head})`);
+      if (flags.all || b.name === (flags.branch ?? 'main')) for (const c of store.listHistory(b.name).reverse()) console.log(`  ${c.id}  ${c.createdAt}  ${c.message}\n      patch ${c.patchHash.slice(7, 19)}  snapshot ${c.snapshotHash.slice(7, 19)}  parents ${c.parentRefs.join(',') || '-'}`);
+    }
+    return 0;
+  },
+
+  async compare({ positional }) {
+    const [dir, fromRef, toRef] = positional;
+    if (!fromRef || !toRef) throw new Error('compare <fixture> <ref> <ref>   (ref = branch, branch@n, or commit id)');
+    const { store } = await withFixture(dir);
+    const cmp = store.compare(fromRef, toRef);
+    console.log(`${fromRef} (${cmp.from}) → ${toRef} (${cmp.to})   classes: ${cmp.diff.classes.join(', ') || '-'}`);
+    console.log(formatDiff(cmp.diff));
+    console.log(formatEvaluationDiff(cmp.evaluation));
+    return 0;
+  },
+
+  async logic({ positional, flags }) {
+    const [dir, unitId] = positional;
+    const { store } = await withFixture(dir);
+    const snapshot = store.getSnapshot(flags.ref ?? 'main');
+    const names = Object.fromEntries(Object.values(snapshot.units).filter((u) => u.kind === 'concept').map((u) => [u.id, u.label]));
+    const ids = unitId ? [unitId] : Object.values(snapshot.units).filter((u) => u.kind === 'claim').map((u) => u.id);
+    for (const id of ids) {
+      const u = snapshot.units[id];
+      const ex = u ? claimExpression(u, snapshot) : null;
+      if (!ex) { if (unitId) console.log(`${id}: no formal expression`); continue; }
+      console.log(`${id}  ${u.text}`);
+      console.log(`  IR:      ${renderIr(ex.ir, names)}   (${ex.from}${ex.valid.ok ? '' : ', INVALID: ' + ex.valid.diagnostics.map((d) => d.code).join(',')})`);
+      console.log(`  Prolog:  ${toProlog(ex.ir, names)}`);
+      if (flags.datalog) console.log(`  Datalog: ${toDatalog(ex.ir, names)}`);
+      if (flags.json) console.log(JSON.stringify(ex.ir));
+    }
+    return 0;
+  },
+
+  async concept({ positional, flags }) {
+    const [dir, conceptId] = positional;
+    const { store } = await withFixture(dir);
+    const snapshot = store.getSnapshot(flags.ref ?? 'main');
+    const ids = conceptId ? [conceptId] : Object.values(snapshot.units).filter((u) => u.kind === 'concept').map((u) => u.id);
+    for (const id of ids) {
+      const x = store.explainConcept(id, flags.ref ?? 'main');
+      if (!x.concept) { console.log(`${id}: unknown concept`); continue; }
+      console.log(`${id}  ${x.concept.label}${x.concept.senseOf ? `  (sense of ${x.concept.senseOf})` : ''}${x.concept.ksgRef ? `  KSG ${x.concept.ksgRef}` : '  (local, not yet in KSG)'}`);
+      if (x.concept.definition) console.log(`  ${x.concept.definition}`);
+      if (x.concept.aliases?.length) console.log(`  aliases: ${x.concept.aliases.join(', ')}`);
+      console.log(`  used by claims: ${x.claims.join(', ') || '-'}`);
+      console.log(`  arguments affected by a grounding change: ${x.arguments.join(', ') || '-'}`);
+      if (x.competingSenses.length) console.log(`  competing senses: ${x.competingSenses.join(', ')}`);
+    }
+    return 0;
+  },
+
+  async bundle({ positional, flags }) {
+    const { store, project } = await withFixture(positional[0]);
+    const bundle = buildBundle({ store, project });
+    const text = JSON.stringify(bundle);
+    if (flags.out) { writeFileSync(flags.out, text); console.log(`wrote ${flags.out} (${(text.length / 1024).toFixed(0)} KB, ${bundle.commits.length} commits, ${bundle.branches.length} branches)`); } else process.stdout.write(text);
     return 0;
   },
 
@@ -169,6 +236,8 @@ const commands = {
     console.log('\n== verify'); await commands.verify({ positional: [dir], flags: {} });
     console.log('\n== evaluate (head)'); await commands.evaluate({ positional: [dir], flags: { quiet: true } });
     console.log('\n== diff (previous → head)'); await commands.diff({ positional: [dir], flags: {} });
+    const { store } = await withFixture(dir);
+    for (const b of store.listBranches()) if (b.name !== 'main') { console.log(`\n== compare main → ${b.name}`); await commands.compare({ positional: [dir, 'main', b.name], flags: {} }); }
     return 0;
   }
 };

@@ -1,0 +1,184 @@
+{
+  "p1": {
+    "ir": {
+      "logicIrVersion": "0.0.1",
+      "kind": "ForAll",
+      "variable": {
+        "kind": "Variable",
+        "name": "x"
+      },
+      "body": {
+        "kind": "Implies",
+        "if": {
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "H17",
+            "revisionUuid": "H17"
+          },
+          "args": [
+            {
+              "kind": "Variable",
+              "name": "x"
+            }
+          ]
+        },
+        "then": {
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "M52",
+            "revisionUuid": "M52"
+          },
+          "args": [
+            {
+              "kind": "Variable",
+              "name": "x"
+            }
+          ]
+        }
+      }
+    },
+    "names": {
+      "H17": "Human",
+      "M52": "Mortal"
+    },
+    "canonical": "{\"body\":{\"if\":{\"args\":[{\"kind\":\"Variable\",\"name\":\"x\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"revisionUuid\":\"H17\",\"uuid\":\"H17\"}},\"kind\":\"Implies\",\"then\":{\"args\":[{\"kind\":\"Variable\",\"name\":\"x\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"revisionUuid\":\"M52\",\"uuid\":\"M52\"}}},\"kind\":\"ForAll\",\"logicIrVersion\":\"0.0.1\",\"variable\":{\"kind\":\"Variable\",\"name\":\"x\"}}",
+    "hash": "sha256:48cf966c8b2cad13e911a74a4af18aba51d1ea29e83fa66937254d5957351c4a",
+    "rendering": "∀x (Human(x) → Mortal(x))"
+  },
+  "p2": {
+    "ir": {
+      "logicIrVersion": "0.0.1",
+      "kind": "Predicate",
+      "predicate": {
+        "kind": "ConceptRef",
+        "uuid": "H17"
+      },
+      "args": [
+        {
+          "kind": "EntityRef",
+          "uuid": "S1"
+        }
+      ]
+    },
+    "names": {
+      "H17": "Human",
+      "S1": "Socrates"
+    },
+    "canonical": "{\"args\":[{\"kind\":\"EntityRef\",\"uuid\":\"S1\"}],\"kind\":\"Predicate\",\"logicIrVersion\":\"0.0.1\",\"predicate\":{\"kind\":\"ConceptRef\",\"uuid\":\"H17\"}}",
+    "hash": "sha256:8f3926d8221b07ea5b4404daca94814b9642e821d6e12afaed1d656a2c729bce",
+    "rendering": "Human(Socrates)"
+  },
+  "andOrder": {
+    "ir": {
+      "kind": "And",
+      "args": [
+        {
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "Q"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "a"
+            }
+          ]
+        },
+        {
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "P"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "a"
+            }
+          ]
+        }
+      ]
+    },
+    "names": {},
+    "canonical": "{\"args\":[{\"args\":[{\"kind\":\"EntityRef\",\"uuid\":\"a\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"uuid\":\"P\"}},{\"args\":[{\"kind\":\"EntityRef\",\"uuid\":\"a\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"uuid\":\"Q\"}}],\"kind\":\"And\",\"logicIrVersion\":\"0.0.1\"}",
+    "hash": "sha256:b234a9f18c126b280c2ff3c0df6e759e7319a1f9dec4eb317ed00e3710c2bd46",
+    "rendering": "Q(a) ∧ P(a)"
+  },
+  "nested": {
+    "ir": {
+      "kind": "Exists",
+      "variable": {
+        "kind": "Variable",
+        "name": "x"
+      },
+      "body": {
+        "kind": "Or",
+        "args": [
+          {
+            "kind": "Not",
+            "of": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "B"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          },
+          {
+            "kind": "And",
+            "args": [
+              {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "A"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              },
+              {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "C"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "EntityRef",
+                    "uuid": "e"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "names": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "e": "e"
+    },
+    "canonical": "{\"body\":{\"args\":[{\"args\":[{\"args\":[{\"kind\":\"Variable\",\"name\":\"x\"},{\"kind\":\"EntityRef\",\"uuid\":\"e\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"uuid\":\"C\"}},{\"args\":[{\"kind\":\"Variable\",\"name\":\"x\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"uuid\":\"A\"}}],\"kind\":\"And\"},{\"kind\":\"Not\",\"of\":{\"args\":[{\"kind\":\"Variable\",\"name\":\"x\"}],\"kind\":\"Predicate\",\"predicate\":{\"kind\":\"ConceptRef\",\"uuid\":\"B\"}}}],\"kind\":\"Or\"},\"kind\":\"Exists\",\"logicIrVersion\":\"0.0.1\",\"variable\":{\"kind\":\"Variable\",\"name\":\"x\"}}",
+    "hash": "sha256:6826cdb898192376f2812cab3bd9928df5003713f612aa1de8157e3c859ca762",
+    "rendering": "∃x (¬B(x) ∨ A(x) ∧ C(x, e))"
+  }
+}

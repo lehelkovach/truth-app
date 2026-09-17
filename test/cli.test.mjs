@@ -30,3 +30,18 @@ test('compile reproduces the committed patch operations', () => {
   const committed = JSON.parse(readFileSync(join(fixture('ai-risk'), 'commits', '0001-author-case.json'), 'utf8'));
   assert.equal(compiled.operations.length, committed.operations.length);
 });
+
+test('compare, logic, concept and bundle commands', () => {
+  const cmp = run('compare', fixture('hermione'), 'main', 'repair');
+  assert.match(cmp, /\+ claim:C7/);
+  assert.match(cmp, /not_entailed → entailed/);
+  assert.match(run('logic', fixture('hermione'), 'claim:C1'), /warm_blooded\(X\) :- mammal\(X\)\./);
+  assert.match(run('concept', fixture('ai-risk'), 'concept:intelligence-competence'), /competing senses: concept:intelligence-agency/);
+  const out = join(mkdtempSync(join(tmpdir(), 'truth-')), 'b.json');
+  run('bundle', fixture('hermione'), '--out', out);
+  const b = JSON.parse(readFileSync(out, 'utf8'));
+  assert.equal(b.schema, 'truth-bundle');
+  assert.equal(b.commits.length, 3);
+  assert.equal(b.compares[0].to, 'repair');
+  assert.ok(b.commits[0].logicText['claim:C1'].prolog);
+});

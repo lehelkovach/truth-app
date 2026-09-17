@@ -56,6 +56,14 @@ export function renderMarkdown({ snapshot, evaluation, project = {}, history = [
       if (a.notes) { add(a.notes); add(); }
       const d = r.derivation[a.id];
       if (d) { add(`Derivation: ${d.reason}.`); add(); }
+      const L = r.logic?.arguments?.[a.id];
+      if (L) {
+        add(`Logic (${L.evaluator}@${L.evaluatorVersion}): **${L.result}**${L.expression ? ' — ' + L.expression : ''}`);
+        if (L.proof?.length) { add(); for (const s of L.proof) add(`  - ${s.step}: ${s.expression}  [${s.rule}${s.from.length ? ' from ' + s.from.join(', ') : ''}]`); }
+        if (L.missingCondition?.hints?.length) add(`  Missing condition: ${L.missingCondition.hints.join(' or ')}`);
+        if (L.missing?.length) add(`  Outside coverage: ${L.missing.map((m) => `${m.claim} (${m.reason})`).join('; ')}`);
+        add();
+      }
       const atk = r.edges.filter((e) => e.to === a.id);
       if (atk.length) { add('Attacked by: ' + atk.map((e) => `${e.from} (${e.operator}${e.targetRef ? ' ' + e.targetRef : ''}, ${LABEL_WORD[r.labels[e.from]]})`).join(', ')); add(); }
       for (const f of annotations.filter((x) => x.targetRef === a.id)) {
@@ -66,13 +74,27 @@ export function renderMarkdown({ snapshot, evaluation, project = {}, history = [
       if (a.sourceRefs?.length) { add('Sources: ' + a.sourceRefs.map((s) => src(units[s])).join('; ')); add(); }
     }
   }
+  add('## Diagnostics'); add();
+  const diags = r.diagnostics ?? [];
+  const counts = { red: 0, yellow: 0, green: 0 };
+  for (const d of diags) counts[d.state] += 1;
+  add(`${counts.red} red · ${counts.yellow} yellow · ${counts.green} green. Colour is diagnostic state under a named evaluator, not a truth label.`); add();
+  for (const d of diags.filter((x) => x.state !== 'green')) add(`- **${d.state.toUpperCase()}** \`${d.code}\` ${d.target ?? ''} (${d.evaluator}): ${d.message}${d.explanation?.options?.length ? ' — options: ' + d.explanation.options.join(' · ') : ''}`);
+  add();
   add('## Automated findings'); add();
   if (!r.findings.length) add('None.');
   for (const f of r.findings) add(`- \`${f.code}\` (${f.severity}) ${f.argument ?? f.claim ?? ''}: ${f.message}`);
   add();
+  const concepts = unitsOfKind(snapshot, 'concept');
+  if (concepts.length) {
+    add('## Concepts (grounding)'); add();
+    add('| Concept | Label | Sense of | KSG | Definition |'); add('|---|---|---|---|---|');
+    for (const k of concepts) add(`| ${k.id} | ${k.label} | ${k.senseOf ?? ''} | ${k.ksgRef ?? 'local'} | ${k.definition ?? ''} |`);
+    add();
+  }
   add('## Claims'); add();
-  add('| Id | Text | Kind | Modality | Basis | Status | Sources |'); add('|---|---|---|---|---|---|---|');
-  for (const c of claims) add(`| ${c.id} | ${c.text} | ${c.claimKind} | ${c.modality} | ${c.basis} | ${r.claims[c.id] ?? 'established'} | ${(c.sourceRefs ?? []).map((s) => src(units[s])).join('; ')} |`);
+  add('| Id | Text | Kind | Modality | Basis | Status | Grounding | Logic | Sources |'); add('|---|---|---|---|---|---|---|---|---|');
+  for (const c of claims) add(`| ${c.id} | ${c.text} | ${c.claimKind} | ${c.modality} | ${c.basis} | ${r.claims[c.id] ?? 'established'} | ${r.grounding?.[c.id]?.state ?? 'none'} | ${r.logic?.claims?.[c.id]?.result ?? ''} | ${(c.sourceRefs ?? []).map((s) => src(units[s])).join('; ')} |`);
   add();
   if (history.length) {
     add('## History'); add();
@@ -81,7 +103,7 @@ export function renderMarkdown({ snapshot, evaluation, project = {}, history = [
   }
   if (diff && !diff.empty) {
     add('## Semantic diff (previous commit → this commit)'); add();
-    add('```'); add(diff.text); add('```'); add();
+    add('```'); add(diff.text); if (diff.evaluationText) add(diff.evaluationText); add('```'); add();
   }
   return L.join('\n');
 }

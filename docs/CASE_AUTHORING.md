@@ -34,6 +34,38 @@ The AI-risk fixture was built this way; use it as the template.
    (`commits/0002-*.json`). `truth diff` shows what changed and
    `truth evaluate --commit N` shows what it did to the labels.
 
+## Grounding and formalising (optional, per claim)
+
+```json
+"concepts": {
+  "mammal":   { "label": "mammal", "kind": "predicate", "definition": "…" },
+  "hermione": { "label": "Hermione", "kind": "entity" },
+  "intelligence-agency": { "label": "intelligence (goal-directed agency)", "aliases": ["agency"], "senseOf": "intelligence" }
+},
+"propositions": [
+  { "id": "C1", "text": "Every mammal is warm-blooded.", "terms": ["mammal", "warm-blooded"], "logic": "forall x: mammal(x) -> warm_blooded(x)", … },
+  { "id": "P2", "text": "…", "terms": [{ "symbol": "intelligence", "concept": "intelligence-agency" }], … },
+  { "id": "P1", "text": "…", "terms": [{ "symbol": "intelligence", "candidates": ["intelligence-competence", "intelligence-agency"] }], … }
+]
+```
+
+- A bare string in `terms` resolves by exact label or alias. One hit binds
+  it; several leave `candidates` (yellow, ambiguous); none leaves it
+  unresolved. Nothing is guessed.
+- `logic` is parsed into KSG Logic IR (`forall`, `exists`, `->`, `&`, `|`,
+  `~`, `pred(args)`); identifiers are concept keys. `truth logic <fixture>`
+  shows the IR and its Prolog projection.
+- Use two `senseOf` concepts when a word does double duty. If premises then
+  ground it differently inside one argument, W001 fires with both senses and
+  the claims, which is the equivocation you would otherwise have to argue.
+- Native entailment only runs on arguments whose premises and conclusion all
+  have valid, fully grounded expressions; everything else is `outside
+  coverage`, which is a scope statement, not a verdict.
+
+Branches: `fixtures/<case>/branches/<name>/branch.json` (`{ "from": "main@2" }`)
+plus ordered patches; `truth compare <fixture> main <name>` shows the semantic
+diff and the evaluation diff (labels, logic results, grounding, diagnostics).
+
 Compile a compact case with:
 
 ```bash

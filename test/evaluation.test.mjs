@@ -9,7 +9,7 @@ test('PROV-001 evaluation pins the exact input commit, snapshot hash and evaluat
   const ev = store.evaluate(commits[1].id);
   assert.equal(ev.inputCommitRef, commits[1].id);
   assert.equal(ev.inputSnapshotHash, commits[1].snapshotHash);
-  assert.equal(ev.evaluator, 'argumentation.grounded');
+  assert.equal(ev.evaluator, 'truth.native');
   assert.match(ev.evaluatorVersion, /^\d+\.\d+\.\d+$/);
   assert.match(ev.id, /^evaluation:[a-f0-9]{16}$/);
   assert.equal(ev.provenance.sourceType, 'evaluator');
@@ -31,7 +31,7 @@ test('explainUnit returns revision, relations, label, derivation and lineage', a
 });
 
 test('evaluator registry lists the grounded evaluator and accepts new ones', () => {
-  assert.ok(listEvaluators().some((e) => e.id === 'argumentation.grounded'));
+  assert.ok(listEvaluators().some((e) => e.id === 'truth.native'));
   registerEvaluator({ id: 'test.noop', version: '0.0.1', run: () => ({ ok: true }) });
   assert.deepEqual(getEvaluator('test.noop').run({}), { ok: true });
   assert.throws(() => getEvaluator('nope'), /unknown evaluator/);

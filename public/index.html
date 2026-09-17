@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TruthApp</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:,">
+<script src="vendor/cytoscape.min.js"></script>
+</head>
+<body>
+<header id="top">
+  <div class="brand">TruthApp <span class="muted">v0.1 · projection over a semantic bundle</span></div>
+  <div class="controls">
+    <label>Project <select id="project"></select></label>
+    <label>Branch <select id="branch"></select></label>
+    <label>Commit <select id="commit"></select></label>
+  </div>
+</header>
+<main>
+  <aside id="left">
+    <section id="issue"></section>
+    <section id="history"><h3>History</h3><ol id="history-list"></ol></section>
+    <section id="filters"><h3>Graph filters</h3><div id="filter-list"></div></section>
+  </aside>
+  <section id="center">
+    <nav id="tabs">
+      <button data-tab="graph" class="active">Graph</button>
+      <button data-tab="arguments">Arguments</button>
+      <button data-tab="diagnostics">Diagnostics</button>
+      <button data-tab="logic">Logic</button>
+      <button data-tab="concepts">Concepts</button>
+      <button data-tab="compare">Compare</button>
+    </nav>
+    <div id="panel-graph" class="panel active"><div id="cy"></div></div>
+    <div id="panel-arguments" class="panel"></div>
+    <div id="panel-diagnostics" class="panel"></div>
+    <div id="panel-logic" class="panel"></div>
+    <div id="panel-concepts" class="panel"></div>
+    <div id="panel-compare" class="panel"></div>
+  </section>
+  <aside id="right"><div id="inspector"><p class="muted">Select a node, an argument, a diagnostic or a concept.</p></div></aside>
+</main>
+<script type="module" src="app.mjs"></script>
+</body>
+</html>

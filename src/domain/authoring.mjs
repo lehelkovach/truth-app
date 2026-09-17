@@ -16,6 +16,14 @@
  *     fallacies: [{argument, name, where?, explanation, severity?, by?}] }
  */
 
+import { parseIr } from '../logic/text.mjs';
+
+/**
+ * Concepts: `concepts: { key: { label, aliases?, definition?, kind?: concept|entity|predicate, ksgRef?, senseOf?: key } }`.
+ * Terms on a proposition: `terms: ["intelligence", { symbol: "AI", concept: "ai-system" }, { symbol: "x", candidates: ["a", "b"] }]`.
+ * A bare string resolves by exact label/alias among the case's concepts; one hit binds it, several leave candidates, none leaves it unresolved.
+ * `proposition: { predicate: key, roles: { agent: key }, polarity?, context? }` and `logic: "forall x: mammal(x) -> warm_blooded(x)"` compile to Logic IR.
+ */
 export function compileCase(c, { provenance = null, message = null } = {}) {
   const prov = provenance ?? { sourceType: 'user', sourceRef: `case:${c.id}`, method: 'manual_authoring' };
   const ops = [];
@@ -30,6 +38,27 @@ export function compileCase(c, { provenance = null, message = null } = {}) {
   add({ id: issueId, kind: 'issue', title: c.title, question: c.question, text: c.description ?? undefined, thesisRef: c.thesis ? claimRef(c.thesis) : undefined });
   for (const p of c.parties ?? []) add({ id: `position:${p.id}`, kind: 'position', issueRef: issueId, name: p.name, text: p.description ?? undefined });
   for (const [key, s] of Object.entries(c.sources ?? {})) add({ id: srcRef(key), kind: 'source', title: s.title, who: s.who, year: s.year, url: s.url, note: s.note });
+  const conceptRefOf = (key) => `concept:${key}`;
+  const concepts = c.concepts ?? {};
+  const symbols = {};
+  for (const [key, k] of Object.entries(concepts)) {
+    add({ id: conceptRefOf(key), kind: 'concept', label: k.label ?? key, aliases: k.aliases, definition: k.definition, conceptKind: k.kind ?? 'concept', ksgRef: k.ksgRef ?? null, senseOf: k.senseOf ? conceptRefOf(k.senseOf) : undefined, sourceRefs: k.sources?.length ? k.sources.map(srcRef) : undefined, text: k.definition });
+    symbols[key] = { uuid: conceptRefOf(key), kind: k.kind === 'entity' ? 'entity' : 'concept' };
+  }
+  const norm = (s) => String(s).trim().toLowerCase();
+  const resolveSymbol = (symbol) => {
+    const hits = Object.entries(concepts).filter(([key, k]) => norm(k.label ?? key) === norm(symbol) || (k.aliases ?? []).some((a) => norm(a) === norm(symbol)));
+    if (hits.length === 1) return { symbol, conceptRef: conceptRefOf(hits[0][0]) };
+    if (hits.length > 1) return { symbol, candidates: hits.map(([key]) => conceptRefOf(key)) };
+    return { symbol };
+  };
+  const compileTerms = (terms) => (terms ?? []).map((t) => {
+    if (typeof t === 'string') return resolveSymbol(t);
+    if (t.concept) return { symbol: t.symbol, conceptRef: conceptRefOf(t.concept) };
+    if (t.candidates) return { symbol: t.symbol, candidates: t.candidates.map(conceptRefOf) };
+    return resolveSymbol(t.symbol);
+  });
+  const compileProposition = (p) => p ? { predicateRef: conceptRefOf(p.predicate), roles: Object.fromEntries(Object.entries(p.roles ?? {}).map(([r, k]) => [r, conceptRefOf(k)])), polarity: p.polarity, context: p.context } : undefined;
   for (const p of c.propositions ?? []) {
     add({
       id: claimRef(p.id),
@@ -41,7 +70,11 @@ export function compileCase(c, { provenance = null, message = null } = {}) {
       positionRef: posRef(p.party),
       sourceRefs: p.sources?.length ? p.sources.map(srcRef) : undefined,
       notes: p.notes,
-      tags: p.tags
+      tags: p.tags,
+      terms: p.terms?.length ? compileTerms(p.terms) : undefined,
+      proposition: compileProposition(p.proposition),
+      logicIr: p.logic ? parseIr(p.logic, symbols) : p.logicIr,
+      logicText: p.logic
     });
   }
   for (const a of c.arguments ?? []) {

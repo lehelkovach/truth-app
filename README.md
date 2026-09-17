@@ -74,6 +74,51 @@ findings then tell the author exactly where to reply next.
 
 See [`docs/CASE_AUTHORING.md`](docs/CASE_AUTHORING.md) for the method.
 
+## What the evaluators say, and what they do not
+
+Every argument gets separate answers, each under a named evaluator, and the
+UI shows them side by side rather than folding them into one score:
+
+| Dimension | Values | From |
+|---|---|---|
+| Argument state | stands / defeated / contested | grounded argumentation over declared attacks |
+| Logical result | entailed / not entailed / contradicted / outside coverage | native evaluator over KnowShowGo Logic IR, with a proof or a missing condition |
+| Grounding | resolved / ambiguous / unresolved | exact label or alias match to concepts; ambiguity stops |
+| Evidence | present / missing / retracted | source presence, not source quality |
+| Lifecycle, parser | proposed / accepted / retracted; human / imported / AI-proposed | the unit's own status and provenance |
+
+Diagnostics are red, yellow or green **with an explanation**: what was
+detected, why it matters, what was checked, and what you can do. A red
+"conclusion does not follow" names the missing condition; a red equivocation
+names both concept senses and the claims that use each.
+
+`fixtures/hermione` is the spec's own example. Its second commit adds an
+argument whose conclusion does not follow; the `repair` branch adds the
+missing premise, and `truth compare fixtures/hermione main repair` prints:
+
+```
++ claim:C7 (claim)
+~ argument:A2 (argument) premiseRefs, warrant [inference]
+EVALUATION argument:A2 [logical logic.native]: not_entailed → entailed
+DIAGNOSTICS red 1→0 · yellow 2→3 · green 9→11
+```
+
+In the AI-risk case, "intelligence" is grounded to two senses (task
+competence in the timelines premise, goal-directed agency in the
+instrumental-convergence premise) and the evaluator flags the orthogonality
+argument for equivocation on its own; the `regrounded` branch shows what
+changes when the premise is restated in one sense.
+
+## UI
+
+```bash
+npm run serve     # builds public/data/*.json from every fixture, serves http://127.0.0.1:8787
+```
+
+A static page with issue, history, graph, arguments, diagnostics, logic,
+concepts and compare panels, and an inspector for any node. It renders a
+precomputed bundle and computes nothing itself.
+
 ## How it works
 
 ```
@@ -93,6 +138,14 @@ compact case → TruthPatch → AJV + invariants → immutable snapshot → comm
 - **Evaluation** (`src/domain/argumentation.mjs`): grounded semantics with
   premise support; structural findings (modal overreach, circularity,
   unsourced evidence, uncontested arguments, standoffs).
+- **Logic** (`src/logic/`): a byte-compatible mirror of KnowShowGo's Logic IR
+  v0.0.1, an authoring syntax, Prolog and Datalog projections, and a native
+  evaluator (forward chaining, three-valued, quantifiers over the snapshot,
+  proofs).
+- **Grounding and diagnostics** (`src/domain/grounding.mjs`,
+  `src/domain/diagnostics.mjs`): concept handles, exact/alias resolution,
+  equivocation detection, explained red/yellow/green diagnostics, status
+  dimensions.
 - **KnowShowGo** (`src/adapters/ksg.mjs`): the only boundary; units become
   objects with lineage, relations become assertions with `prev_assertion_id`
   chains, commits become assertions. `truth ksg-push` uses a deterministic fake
@@ -116,6 +169,10 @@ Full details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
 | `truth compile <case.json> --out patch.json` | Compact case → TruthPatch. |
 | `truth fallacies [-v]` | Catalogue with tests. |
 | `truth ksg-push <fixture> [--live] [--expect-release vX]` | Mirror into KnowShowGo. |
+| `truth compare <fixture> <ref> <ref>` | Semantic diff plus evaluation diff between branches or commits (`main`, `repair@1`, commit id). |
+| `truth logic <fixture> [claim]` | Logic IR rendering and Prolog projection per claim. |
+| `truth concept <fixture> [concept]` | Where a concept is used, which arguments a regrounding touches, competing senses. |
+| `truth bundle <fixture> --out F` | Precomputed bundle for the UI. |
 | `truth demo <fixture>` | All of the above in order. |
 
 `truth` is `node src/cli.mjs` (or `npx truth` after `npm link`).
@@ -123,11 +180,14 @@ Full details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
 ## Status and non-goals (v0.1)
 
 Done in this release: schemas, hashing, patch/revision/commit/diff, grounded
-evaluator, KSG adapter with contract check, two fixtures, CLI, HTML/Markdown
-reports, CI on Node 18/20/22.
+evaluator, KSG Logic IR mirror with parity tests, native logic evaluator,
+concept grounding and equivocation, explained diagnostics, fixture branches
+and compare, KSG adapter with contract check, three fixtures, CLI,
+HTML/Markdown reports, static UI, CI on Node 18/20/22.
 
-Not yet: graph UI, proposal-review flow, AI translator, Logic IR bindings,
-ASP / Bayesian / LNN evaluators, distributed merge, multi-user auth. See
+Not yet: composer and proposal-review flow, AI translator, debate ingestion,
+merge / pull requests, Datalog or Prolog execution, casting units to KSG's
+seeded prototypes, ASP / Bayesian / LNN evaluators, multi-user auth. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).
 
 ## License

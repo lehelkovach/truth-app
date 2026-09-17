@@ -88,7 +88,37 @@ analyst's belief and not a probability.
 | commit | `create_assertion` | `commit:… commits repo:…` with hashes in provenance. |
 | contract | `connect({ expected_release })` | mismatch fails closed (KSG-003). |
 
+## Native logic (src/logic)
+
+| File | Owns |
+|---|---|
+| `ir.mjs` | Mirror of KSG Logic IR v0.0.1: AST, `validate` (E004–E006), `inspectBindings` (E001–E003), `canonicalize`, `hashIr`, `render`. Parity-tested against KSG vectors. |
+| `text.mjs` | Authoring syntax (`forall x: mammal(x) -> warm_blooded(x)`) → IR; IR → Prolog / Datalog projections. |
+| `kb.mjs` | Claim → expression (`logicIr`, else `proposition` roles → one predicate), grounding state from `terms`, KB of facts and rules with claim provenance. |
+| `evaluate.mjs` | Bounded forward chaining (UMP, MP, conjunction), Kleene three-valued evaluation with quantifiers over the snapshot's entities, `entails(argument)` → entailed / contradicted / not_entailed / outside_coverage with a proof trace and a missing-condition hint. |
+
+Results carry `evaluator: logic.native@0.1.0`, the claims checked, the proof
+steps and the domain used, so every green or red can be re-derived.
+
+## Grounding and diagnostics (src/domain)
+
+| File | Owns |
+|---|---|
+| `grounding.mjs` | `resolveTerm` (exact/alias, stop on ambiguity), `groundingReport`, `equivocations` (W001 within an argument, W002 across an attack), `conceptUsage` (where used, which arguments a regrounding touches, competing senses). |
+| `diagnostics.mjs` | `buildDiagnostics`: every argument label, native logic result, grounding state, structural finding and evidence check becomes `{ state: green|yellow|red, code, target, evaluator, scope, message, explanation: { detected, why, checked, options, proof?, missingCondition? } }`. `dimensions`: lifecycle / logical / argument / evidence / grounding / parser per unit. |
+
+## UI (public/)
+
+`truth bundle <fixture>` (or `npm run bundles`) writes `public/data/<name>.json`
+with every commit's snapshot, evaluation, logic projections and diffs, plus
+branch compares. `public/app.mjs` renders issue, history, graph (Cytoscape from
+cdnjs), arguments, diagnostics, logic table, concepts and compare, with an
+inspector that shows the exact unit, its dimensions, grounding, logic, sources,
+revision and diagnostics. `npm run serve` builds bundles and serves on 8787.
+
 ## What is not here yet
 
-Graph UI (Vite + Cytoscape), proposal-review flow, AI translator, Logic IR
-bindings, ASP / Bayesian / LNN evaluators. See `docs/ROADMAP.md`.
+Proposal-review flow and AI translator, debate ingestion, merge / pull
+requests, Datalog or Prolog *execution* (projections only), science and theory
+pages, KSG-side casting of units to the seeded prototypes (T1–T6 in
+`KSG-LOGIC-IR-STATUS.md`). See `docs/ROADMAP.md`.

@@ -1,0 +1,15 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:hermione-0002",
+  "message": "Add A2 (Hermione has fur) whose conclusion does not follow, and a claim about Crookshanks with an unresolved term",
+  "createdAt": "2026-09-18T00:00:00Z",
+  "provenance": { "sourceType": "fixture", "sourceRef": "case:hermione", "method": "manual_authoring" },
+  "operations": [
+    { "op": "addUnit", "unit": { "id": "claim:C5", "kind": "claim", "status": "accepted", "provenance": { "sourceType": "user", "sourceRef": "case:hermione" }, "text": "Hermione has fur.", "claimKind": "empirical", "modality": "probable", "basis": "derived", "positionRef": "position:author",
+      "terms": [{ "symbol": "Hermione", "conceptRef": "concept:hermione" }, { "symbol": "has fur", "conceptRef": "concept:has_fur" }],
+      "logicText": "has_fur(hermione)", "logicIr": { "logicIrVersion": "0.0.1", "kind": "Predicate", "predicate": { "kind": "ConceptRef", "uuid": "concept:has_fur" }, "args": [{ "kind": "EntityRef", "uuid": "concept:hermione" }] } } },
+    { "op": "addUnit", "unit": { "id": "argument:A2", "kind": "argument", "status": "accepted", "provenance": { "sourceType": "user", "sourceRef": "case:hermione" }, "title": "Hermione has fur", "premiseRefs": ["claim:C1", "claim:C2"], "conclusionRef": "claim:C5", "scheme": "deductive", "strict": true, "positionRef": "position:author", "warrant": "Mammals are warm-blooded and Hermione is a mammal, so she has fur." } },
+    { "op": "addUnit", "unit": { "id": "claim:C6", "kind": "claim", "status": "proposed", "provenance": { "sourceType": "llm", "sourceRef": "conversation:demo", "method": "llm_extract", "model": "demo" }, "text": "Crookshanks is a mammal.", "claimKind": "empirical", "modality": "probable", "basis": "assumption", "positionRef": "position:author",
+      "terms": [{ "symbol": "Crookshanks" }, { "symbol": "mammal", "conceptRef": "concept:mammal" }] } }
+  ]
+}
