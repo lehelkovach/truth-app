@@ -116,6 +116,16 @@ cdnjs), arguments, diagnostics, logic table, concepts and compare, with an
 inspector that shows the exact unit, its dimensions, grounding, logic, sources,
 revision and diagnostics. `npm run serve` builds bundles and serves on 8787.
 
+## Composer (src/services/compose.mjs)
+
+`parseComposer(text)` reads the line-based subset in `docs/COMPOSER.md` into
+the compact case shape plus a span per statement; `compose(text)` runs
+compile → schema → invariants → commit on a throwaway store → evaluate and
+returns every diagnostic with the line it belongs to. `scripts/serve.mjs`
+exposes it as `POST /api/compose`; `truth compose` runs it from the CLI. The
+editor in `public/` is a textarea, a gutter and a review pane with underlines;
+it holds no logic of its own.
+
 ## What is not here yet
 
 Proposal-review flow and AI translator, debate ingestion, merge / pull

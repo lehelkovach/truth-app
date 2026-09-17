@@ -31,6 +31,7 @@
       <button data-tab="logic">Logic</button>
       <button data-tab="concepts">Concepts</button>
       <button data-tab="compare">Compare</button>
+      <button data-tab="compose">Compose</button>
     </nav>
     <div id="panel-graph" class="panel active"><div id="cy"></div></div>
     <div id="panel-arguments" class="panel"></div>
@@ -38,6 +39,14 @@
     <div id="panel-logic" class="panel"></div>
     <div id="panel-concepts" class="panel"></div>
     <div id="panel-compare" class="panel"></div>
+    <div id="panel-compose" class="panel">
+      <div class="compose-bar"><span class="small">Write a case; it is validated and evaluated as you type. Red = demonstrable problem, yellow = review, green = verified. Hover or click a mark for the explanation. <a id="compose-example">Load example</a> · <a id="compose-help">Grammar</a></span><span id="compose-status" class="small"></span></div>
+      <div class="compose-grid">
+        <div class="compose-editor"><div id="compose-gutter"></div><textarea id="compose-text" spellcheck="false" placeholder="issue: …&#10;C1 [certain]: Every mammal is warm-blooded.&#10;  logic: forall x: mammal(x) -> warm_blooded(x)"></textarea></div>
+        <div id="compose-review"></div>
+      </div>
+      <pre id="compose-grammar" class="small" hidden></pre>
+    </div>
   </section>
   <aside id="right"><div id="inspector"><p class="muted">Select a node, an argument, a diagnostic or a concept.</p></div></aside>
 </main>

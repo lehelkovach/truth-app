@@ -1,0 +1,33 @@
+# The composer format: one statement per line, indented lines are properties.
+issue: Is Hermione warm-blooded, and does it follow that she has fur?
+thesis: C3
+party author: Author
+
+predicate mammal (mammal): An animal of the class Mammalia.
+predicate warm_blooded (warm-blooded): Maintains body temperature internally.
+  aliases: endothermic
+predicate has_fur (has fur)
+entity hermione (Hermione): A particular cat.
+
+C1 [certain, definition]: Every mammal is warm-blooded.
+  logic: forall x: mammal(x) -> warm_blooded(x)
+  terms: mammal, warm-blooded
+C2 [certain, evidence]: Hermione is a mammal.
+  logic: mammal(hermione)
+  terms: Hermione, mammal
+  source: Veterinary record | https://example.org/hermione
+C3 [certain, derived]: Hermione is warm-blooded.
+  logic: warm_blooded(hermione)
+  terms: Hermione, warm-blooded
+C5 [probable, derived]: Hermione has fur.
+  logic: has_fur(hermione)
+  terms: Hermione, has fur
+C6 [probable]: Crookshanks is a mammal.
+  terms: Crookshanks, mammal
+
+A1 [deductive]: C1, C2 => C3
+  title: Hermione is warm-blooded
+  warrant: Universal instantiation of C1 at Hermione, then modus ponens with C2.
+A2 [deductive]: C1, C2 => C5
+  title: Hermione has fur
+  warrant: Mammals are warm-blooded and Hermione is a mammal, so she has fur.

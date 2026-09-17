@@ -24,6 +24,16 @@ import { parseIr } from '../logic/text.mjs';
  * A bare string resolves by exact label/alias among the case's concepts; one hit binds it, several leave candidates, none leaves it unresolved.
  * `proposition: { predicate: key, roles: { agent: key }, polarity?, context? }` and `logic: "forall x: mammal(x) -> warm_blooded(x)"` compile to Logic IR.
  */
+function parseLogicOrThrow(text, symbols, claimId) {
+  try {
+    return parseIr(text, symbols);
+  } catch (e) {
+    const err = new SyntaxError(`${claimId}#logic: ${e.message}`);
+    err.claimId = claimId;
+    throw err;
+  }
+}
+
 export function compileCase(c, { provenance = null, message = null } = {}) {
   const prov = provenance ?? { sourceType: 'user', sourceRef: `case:${c.id}`, method: 'manual_authoring' };
   const ops = [];
@@ -73,7 +83,7 @@ export function compileCase(c, { provenance = null, message = null } = {}) {
       tags: p.tags,
       terms: p.terms?.length ? compileTerms(p.terms) : undefined,
       proposition: compileProposition(p.proposition),
-      logicIr: p.logic ? parseIr(p.logic, symbols) : p.logicIr,
+      logicIr: p.logic ? parseLogicOrThrow(p.logic, symbols, claimRef(p.id)) : p.logicIr,
       logicText: p.logic
     });
   }

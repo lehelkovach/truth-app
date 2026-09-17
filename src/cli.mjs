@@ -14,6 +14,7 @@
  *   truth compare   <fixture-dir> <ref> <ref>        ref = branch | branch@n | commit id
  *   truth logic     <fixture-dir> [claim id] [--ref R] [--datalog] [--json]
  *   truth concept   <fixture-dir> [concept id] [--ref R]
+ *   truth compose   <file.truth> [--json] [--out patch.json] [--all] [--show]
  *   truth bundle    <fixture-dir> --out public/data/<name>.json
  *   truth demo      <fixture-dir>
  */
@@ -26,6 +27,7 @@ import { render as renderIr } from './logic/ir.mjs';
 import { toProlog, toDatalog } from './logic/text.mjs';
 import { claimExpression } from './logic/kb.mjs';
 import { buildBundle } from './services/bundle.mjs';
+import { compose } from './services/compose.mjs';
 import { assertValidPatch, snapshotProblems } from './domain/validate.mjs';
 import { applyPatch, emptySnapshot } from './domain/truth-patch.mjs';
 import { createFakeKsgClient, createKsgAdapter, createKsgClientFromEnv } from './adapters/ksg.mjs';
@@ -176,6 +178,22 @@ const commands = {
       if (x.competingSenses.length) console.log(`  competing senses: ${x.competingSenses.join(', ')}`);
     }
     return 0;
+  },
+
+  async compose({ positional, flags }) {
+    const text = readFileSync(positional[0], 'utf8');
+    const result = compose(text);
+    if (flags.json) { console.log(JSON.stringify(result, null, 2)); return result.ok ? 0 : 1; }
+    if (flags.out && result.patch) { writeFileSync(flags.out, JSON.stringify(result.patch, null, 2) + '\n'); console.log(`wrote ${flags.out}`); }
+    const lines = text.split(/\r?\n/);
+    console.log(`${result.ok ? 'OK' : 'FAILED'} at stage ${result.stage}${result.summary ? ` · ${result.summary.units} units · ${result.summary.accepted} stand / ${result.summary.rejected} defeated · red ${result.summary.red} yellow ${result.summary.yellow} green ${result.summary.green}${result.summary.thesis ? ' · thesis ' + result.summary.thesis : ''}` : ''}`);
+    for (const d of result.diagnostics) {
+      if (d.state === 'green' && !flags.all) continue;
+      const where = d.line ? `${positional[0]}:${d.line.line}` : '(no line)';
+      console.log(`  ${d.state.toUpperCase().padEnd(6)} ${where.padEnd(34)} ${d.code.padEnd(20)} ${d.message}`);
+      if (d.line && flags.show) console.log(`         > ${lines[d.line.line - 1]}`);
+    }
+    return result.ok ? 0 : 1;
   },
 
   async bundle({ positional, flags }) {

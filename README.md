@@ -109,7 +109,7 @@ instrumental-convergence premise) and the evaluator flags the orthogonality
 argument for equivocation on its own; the `regrounded` branch shows what
 changes when the premise is restated in one sense.
 
-## UI
+## UI and composer
 
 ```bash
 npm run serve     # builds public/data/*.json from every fixture, serves http://127.0.0.1:8787
@@ -118,6 +118,13 @@ npm run serve     # builds public/data/*.json from every fixture, serves http://
 A static page with issue, history, graph, arguments, diagnostics, logic,
 concepts and compare panels, and an inspector for any node. It renders a
 precomputed bundle and computes nothing itself.
+
+The **Compose** tab is the editor: write a case in the readable subset
+(`docs/COMPOSER.md`) and it is validated and evaluated as you type, with
+wavy underlines you hover for the reason and click for the full explanation,
+proof or missing condition. The page posts the text to `POST /api/compose`
+on the same local server; `truth compose file.truth` does the same from the
+terminal.
 
 ## How it works
 
@@ -173,6 +180,7 @@ Full details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
 | `truth logic <fixture> [claim]` | Logic IR rendering and Prolog projection per claim. |
 | `truth concept <fixture> [concept]` | Where a concept is used, which arguments a regrounding touches, competing senses. |
 | `truth bundle <fixture> --out F` | Precomputed bundle for the UI. |
+| `truth compose <file.truth> [--show] [--out patch.json]` | Compile, validate and evaluate a composer file; diagnostics with line numbers. |
 | `truth demo <fixture>` | All of the above in order. |
 
 `truth` is `node src/cli.mjs` (or `npx truth` after `npm link`).
@@ -185,7 +193,7 @@ concept grounding and equivocation, explained diagnostics, fixture branches
 and compare, KSG adapter with contract check, three fixtures, CLI,
 HTML/Markdown reports, static UI, CI on Node 18/20/22.
 
-Not yet: composer and proposal-review flow, AI translator, debate ingestion,
+Not yet: proposal-review flow, AI translator, debate ingestion,
 merge / pull requests, Datalog or Prolog execution, casting units to KSG's
 seeded prototypes, ASP / Bayesian / LNN evaluators, multi-user auth. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).

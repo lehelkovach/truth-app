@@ -209,6 +209,83 @@ function renderInspector(diag = null) {
   for (const a of el.querySelectorAll('a[data-sel]')) a.onclick = () => select(a.dataset.sel);
 }
 
+/* ---------------- Composer: text in, underlines out ---------------- */
+const GRAMMAR = `issue: <question>
+thesis: <claim id>
+party <id>: <display name>
+concept|entity|predicate <key> (<label>): <definition>
+  aliases: a, b        kind: concept|entity|predicate        sense of: <key>
+<Claim id> [modality, basis, kind, party]: <text>
+  logic: forall x: p(x) -> q(x)      terms: word, word=conceptKey      source: Title | url
+<Arg id> [scheme, party]: P1, P2 => C
+  title: …    warrant: …
+<Arg> undercuts|rebuts|undermines <Arg> [at <premise>]: note
+fallacy <Arg> <name> [inference|conclusion|premise:<id>, fatal|weakens|note, party]: why
+modality: speculative possible plausible probable certain · basis: evidence definition assumption derived
+kind: empirical predictive normative definitional conceptual · scheme: deductive inductive abductive analogical expected-value authority extrapolation`;
+
+let composeTimer = null;
+let composeResult = null;
+let tip = null;
+
+async function runCompose() {
+  const text = $('#compose-text').value;
+  $('#compose-status').textContent = 'evaluating…';
+  try {
+    const res = await fetch('api/compose', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) });
+    composeResult = await res.json();
+  } catch (e) {
+    $('#compose-status').innerHTML = `<span class="badge red">no compose endpoint</span> run <code>npm run serve</code> (the static page alone cannot evaluate)`;
+    return;
+  }
+  renderCompose(text);
+}
+
+function renderCompose(text) {
+  const r = composeResult;
+  const lines = text.split(/\r?\n/);
+  const byLine = new Map();
+  for (const d of r.diagnostics) { if (!d.line) continue; const L = d.line.line; byLine.set(L, [...(byLine.get(L) ?? []), d]); }
+  const worst = (ds) => (ds.some((d) => d.state === 'red') ? 'red' : ds.some((d) => d.state === 'yellow') ? 'yellow' : 'green');
+  $('#compose-gutter').innerHTML = lines.map((_, i) => { const ds = byLine.get(i + 1); return `<div class="${ds ? worst(ds) : ''}">${i + 1}</div>`; }).join('');
+  $('#compose-review').innerHTML = lines.map((line, i) => { const ds = byLine.get(i + 1); const body = esc(line || ' '); return `<span class="rl"><span class="ln">${i + 1}</span>${ds ? `<span class="mark ${worst(ds)}" data-line="${i + 1}">${body}</span>` : body}</span>`; }).join('');
+  const s = r.summary;
+  $('#compose-status').innerHTML = s ? `<span class="badge red">${s.red}</span><span class="badge yellow">${s.yellow}</span><span class="badge green">${s.green}</span> ${s.units} units · ${s.accepted} stand / ${s.rejected} defeated${s.thesis ? ' · thesis ' + s.thesis : ''}` : `<span class="badge red">${r.diagnostics.length}</span> problems at stage ${esc(r.stage)}`;
+  const unlined = r.diagnostics.filter((d) => !d.line && d.state !== 'green');
+  if (unlined.length) $('#compose-review').innerHTML += `<hr>` + unlined.map((d) => `<span class="rl"><span class="mark ${d.state}" data-diag="${r.diagnostics.indexOf(d)}">${esc(d.code)} ${esc(d.message)}</span></span>`).join('');
+  for (const m of $('#compose-review').querySelectorAll('.mark')) {
+    const ds = m.dataset.line ? byLine.get(Number(m.dataset.line)) : [r.diagnostics[Number(m.dataset.diag)]];
+    m.onmouseenter = (e) => showTip(e, ds);
+    m.onmousemove = (e) => { if (tip) { tip.style.left = `${Math.min(e.clientX + 12, window.innerWidth - 440)}px`; tip.style.top = `${e.clientY + 14}px`; } };
+    m.onmouseleave = hideTip;
+    m.onclick = () => { hideTip(); showComposeInspector(ds); };
+  }
+}
+
+function showTip(e, ds) {
+  hideTip();
+  tip = document.createElement('div');
+  tip.className = 'tip';
+  tip.innerHTML = ds.map((d) => `<div><span class="badge ${d.state}">${d.state}</span><code>${esc(d.code)}</code> ${esc(d.message)}<div class="small">${esc(d.explanation?.why ?? '')}</div></div>`).join('<hr>');
+  tip.style.left = `${Math.min(e.clientX + 12, window.innerWidth - 440)}px`;
+  tip.style.top = `${e.clientY + 14}px`;
+  document.body.appendChild(tip);
+}
+function hideTip() { if (tip) { tip.remove(); tip = null; } }
+
+function showComposeInspector(ds) {
+  const r = composeResult;
+  const el = $('#inspector');
+  el.innerHTML = ds.map((d) => `<div class="card" style="cursor:default"><span class="badge ${d.state}">${d.state}</span><code>${esc(d.code)}</code> ${d.target ? `<b>${esc(d.target)}</b>` : ''}<div>${esc(d.message)}</div><h4>Why</h4><div class="small">${esc(d.explanation?.why ?? '')}</div>${d.explanation?.checked?.length ? `<h4>Checked</h4><div class="small">${esc(d.explanation.checked.join(', '))}</div>` : ''}${d.explanation?.missingCondition ? `<h4>Missing condition</h4><div class="small">${esc(d.explanation.missingCondition.hints.join(' or '))}</div>` : ''}${d.explanation?.proof?.length ? `<h4>Proof</h4><ol class="small">${d.explanation.proof.map((s) => `<li><code>${esc(s.expression)}</code> ${esc(s.rule)}${s.from.length ? ' from ' + esc(s.from.join(', ')) : ''}</li>`).join('')}</ol>` : ''}<h4>Options</h4>${(d.explanation?.options ?? []).map((o) => `<span class="opt">${esc(o)}</span>`).join('')}<div class="small" style="margin-top:6px">evaluator ${esc(d.evaluator)}</div></div>`).join('');
+  const t = ds[0]?.target;
+  if (t && r.evaluation?.dimensions?.[t]) el.innerHTML += `<h4>Dimensions of ${esc(t)}</h4><dl class="dim">${Object.entries(r.evaluation.dimensions[t]).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
+}
+
+$('#compose-text').addEventListener('input', () => { clearTimeout(composeTimer); composeTimer = setTimeout(runCompose, 450); });
+$('#compose-text').addEventListener('scroll', () => { $('#compose-gutter').scrollTop = $('#compose-text').scrollTop; });
+$('#compose-example').onclick = async () => { $('#compose-text').value = await (await fetch('api/compose/example')).text(); runCompose(); };
+$('#compose-help').onclick = () => { const g = $('#compose-grammar'); g.hidden = !g.hidden; g.textContent = GRAMMAR; };
+
 for (const b of document.querySelectorAll('#tabs button')) b.onclick = () => { for (const x of document.querySelectorAll('#tabs button')) x.classList.toggle('active', x === b); for (const p of document.querySelectorAll('.panel')) p.classList.toggle('active', p.id === `panel-${b.dataset.tab}`); if (b.dataset.tab === 'graph' && cy) { cy.resize(); cy.fit(undefined, 24); if (state.selected && cy.getElementById(state.selected).length) cy.center(cy.getElementById(state.selected)); } };
 
 loadIndex().catch((e) => { $('#issue').innerHTML = `<p class="badge red">failed to load bundle: ${esc(e.message)}</p>`; });
