@@ -4,11 +4,13 @@ import { readFileSync } from 'node:fs';
 import { canonicalize, hashIr, render, serialize, validate, inspectBindings, strictEvaluate, conceptRef, entityRef, variable, predicate, implies, forAll, and, not } from '../src/logic/ir.mjs';
 import { parseIr, toProlog, toDatalog } from '../src/logic/text.mjs';
 import { buildKb, claimExpression, groundingState } from '../src/logic/kb.mjs';
+import { inferArgument } from '../src/logic/infer.mjs';
 import { saturate, evaluateFormula, entails, evaluateClaim, TRUTH, LOGIC_RESULT } from '../src/logic/evaluate.mjs';
 import { applyPatch, emptySnapshot } from '../src/domain/truth-patch.mjs';
 import { patchOf, addUnit, prov } from './helpers.mjs';
 
 const vectors = JSON.parse(readFileSync(new URL('./vectors/logic-ir-ksg.json', import.meta.url), 'utf8'));
+const inferVectors = JSON.parse(readFileSync(new URL('./vectors/infer-ksg.json', import.meta.url), 'utf8'));
 
 test('LOGIC-000 mirror is byte-compatible with KSG core.js on canonical form, hash and rendering', () => {
   for (const [name, v] of Object.entries(vectors)) {
@@ -109,4 +111,12 @@ test('LOGIC-006 proposition-centric shape compiles to a predicate; polarity to n
   const ex = claimExpression(claim, snap);
   assert.equal(ex.from, 'proposition');
   assert.equal(render(ex.ir, { 'concept:bird': 'bird', 'concept:hermione': 'Hermione' }), '¬bird(Hermione)');
+});
+
+test('LOGIC-007 the inference mirror matches KSG infer.js on the parity vectors (valid / invalid / unresolved)', () => {
+  for (const [name, v] of Object.entries(inferVectors)) {
+    const r = inferArgument(v.input);
+    assert.equal(r.decision, v.decision, `${name} decision`);
+    assert.equal(r.rule ?? null, v.rule, `${name} rule`);
+  }
 });

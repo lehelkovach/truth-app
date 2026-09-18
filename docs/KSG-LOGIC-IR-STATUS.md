@@ -75,15 +75,19 @@ KG1/KG2 need a client pair before anyone depends on them.
 
 | # | Do | Closes when |
 |---|---|---|
-| T1 | On `ksg-push`, call `seed_logic_ir_primitives()` once and cache the prototype uuids by name | the adapter never writes an ad-hoc `category_name`; every unit is cast to a seeded prototype or to `Utterance` |
-| T2 | Write claims as `Utterance` by default; as `Claim` when the TruthIR claim carries an `sop: { subject, predicate, object }` of Concept refs; as `Proposition` when it carries `logicIr` + `bindings`, using the same property names as `toObjectProperties` | `evaluatePrototypeMatch` returns `match` for a claim with IR and `no_match` (unresolved) for one without, and the decision is stored back on the TruthApp unit as an evaluation, not as a type |
+| T1 | ✅ `ensurePrototypes()` seeds once and caches the prototype uuids by name; concepts, claims and arguments cast to seeded prototypes, domain units (issue/position/source/evidence/hypothesis/theory/annotation/actor) keep a TruthApp `category_name` under `TruthUnit` | done in this branch |
+| T2 | ✅ `formalizeClaim` casts a claim to `Proposition` when its `logicIr` validates and every term resolves, to `Claim` when it has an sop (`proposition.roles`), else `Utterance`; property names match KSG's `toObjectProperties`. After each cast the adapter calls `evaluatePrototypeMatch` and records the decision in `matches` (an evaluation, not a stored type) | done; `matches` shows `Proposition:match` for an IR claim and `Utterance:...` for one with an unresolved term |
 | T3 | ✅ Optional `logicIr`, `terms` (bindings) and `proposition` on the TruthIR claim schema; `logicIr` validated offline with a byte-compatible mirror of KSG's validator (`src/logic/ir.mjs`, parity vectors in `test/vectors/`) | done in this branch; `sop` is expressed as `proposition.roles` |
-| T4 | Write arguments as `Argument` with `premises` (JSON array of premise object uuids) and `conclusion` (concept_ref uuid), then call `evaluateLogicInference({ argumentRevisionUuid })` for arguments whose premises and conclusion all have IR; record `valid` / `invalid` / `unresolved` as a TruthApp evaluation beside the grounded label | the Socrates syllogism authored as a TruthApp case comes back `valid` from KSG; an AI-risk argument comes back `unresolved`, never `invalid` |
-| T5 | ✅ (local half) Concept binding in the compact authoring format (`concepts`, `terms`, `logic`), exact/alias resolution, ambiguity stops; ⬜ (push half) map `concept:` ids to KSG uuids (`ksgRef`) at push time and report unresolved symbols as E001 | the report shows which claims are formalisable and which are not |
-| T6 | Store `modality`, `basis` and `claimKind` as plain properties on the KSG object, outside the IR | matches KSG's "keep the dimensions separate" rule; nothing is added to the IR |
+| T4 | ✅ Arguments cast to `Argument` with `premises` (JSON array of premise object uuids) and `conclusion` (concept_ref); the adapter calls `evaluateLogicInference({ argumentRevisionUuid })` and records the decision in `inferences`. The inference core is mirrored byte-faithfully (`src/logic/infer.mjs`, vectors in `test/vectors/infer-ksg.json`) so the fake client decides what the server would | done; hermione's syllogism → `valid`, every AI-risk argument → `unresolved` (never `invalid`), a not-entailed grounded argument → `invalid` |
+| T5 | ✅ Concepts are written first and their KSG uuids grounds every `concept:` ref in a claim's `logicIr` and `terms` (`remapRefs`); `ksgRef` overrides. `truth ksg-push` prints the cast breakdown, KSG inference counts, and unresolved terms (E001); `--verbose` lists them | done |
+| T6 | ✅ `modality`, `basis`, `claimKind`, `positionRef` are plain properties on the KSG object, outside the IR | done |
 
-T2 and T4 depend on the adapter writing units in dependency order (sources
-and claims before arguments); that ordering fix is in this commit.
+All of T1–T6 landed on branch `claude/truth-app-ai-safety-lb3lhe`. What is
+**not** done is a live round-trip: `truth ksg-push --live` builds a real
+client from `KSG_API_URL` / `KSG_API_TOKEN` and runs the same path, but it
+has not been exercised against a running KSG server from here. The offline
+fake models the prototype-match and inference contracts faithfully, so the
+wiring is proven; only the network hop is unverified.
 
 ### In KSG / knowshowgo-client, to ask for on their ladder
 

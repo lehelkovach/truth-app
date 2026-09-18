@@ -5,11 +5,13 @@
    `iac-bus` or `yolo-online-learner`. v0.1 uses a flat profile
    (`schema/truthir-profile-v0.1.schema.json`). If the frame schema lives
    elsewhere, point to it and the profile will be re-expressed as frames.
-2. **KSG object category for units.** The adapter still writes
-   `category_name = unit.kind`. KSG already seeds `Utterance` / `Claim` /
-   `Proposition` / `Argument` prototypes; switching to them is T1–T2 in
-   `docs/KSG-LOGIC-IR-STATUS.md`. Confirm that TruthApp should cast rather
-   than keep its own categories.
+2. **KSG object category for units.** Resolved 2026-09-18: the adapter casts
+   concepts / claims / arguments to KSG's seeded prototypes (Concept,
+   Proposition / Claim / Utterance, Argument) and records the prototype-match
+   decision as an evaluation. Domain units (issue, position, source, evidence,
+   hypothesis, theory, annotation, actor) keep a TruthApp `category_name`
+   under `TruthUnit`, since they are not logic primitives. Confirm that split
+   is what you want, or name domain prototypes to cast them to as well.
 3. **Semantic bindings / Logic IR.** Resolved 2026-09-17: KSG `dev` has R1/R2
    shipped and a seeded `Proposition` prototype. Assessment and build list in
    `docs/KSG-LOGIC-IR-STATUS.md`. Remaining question for the owner: which

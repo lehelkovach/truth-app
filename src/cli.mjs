@@ -241,8 +241,18 @@ const commands = {
     const ksg = createKsgAdapter({ client, ownerUserId: process.env.KSG_OWNER ?? null });
     const expected = flags['expect-release'] ? { expected_release: flags['expect-release'] } : {};
     await ksg.connect(expected);
-    const { commits } = await loadFixture(positional[0], { ksg });
+    const { store, commits } = await loadFixture(positional[0], { ksg });
     console.log(`${flags.live ? 'pushed' : 'mirrored into fake client'}: ${commits.length} commits, ${ksg.objectUuids.size} objects, ${ksg.assertionIds.size} relation assertions`);
+    const rep = ksg.formalizationReport(store.getSnapshot(commits.at(-1).id));
+    console.log(`  cast: ${rep.propositions} Proposition, ${rep.claims} Claim, ${rep.utterances} Utterance`);
+    const infCounts = Object.values(rep.arguments).reduce((a, i) => ((a[i.decision] = (a[i.decision] ?? 0) + 1), a), {});
+    if (Object.keys(infCounts).length) console.log(`  KSG inference: ${Object.entries(infCounts).map(([d, n]) => `${n} ${d}`).join(', ')}`);
+    if (rep.unresolvedSymbols.length && flags.verbose) {
+      console.log('  unresolved terms (E001 — not formalisable until grounded):');
+      for (const u of rep.unresolvedSymbols) console.log(`    ${u.claim}: '${u.symbol}' (${u.status})`);
+    } else if (rep.unresolvedSymbols.length) {
+      console.log(`  unresolved terms: ${rep.unresolvedSymbols.length} (pass --verbose to list; these stay Utterances)`);
+    }
     if (!flags.live) console.log('(no --live: nothing left the machine; set KSG_API_URL and pass --live to write to KnowShowGo)');
     return 0;
   },

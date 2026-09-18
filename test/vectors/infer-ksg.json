@@ -1,0 +1,369 @@
+{
+  "socrates_valid": {
+    "input": {
+      "premises": [
+        {
+          "uuid": "p1",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "ForAll",
+            "variable": {
+              "kind": "Variable",
+              "name": "x"
+            },
+            "body": {
+              "kind": "Implies",
+              "if": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "H17"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              },
+              "then": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "M52"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "uuid": "p2",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "H17"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "S1"
+              }
+            ]
+          }
+        }
+      ],
+      "conclusion": {
+        "uuid": "p3",
+        "ir": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "M52"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "S1"
+            }
+          ]
+        }
+      }
+    },
+    "decision": "valid",
+    "rule": "universal_modus_ponens"
+  },
+  "hypothetical_valid": {
+    "input": {
+      "premises": [
+        {
+          "uuid": "p1",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "ForAll",
+            "variable": {
+              "kind": "Variable",
+              "name": "x"
+            },
+            "body": {
+              "kind": "Implies",
+              "if": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "A1"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              },
+              "then": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "B1"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "uuid": "p2",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "ForAll",
+            "variable": {
+              "kind": "Variable",
+              "name": "x"
+            },
+            "body": {
+              "kind": "Implies",
+              "if": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "B1"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              },
+              "then": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "C1"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "conclusion": {
+        "uuid": "p3",
+        "ir": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "A1"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "C1"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "decision": "valid",
+    "rule": "hypothetical_syllogism"
+  },
+  "wrong_conclusion_invalid": {
+    "input": {
+      "premises": [
+        {
+          "uuid": "p1",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "ForAll",
+            "variable": {
+              "kind": "Variable",
+              "name": "x"
+            },
+            "body": {
+              "kind": "Implies",
+              "if": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "H17"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              },
+              "then": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "M52"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "uuid": "p2",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "H17"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "S1"
+              }
+            ]
+          }
+        }
+      ],
+      "conclusion": {
+        "uuid": "p3",
+        "ir": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "A1"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "S1"
+            }
+          ]
+        }
+      }
+    },
+    "decision": "invalid",
+    "rule": null
+  },
+  "unresolved_premise": {
+    "input": {
+      "premises": [
+        {
+          "uuid": "p1",
+          "ir": {
+            "logicIrVersion": "0.0.1",
+            "kind": "ForAll",
+            "variable": {
+              "kind": "Variable",
+              "name": "x"
+            },
+            "body": {
+              "kind": "Implies",
+              "if": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "H17"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              },
+              "then": {
+                "kind": "Predicate",
+                "predicate": {
+                  "kind": "ConceptRef",
+                  "uuid": "M52"
+                },
+                "args": [
+                  {
+                    "kind": "Variable",
+                    "name": "x"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "uuid": "p2",
+          "ir": null,
+          "bindings": [
+            {
+              "symbol": "God",
+              "resolved": false
+            }
+          ]
+        }
+      ],
+      "conclusion": {
+        "uuid": "p3",
+        "ir": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "M52"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "S1"
+            }
+          ]
+        }
+      }
+    },
+    "decision": "unresolved",
+    "rule": null
+  }
+}

@@ -86,6 +86,9 @@ analyst's belief and not a probability.
 | argument | also `create_syllogism` | premises / conclusion texts with ids. |
 | relation | `create_assertion` | subject = from, predicate = operator, obj = to, `prev_assertion_id` chains revisions. |
 | commit | `create_assertion` | `commit:… commits repo:…` with hashes in provenance. |
+| unit → prototype | `upsert_object({ category_prototype_uuid })` | concept → Concept, claim → Proposition / Claim / Utterance (by `formalizeClaim`), argument → Argument; domain units keep `category_name`. |
+| classify | `evaluatePrototypeMatch` | recorded in `matches` as an evaluation, never a stored type. |
+| argument validity | `evaluateLogicInference({ argumentRevisionUuid })` | recorded in `inferences`: valid / invalid / unresolved. |
 | contract | `connect({ expected_release })` | mismatch fails closed (KSG-003). |
 
 ## Native logic (src/logic)
@@ -96,6 +99,8 @@ analyst's belief and not a probability.
 | `text.mjs` | Authoring syntax (`forall x: mammal(x) -> warm_blooded(x)`) → IR; IR → Prolog / Datalog projections. |
 | `kb.mjs` | Claim → expression (`logicIr`, else `proposition` roles → one predicate), grounding state from `terms`, KB of facts and rules with claim provenance. |
 | `evaluate.mjs` | Bounded forward chaining (UMP, MP, conjunction), Kleene three-valued evaluation with quantifiers over the snapshot's entities, `entails(argument)` → entailed / contradicted / not_entailed / outside_coverage with a proof trace and a missing-condition hint. |
+| `infer.mjs` | Byte-faithful mirror of KSG `infer.js`: `inferArgument` (universal modus ponens, modus ponens, hypothetical syllogism, reiteration) → valid / invalid / unresolved. Parity-tested; the fake KSG client decides through it. |
+| `formalize.mjs` | Shapes a claim for KSG's `Proposition` / `Claim` prototypes (the property names KSG's matcher reads) and remaps local `concept:` refs in `logicIr` / `terms` to KSG object uuids. |
 
 Results carry `evaluator: logic.native@0.1.0`, the claims checked, the proof
 steps and the domain used, so every green or red can be re-derived.

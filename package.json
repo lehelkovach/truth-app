@@ -21,7 +21,7 @@
     "demo": "node src/cli.mjs demo fixtures/ai-risk",
     "bundles": "node scripts/build-bundles.mjs",
     "serve": "node scripts/build-bundles.mjs && node scripts/serve.mjs",
-    "vectors": "node scripts/gen-logic-ir-vectors.mjs ../knowshowgo"
+    "vectors": "node scripts/gen-logic-ir-vectors.mjs ../knowshowgo && node scripts/gen-infer-vectors.mjs ../knowshowgo"
   },
   "keywords": [
     "argumentation",
