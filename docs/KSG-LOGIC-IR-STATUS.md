@@ -103,12 +103,43 @@ KG1/KG2 need a client pair before anyone depends on them.
 | T5 | ✅ Concepts are written first and their KSG uuids grounds every `concept:` ref in a claim's `logicIr` and `terms` (`remapRefs`); `ksgRef` overrides. `truth ksg-push` prints the cast breakdown, KSG inference counts, and unresolved terms (E001); `--verbose` lists them | done |
 | T6 | ✅ `modality`, `basis`, `claimKind`, `positionRef` are plain properties on the KSG object, outside the IR | done |
 
-All of T1–T6 landed on branch `claude/truth-app-ai-safety-lb3lhe`. What is
-**not** done is a live round-trip: `truth ksg-push --live` builds a real
-client from `KSG_API_URL` / `KSG_API_TOKEN` and runs the same path, but it
-has not been exercised against a running KSG server from here. The offline
-fake models the prototype-match and inference contracts faithfully, so the
-wiring is proven; only the network hop is unverified.
+All of T1–T6 landed on branch `claude/truth-app-ai-safety-lb3lhe`.
+
+### T7 — the live path, over real HTTP (2026-09-21)
+
+The gap this section used to describe was that `truth ksg-push --live` had
+never run: every KSG test replaced the **client** with `createFakeKsgClient`,
+so client construction from the environment, URL building, bearer auth, JSON
+serialisation, status handling and response parsing were all untested, and the
+first thing to exercise them would have been a real push at a real server.
+
+That is now closed from the other side. `scripts/ksg-contract-server.mjs`
+replaces the **server** — it speaks the eight v0.2.20 routes the push path
+uses, shaped as the client calls them — so the whole network path runs for
+real and only the storage behind it is in memory. It shares `matchDecision`
+and `inferArgument` with the offline fake by import, so the two cannot drift.
+
+| Verified | How |
+|---|---|
+| A real `KnowShowGoClient` over HTTP decides exactly what the offline fake decides — per-unit prototype decisions and inference verdicts, not just counts | `test/ksg-live.test.mjs` LIVE-001 |
+| `KSG_API_TOKEN` reaches the server as `Authorization: Bearer` on every call, and no request goes to an endpoint outside the contract | LIVE-002 |
+| What crosses the wire is grounded: server-assigned uuids in the IR, no local `concept:` id leaks, lineage keys, provenance, revision chaining | LIVE-003 |
+| The release handshake fails closed over HTTP before anything is written | LIVE-004, LIVE-007 |
+| A rejected token errors rather than silently no-opping | LIVE-005 |
+| `truth ksg-push --live` reports the same numbers as the offline run, and exits non-zero when the server refuses the release | LIVE-006, LIVE-007 |
+| Each hard `Proposition` constraint is load-bearing over HTTP, asserted absolutely rather than by parity (parity cannot catch a change both sides share) | LIVE-008 |
+| The pinned client still exposes every surface the adapter calls | RELEASE-001 |
+
+`npm run ksg:smoke` runs the same assertions against either target: with no
+`KSG_API_URL` it boots the contract server (hermetic, so CI runs it on every
+push); with `KSG_API_URL` + `KSG_API_TOKEN` set it runs them against a real
+deployment and writes the hermione fixture there.
+
+**Still unverified:** that a production KSG deployment answers these routes the
+way the contract server does. That needs a reachable host and a token, neither
+of which exists in CI. The command to find out is already written — point
+`npm run ksg:smoke` at `api.knowshowgo.com`. Everything it asserts uses only
+released `v0.2.20` surfaces, so no unreleased feature is in the way.
 
 ### In KSG / knowshowgo-client, to ask for on their ladder
 

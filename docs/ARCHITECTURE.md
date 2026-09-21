@@ -40,6 +40,8 @@ compact case (fixtures/<case>/source/case.json)  ──compileCase──▶  Tru
 | `src/services/evaluator-registry.mjs` | Pluggable evaluators. |
 | `src/adapters/ksg.mjs` | The one KnowShowGo boundary, plus a deterministic fake client. |
 | `src/adapters/local-fixture-store.mjs` | Replay `fixtures/<name>/commits/*.json` into a store. |
+| `scripts/ksg-contract-server.mjs` | A server speaking the v0.2.20 HTTP contract the push path uses. Swapping the *server* (not the client) runs the real network path; shares `matchDecision` with the fake so the two cannot drift. |
+| `scripts/ksg-live-smoke.mjs` | Release-contract smoke. Runs the same assertions against the contract server (CI) or a real deployment (`KSG_API_URL`). |
 | `src/report/` | Markdown and HTML projections. |
 | `src/cli.mjs` | `truth validate | evaluate | report | history | diff | verify | compile | fallacies | ksg-push | demo`. |
 
