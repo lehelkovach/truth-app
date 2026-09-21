@@ -1,6 +1,6 @@
 # KnowShowGo Logic IR: status against what TruthApp needs
 
-Assessed 2026-09-17 against `lehelkovach/knowshowgo` `dev` (0.2.21-dev; `main` is
+Assessed 2026-09-17, re-audited 2026-09-21, against `lehelkovach/knowshowgo` `dev` (0.2.21-dev; `main` is
 0.2.20 and carries the same Logic IR code) and `knowshowgo-client` v0.2.20.
 Source of truth for the ladder: `knowshowgo/docs/DEVELOPMENT-PLAN.md` v7.2.1.
 
@@ -69,6 +69,27 @@ Client gaps (knowshowgo-client v0.2.20): no wrappers yet for
 `POST /logic-ir/evaluate` and `GET /logic-ir/derivations`. The KSG plan says
 KG1/KG2 need a client pair before anyone depends on them.
 
+## Stack audit (2026-09-21)
+
+- **KSG server `dev` unchanged** since the 2026-09-17 assessment (tip
+  `0df726f`); `dev` is 72 commits ahead of `main`. No new Logic IR server
+  features to reconcile.
+- **The surfaces TruthApp's adapter uses are in the released `v0.2.20`**
+  (prod / `api.knowshowgo.com`): `/seed/logic-ir-primitives`,
+  `/prototype-matches/evaluate`, `/logic-ir/infer`, and the matching client
+  methods in `v0.2.20-client`. So `ksg-push --live` against prod is a real,
+  finishable verification — it needs only a reachable server and a token, not
+  an unreleased feature.
+- **KG1 ground evaluation and KG2 derivations are `dev`-only.** The server
+  endpoints (`/logic-ir/evaluate`, `/logic-ir/derivations`) and the client
+  wrappers (`evaluateLogicIr`, `explainDerivation`, `listDerivations`) exist
+  on both `dev` branches (client `0.2.21-dev`) but are **absent from
+  `v0.2.20` and prod**. C1 below is therefore satisfied on `dev`, pending a
+  release.
+- **Nothing was merged into TruthApp by anyone else**; the only truth-app
+  branch is `claude/truth-app-ai-safety-lb3lhe`. iac-bus is parked at M0 and
+  osl-oc-agent's recent work is unrelated to TruthApp.
+
 ## What to build
 
 ### In TruthApp (this repo), in order
@@ -93,7 +114,7 @@ wiring is proven; only the network hop is unverified.
 
 | # | Repo | Do | Why TruthApp needs it |
 |---|---|---|---|
-| C1 | client | `evaluate_logic_ground()` for `/logic-ir/evaluate` and `get_derivations()` / `get_derivation()` for `/logic-ir/derivations` | TruthApp's inspector should show KSG's three-valued verdict and the derivation walk, through the client, not raw HTTP |
+| C1 | client | ✅ **landed on `dev` (0.2.21-dev), not yet released.** `evaluateLogicIr` / `evaluate_logic_ir` (three-valued KG1 ground evaluation, `record` for KG2), `explainDerivation` / `explain_derivation`, `listDerivations` / `list_derivations`. Backed by KSG server `/api2.0/logic-ir/evaluate` and `/logic-ir/derivations`, also `dev`-only | TruthApp's inspector should show KSG's three-valued verdict and the derivation walk. Adopt when the client cuts a release past `v0.2.20-client`, or by pinning the `dev` channel |
 | C2 | client | `seed_logic_ir_primitives` already exists; add a `logic_ir_prototypes()` helper that returns the seeded uuids by name without re-seeding | avoids a seed call on every push |
 | K1 | knowshowgo | K4 chat binder, or at minimum a `resolve_concept(term)` that returns candidates with AMBIGUOUS/UNRESOLVED status | replaces hand-written `concepts` maps in T5 |
 | K2 | knowshowgo | IR4 attack relations | lets KSG hold the attack graph TruthApp evaluates, and lets a KSG derivation be cited as an undercut |
