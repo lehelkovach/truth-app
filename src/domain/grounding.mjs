@@ -70,6 +70,7 @@ export function equivocations(snapshot, attackEdges = []) {
     }
   }
   for (const e of attackEdges) {
+    if (e.derived) continue; // W002 is about a declared attack, not its mirror
     const from = snapshot.units[e.from];
     const to = snapshot.units[e.to];
     if (!from || !to) continue;

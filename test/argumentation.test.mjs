@@ -63,6 +63,28 @@ test('structural findings: modal overreach, circularity, unsourced evidence, sta
   assert.ok(codes('UNCONTESTED').some((f) => f.argument === 'argument:A'));
 });
 
+test('ARG-003 rebut is symmetric: one authored direction yields a derived reverse edge and a standoff; two authored directions add nothing', () => {
+  const base = [addUnit(claim('E', { basis: 'evidence', sourceRefs: [] })), addUnit(claim('C', { basis: 'derived' })), addUnit(claim('D', { basis: 'derived' })),
+    addUnit(argument('S1', ['E'], 'C')), addUnit(argument('S2', ['E'], 'D'))];
+  const oneWay = applyPatch(emptySnapshot(), patchOf([...base, addRelation(attack('X1', 'S1', 'S2', 'rebut'))]));
+  const edges = attackEdges(oneWay);
+  assert.deepEqual(edges.map((e) => [e.from, e.to, e.operator, e.derived ?? false]), [
+    ['argument:S1', 'argument:S2', 'rebut', false],
+    ['argument:S2', 'argument:S1', 'rebut', true]
+  ]);
+  assert.equal(edges[1].derivedFrom, 'rel:X1');
+  const r = evaluateSnapshot(oneWay);
+  assert.deepEqual(r.undecided, ['argument:S1', 'argument:S2'], 'a one-way rebut is still a standoff');
+  assert.equal(r.findings.filter((f) => f.code === 'STANDOFF').length, 1);
+  assert.ok(!r.findings.some((f) => f.code === 'UNCONTESTED'), 'the rebutter is attacked back');
+  const bothWays = applyPatch(emptySnapshot(), patchOf([...base, addRelation(attack('X1', 'S1', 'S2', 'rebut')), addRelation(attack('X2', 'S2', 'S1', 'rebut'))]));
+  assert.equal(attackEdges(bothWays).length, 2, 'authored both ways: no derived edge');
+  assert.ok(attackEdges(bothWays).every((e) => !e.derived));
+  const directed = applyPatch(emptySnapshot(), patchOf([...base, addRelation(attack('X1', 'S1', 'S2', 'undercut'))]));
+  assert.equal(attackEdges(directed).length, 1, 'undercut stays directed');
+  assert.deepEqual(evaluateSnapshot(directed).rejected, ['argument:S2']);
+});
+
 test('DET-001 100 repeated evaluations return the same canonical result', async () => {
   const { loadFixture } = await import('../src/adapters/local-fixture-store.mjs');
   const { contentHash } = await import('../src/domain/canonicalize.mjs');

@@ -26,7 +26,7 @@ One statement per line. Indented lines are properties of the statement above.
 | `concept mammal (mammal): definition` | A concept. `entity hermione (Hermione): …` and `predicate has_fur (has fur)` set the kind. Properties: `aliases:`, `kind:`, `sense of: <key>`, `ksg: <uuid>`. |
 | `C1 [certain, definition, risk]: text` | A claim. Brackets, any order: modality (speculative, possible, plausible, probable, certain), basis (evidence, definition, assumption, derived), kind (empirical, predictive, normative, definitional, conceptual), party id. Properties: `logic:`, `terms:`, `source: Title \| url`, `predicate: pred agent=key patient=key`, `notes:`. |
 | `A1 [deductive, risk]: C1, C2 => C3` | An argument. Brackets: scheme, party id. Properties: `title:`, `warrant:`, `source:`, `notes:`. |
-| `B1 undercuts A1: note` | An attack: `undercuts`, `rebuts`, `undermines … at <premise>`, `supports`, `qualifies`. |
+| `B1 undercuts A1: note` | An attack: `undercuts`, `rebuts` (symmetric; the reverse edge is implied), `undermines … at <premise>`, `supports`, `qualifies`. |
 | `fallacy A1 equivocation [inference, weakens, skeptic]: why` | A fallacy annotation from the catalogue (`truth fallacies`). |
 
 `terms:` is a comma list; a bare word resolves by exact label or alias, and

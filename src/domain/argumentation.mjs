@@ -13,6 +13,11 @@
  * for that claim, and is rejected when every argument for it is rejected. A
  * mutual rebuttal leaves both sides undecided; the evaluator never breaks a
  * standoff on its own.
+ *
+ * A `rebut` is symmetric (Pollock): two arguments with contrary conclusions
+ * attack each other. Authors write it once; `attackEdges` adds the reverse
+ * edge (`derived: true`) when it is not authored, so a standoff is a
+ * standoff whichever side wrote it down. Undercut and undermine stay directed.
  */
 
 import { liveRelations, unitsOfKind } from './truth-patch.mjs';
@@ -23,7 +28,7 @@ import { entails, evaluateClaim } from '../logic/evaluate.mjs';
 import { buildKb, saturate } from '../logic/kb-saturate.mjs';
 
 export const EVALUATOR_ID = 'truth.native';
-export const EVALUATOR_VERSION = '0.2.0';
+export const EVALUATOR_VERSION = '0.3.0';
 
 export const MODALITIES = ['speculative', 'possible', 'plausible', 'probable', 'certain'];
 const ATTACK_OPERATORS = ['attacks', 'rebut', 'undercut', 'undermine'];
@@ -104,7 +109,13 @@ export function evaluateGrounded({ arguments: args, attacks, premises = {}, supp
   };
 }
 
-/** Attack edges in a snapshot, with undermine expanded to the arguments it hits. */
+/**
+ * Attack edges in a snapshot: undermine expanded to the arguments it hits,
+ * and every authored `rebut` mirrored by a derived reverse rebut unless the
+ * author already wrote both directions. Derived edges carry `derived: true`
+ * and `derivedFrom` (the authored relation id); they are evaluator output,
+ * never written back to the snapshot or mirrored to KSG.
+ */
 export function attackEdges(snapshot) {
   const args = unitsOfKind(snapshot, 'argument');
   const edges = [];
@@ -114,6 +125,13 @@ export function attackEdges(snapshot) {
     } else {
       edges.push({ id: r.id, from: r.from, to: r.to, operator: r.operator, targetRef: r.targetRef ?? null });
     }
+  }
+  const rebuts = new Set(edges.filter((e) => e.operator === 'rebut').map((e) => `${e.from}>${e.to}`));
+  for (const e of edges.filter((x) => x.operator === 'rebut')) {
+    const back = `${e.to}>${e.from}`;
+    if (rebuts.has(back)) continue;
+    rebuts.add(back);
+    edges.push({ id: `${e.id}~reverse`, from: e.to, to: e.from, operator: 'rebut', targetRef: null, derived: true, derivedFrom: e.id });
   }
   return edges;
 }

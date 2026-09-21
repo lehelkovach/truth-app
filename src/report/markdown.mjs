@@ -65,7 +65,7 @@ export function renderMarkdown({ snapshot, evaluation, project = {}, history = [
         add();
       }
       const atk = r.edges.filter((e) => e.to === a.id);
-      if (atk.length) { add('Attacked by: ' + atk.map((e) => `${e.from} (${e.operator}${e.targetRef ? ' ' + e.targetRef : ''}, ${LABEL_WORD[r.labels[e.from]]})`).join(', ')); add(); }
+      if (atk.length) { add('Attacked by: ' + atk.map((e) => `${e.from} (${e.operator}${e.derived ? ' implied' : ''}${e.targetRef ? ' ' + e.targetRef : ''}, ${LABEL_WORD[r.labels[e.from]]})`).join(', ')); add(); }
       for (const f of annotations.filter((x) => x.targetRef === a.id)) {
         const def = FALLACIES[f.name];
         add(`- ⚠ **${f.name}** at ${f.where} (${f.severity}). ${f.text}${def ? ` _${def.definition}_` : ''}`);

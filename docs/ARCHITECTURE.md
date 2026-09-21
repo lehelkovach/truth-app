@@ -58,6 +58,12 @@ Grounded labelling (Dung 1995), extended with premise support:
 
 Attack relations: `rebut` (conclusion), `undercut` (inference), `undermine`
 (a named premise; `to: "argument:*"` expands to every argument using it).
+`rebut` is symmetric: contrary conclusions attack each other, so the evaluator
+mirrors an authored rebut with a derived reverse edge (`derived: true`,
+`derivedFrom: <relation id>`) unless both directions are authored. Derived
+edges appear in `evaluation.edges` and the reports (marked *implied*), count as
+an attack for `UNCONTESTED`, and are never written to the snapshot or mirrored
+to KSG. `undercut` and `undermine` stay directed (D22).
 `supports`, `qualifies`, `cites`, `tested_by`, `replicates` and the rest of the
 vocabulary are recorded and shown but do not move labels.
 
@@ -70,7 +76,7 @@ Structural findings (automated, conservative):
 | `UNSOURCED_PREMISE` | `basis: evidence` with no sources (major); unsourced assumption in use (info). |
 | `DERIVED_UNSUPPORTED` | A derived claim with no argument for it. |
 | `UNCONTESTED` | A standing argument nobody has attacked: where the other side should push next. |
-| `STANDOFF` | Mutual rebuttal with neither side defeated. |
+| `STANDOFF` | Mutual rebuttal (authored one way or both) with neither side defeated. |
 | `NO_WARRANT` | Argument does not say why premises support the conclusion. |
 | `UNKNOWN_FALLACY` | Annotation names a fallacy outside the catalogue. |
 

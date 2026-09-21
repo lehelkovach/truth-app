@@ -72,7 +72,7 @@ export function renderHtml({ snapshot, evaluation, project = {}, history = [], d
         if (L.missing?.length) add(`<p class="small">Outside coverage: ${L.missing.map((m) => `${e(m.claim)} (${e(m.reason)})`).join('; ')}</p>`);
       }
       const atk = r.edges.filter((x) => x.to === a.id);
-      if (atk.length) add(`<p class="small">Attacked by: ${atk.map((x) => `<a href="#${e(x.from)}">${e(x.from)}</a> (${e(x.operator)}${x.targetRef ? ' ' + e(x.targetRef) : ''}, ${e(LABEL_WORD[r.labels[x.from]])})`).join(', ')}</p>`);
+      if (atk.length) add(`<p class="small">Attacked by: ${atk.map((x) => `<a href="#${e(x.from)}">${e(x.from)}</a> (${e(x.operator)}${x.derived ? ' implied' : ''}${x.targetRef ? ' ' + e(x.targetRef) : ''}, ${e(LABEL_WORD[r.labels[x.from]])})`).join(', ')}</p>`);
       for (const f of annotations.filter((x) => x.targetRef === a.id)) { const def = FALLACIES[f.name]; add(`<div class="fallacy"><b>${e(f.name)}</b> at ${e(f.where)} · ${e(f.severity)}. ${e(f.text)}${def ? ` <span class="small">${e(def.definition)}</span>` : ''}</div>`); }
       if (a.sourceRefs?.length) add(`<p class="small">Sources: ${a.sourceRefs.map((s) => src(units[s])).join('; ')}</p>`);
       add('</div>');

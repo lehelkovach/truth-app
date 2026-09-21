@@ -26,6 +26,11 @@ test('ai-risk commit 1: thesis stands, doom chain breaks at takeoff, probability
   assert.deepEqual(overreach, ['A1', 'A10', 'A2', 'A4', 'A5', 'A7', 'A8']);
   assert.equal(r.findings.filter((f) => f.severity === 'major' && f.code !== 'W001').length, 5);
   assert.ok(r.findings.some((f) => f.code === 'W001' && f.argument === 'argument:A1'), 'A1 equivocates on intelligence');
+  const x5 = r.edges.find((e) => e.id === 'rel:X5');
+  const back = r.edges.find((e) => e.derivedFrom === 'rel:X5');
+  assert.deepEqual([x5.from, x5.to], ['argument:B2', 'argument:A4']);
+  assert.deepEqual([back.from, back.to, back.operator, back.derived], ['argument:A4', 'argument:B2', 'rebut', true], 'X5 is mirrored');
+  assert.equal(r.edges.filter((e) => e.derived).length, 1, 'only the one authored rebut is mirrored');
 });
 
 test('ai-risk commit 2: A15 flips the takeoff chain; thesis still stands', async () => {

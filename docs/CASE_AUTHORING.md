@@ -20,7 +20,10 @@ The AI-risk fixture was built this way; use it as the template.
 5. **Attack precisely.** For each argument you contest, decide whether you
    deny a premise (`undermine`, name the premise), deny the inference
    (`undercut`), or assert the contrary (`rebut`). Every attack is itself an
-   argument with premises and a conclusion, so write it as one.
+   argument with premises and a conclusion, so write it as one. A `rebut`
+   cuts both ways: write it once and the evaluator adds the reverse edge, so a
+   lone rebut between two standing arguments is a `STANDOFF`, not a win. To
+   defeat rather than contest, undercut the inference or undermine a premise.
 6. **Annotate fallacies sparingly.** Use the catalogue (`truth fallacies -v`).
    Each entry has a test; apply it before attaching the label. Prefer
    `severity: note` where the label depends on a contested premise.

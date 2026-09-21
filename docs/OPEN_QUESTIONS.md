@@ -1,28 +1,28 @@
 # Open questions (need project-owner input; unrelated work is not blocked)
 
-1. **VSIR/TruthIR frame schema.** The master handoff says to reuse the
-   existing frame/slot schema. It is not in `truth-app`, `knowshowgo-client`,
-   `iac-bus` or `yolo-online-learner`. v0.1 uses a flat profile
-   (`schema/truthir-profile-v0.1.schema.json`). If the frame schema lives
-   elsewhere, point to it and the profile will be re-expressed as frames.
+1. **VSIR/TruthIR frame schema.** Resolved 2026-09-21 (D23): TruthIR was
+   merged into Logic IR upstream; there is no separate frame/slot schema to
+   reuse. The flat profile (`schema/truthir-profile-v0.1.schema.json`) stands.
 2. **KSG object category for units.** Resolved 2026-09-18: the adapter casts
    concepts / claims / arguments to KSG's seeded prototypes (Concept,
    Proposition / Claim / Utterance, Argument) and records the prototype-match
    decision as an evaluation. Domain units (issue, position, source, evidence,
    hypothesis, theory, annotation, actor) keep a TruthApp `category_name`
-   under `TruthUnit`, since they are not logic primitives. Confirm that split
-   is what you want, or name domain prototypes to cast them to as well.
+   under `TruthUnit`, since they are not logic primitives. Confirmed
+   2026-09-21 (D24): keep the split; no domain prototypes requested.
 3. **Semantic bindings / Logic IR.** Resolved 2026-09-17: KSG `dev` has R1/R2
    shipped and a seeded `Proposition` prototype. Assessment and build list in
-   `docs/KSG-LOGIC-IR-STATUS.md`. Remaining question for the owner: which
-   AI-risk claims should be formalised first (T5 there needs Concept uuids).
-4. **Rebuttal symmetry.** A `rebut` is authored as a directed relation. Should
-   the evaluator add the reverse edge automatically (Pollock) or leave it to
-   the author? v0.1 leaves it to the author and reports STANDOFF only when
-   both directions exist.
+   `docs/KSG-LOGIC-IR-STATUS.md`. Answered 2026-09-21 (D26): formalise the
+   doom core first, P3 → P5 → P11 and the no-counterbalance premises P4, P9,
+   P10, P20, then the skeptic replies that meet them. Tracked as T7 there.
+4. **Rebuttal symmetry.** Resolved 2026-09-21 (D22): the evaluator adds the
+   reverse edge automatically (Pollock). Authored one way or both, a live
+   mutual rebut is a STANDOFF; derived edges are marked `derived: true`.
 5. **Client pin.** Pinned to `v0.2.20-client` from GitHub (package is not on
    npm). Confirm this is the intended release channel for TruthApp.
-6. **Comparisons in Logic IR.** Spec v1.1 §6.1 lists comparisons in the
+6. **Comparisons in Logic IR.** Resolved for this repo 2026-09-21 (D25): do
+   not fork; nothing is added here. The proposal below is for KSG's ladder.
+   Spec v1.1 §6.1 lists comparisons in the
    first-slice subset. KSG's v0.0.1 AST has no comparison node and adding one
    here would fork the IR (D14). Proposal for KSG: a `Compare` kind
    (`{ kind: 'Compare', op: '<'|'<='|'='|'>='|'>', left, right }` over
