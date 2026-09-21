@@ -215,6 +215,37 @@ export function createKsgAdapter({ client, source = 'truth-app', ownerUserId = n
 }
 
 /**
+ * The ten prototypes `POST /api2.0/seed/logic-ir-primitives` seeds, in the
+ * order the server reports them.
+ */
+export const LOGIC_IR_PRIMITIVES = ['Concept', 'Utterance', 'Proposition', 'Claim', 'Premise', 'Conclusion', 'Inference', 'Argument', 'Rule', 'Derivation'];
+
+/** An upserted object's properties as a plain name -> value map. */
+export const propMap = (o) => Object.fromEntries((o?.properties ?? []).map((p) => [p.name, p.value]));
+
+/**
+ * KSG's prototype-match contract, as `prototype_match_service.js` evaluates it.
+ * Exported so the in-process fake and the HTTP contract server
+ * (`scripts/ksg-contract-server.mjs`) decide identically — one contract, not
+ * two copies that drift.
+ */
+export function matchDecision(obj, protoName) {
+  const p = propMap(obj);
+  if (protoName === 'Proposition' || protoName === 'Premise' || protoName === 'Conclusion') {
+    const hasExpr = Boolean(p.semanticExpression || p.logicIr);
+    const hasTruth = Boolean(p.truthConditions && p.truthConditions !== '[]');
+    const resolved = !p.unresolvedMaterialSymbols || p.unresolvedMaterialSymbols === '[]';
+    const wellFormed = p.structurallyWellFormed === 'true' || (p.logicIr && p.logicIr.includes('"kind"'));
+    return hasExpr && hasTruth && resolved && wellFormed ? 'match' : 'no_match';
+  }
+  if (protoName === 'Claim') return p.subject && p.predicate && p.object ? 'match' : 'no_match';
+  if (protoName === 'Argument') return p.premises && p.conclusion ? 'match' : 'no_match';
+  if (protoName === 'Concept') return p.lexicalCategory ? 'match' : 'no_match';
+  if (protoName === 'Utterance') return p.text ? 'match' : 'no_match';
+  return 'no_match';
+}
+
+/**
  * Deterministic fake transport for tests and offline demos. Models the Logic
  * IR surfaces faithfully: prototype matches check the same contracts KSG's
  * matcher does, and evaluateLogicInference runs the mirrored inference core
@@ -225,27 +256,10 @@ export function createFakeKsgClient({ release = 'v0.2.20' } = {}) {
   const calls = [];
   let n = 0;
   const next = (prefix) => `${prefix}-${String(++n).padStart(4, '0')}`;
-  const PRIMS = ['Concept', 'Utterance', 'Proposition', 'Claim', 'Premise', 'Conclusion', 'Inference', 'Argument', 'Rule', 'Derivation'];
+  const PRIMS = LOGIC_IR_PRIMITIVES;
   const protoUuidByName = new Map();
   const nameByProtoUuid = new Map();
   const objects = new Map();
-  const propMap = (o) => Object.fromEntries((o.properties ?? []).map((p) => [p.name, p.value]));
-
-  function matchDecision(obj, protoName) {
-    const p = propMap(obj);
-    if (protoName === 'Proposition' || protoName === 'Premise' || protoName === 'Conclusion') {
-      const hasExpr = Boolean(p.semanticExpression || p.logicIr);
-      const hasTruth = Boolean(p.truthConditions && p.truthConditions !== '[]');
-      const resolved = !p.unresolvedMaterialSymbols || p.unresolvedMaterialSymbols === '[]';
-      const wellFormed = p.structurallyWellFormed === 'true' || (p.logicIr && p.logicIr.includes('"kind"'));
-      return hasExpr && hasTruth && resolved && wellFormed ? 'match' : 'no_match';
-    }
-    if (protoName === 'Claim') return p.subject && p.predicate && p.object ? 'match' : 'no_match';
-    if (protoName === 'Argument') return p.premises && p.conclusion ? 'match' : 'no_match';
-    if (protoName === 'Concept') return p.lexicalCategory ? 'match' : 'no_match';
-    if (protoName === 'Utterance') return p.text ? 'match' : 'no_match';
-    return 'no_match';
-  }
 
   return {
     calls, objects, assertions: [], syllogisms: [], protoUuidByName, seeded: false,
