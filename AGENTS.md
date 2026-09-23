@@ -37,3 +37,10 @@ npm run vectors                            # regenerate Logic IR parity vectors 
 See `docs/ARCHITECTURE.md`. Fixtures under `fixtures/<case>/commits/` are
 replayed in order; `fixtures/<case>/source/case.json` is the compact authoring
 form and a test keeps it in sync with the first commit.
+
+## Continuity
+
+- Stable startup and verification steps live in `.AGENT/RUNBOOK.md`.
+- If work must cross sessions before a PR exists, copy
+  `.AGENT/handoffs/HANDOFF-TEMPLATE.md` to `.AGENT/handoffs/<issue>-<task>.md` on the task
+  branch, and delete it once the issue or PR carries the state.
