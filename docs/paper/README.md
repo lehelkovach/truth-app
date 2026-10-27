@@ -12,7 +12,7 @@ repository keeps its name until the author decides.
 | `figures/coverage-all.md` | `npm run coverage` on every fixture: Logic IR coverage and every dimension | current |
 | `ENCODING-RELIABILITY-PROTOCOL.md` | The second-encoder pilot (§7.5 of the draft) | protocol written; needs a second encoder |
 | `COMPARISON.md` | Feature table against ten existing tools, every cell with a source URL, read 2026-10-27 | current |
-| `references.bib` | 29 BibTeX entries, every DOI verified 2026-10-27; three fields flagged for manual confirmation | current |
+| `references.bib` | 28 BibTeX entries, every DOI verified 2026-10-27; three fields flagged for manual confirmation | current |
 
 ## Deadline that matters
 

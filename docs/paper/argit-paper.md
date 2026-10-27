@@ -2,6 +2,8 @@
 title: "Argit: Version-Controlled Argumentation with Side-by-Side Deterministic Evaluation"
 author: "Lehel Kovach"
 date: "Draft, 2026-10-27"
+bibliography: references.bib
+link-citations: true
 abstract: |
   Argument maps are snapshots, and most tools that evaluate them collapse the
   result into a score or a winner. We present Argit, an open-source reasoning
@@ -34,9 +36,10 @@ abstract: |
 
 > **Draft status.** Numbers in this draft are computed from the fixtures at
 > the commit that carries this file (`npm run coverage`, `truth compare`).
-> Two sections are pending verification and marked **[PENDING]**: the tool
-> comparison table and the reference list. Nothing in either should be
-> submitted from memory.
+> Two items remain open and are marked **[PENDING]**: the second-encoder
+> pilot (§7.4) and the author's review of the Pierson v. Post encoding
+> (§7.1). The comparison table and the references were verified against
+> sources on 2026-10-27.
 
 # 1 Introduction
 
@@ -96,51 +99,49 @@ has been validated with users. §9 is specific about each.
 # 2 Background and related work
 
 **Abstract argumentation.** Dung's frameworks and the grounded extension
-[Dung 1995] give a unique, sceptical labelling. We use grounded semantics
+[@dung1995acceptability] give a unique, sceptical labelling. We use grounded semantics
 because it never requires the evaluator to choose between equally defensible
 extensions; where credulous semantics would pick, we report a standoff. The
 labelling view we implement follows Caminada's reinstatement labellings
-[Caminada 2006].
+[@caminada2006reinstatement; @baroni2011introduction].
 
-**Structured argumentation.** ASPIC+ [Modgil and Prakken] and Carneades
-[Gordon, Prakken and Walton 2007] give arguments internal structure and
+**Structured argumentation.** ASPIC+ [@modgil2014aspic] and Carneades
+[@gordon2007carneades] give arguments internal structure and
 distinguish attacks on conclusions, inferences and premises, following Pollock
-[Pollock]. We adopt that typology as `rebut`, `undercut` and `undermine`, the
-last on a named premise. Toulmin's *warrant* [Toulmin 1958] is a field on
+[@pollock1987defeasible]. We adopt that typology as `rebut`, `undercut` and `undermine`, the
+last on a named premise. Toulmin's *warrant* [@toulmin2003uses] is a field on
 every argument, and its absence is a finding. Unlike bipolar frameworks
-[Cayrol and Lagasquie-Schiex], our support-type relations (`supports`,
+[@cayrol2005bipolar], our support-type relations (`supports`,
 `qualifies`, `cites`, `tested_by`, `replicates`) are recorded and displayed
 but never move a label: only declared attacks and premise support do.
 
-**Argument mapping and analysis tools.** Argdown, OVA3 [Janier, Lawrence and
-Reed 2014], Rationale [van Gelder], AGORA-net [Hoffmann], Carneades, Kialo,
-DebateGraph, ArgueMapper and the Arguebuf format [Lenz et al. 2022], PyArg and
-Monkeypuzzle each map, and some evaluate, argument structure. A recent survey
-of argumentation software [Persiani et al.] finds the ecosystem rich in
-coverage of formal approaches and low in software-engineering maturity:
-tools are often undocumented and rarely tested. Argit ships a deterministic
-fixture replay and 80 tests. §8 compares features **[PENDING verification]**.
+**Argument mapping and analysis tools.** Argdown, OVA3 [@janier2014ova], Rationale [@vangelder2007rationale], AGORA-net [@hoffmann2015changing; @hoffmann2018stimulating], Carneades, Kialo,
+DebateGraph, ArgueMapper and the Arguebuf format [@lenz2022arguemapper], PyArg and
+Monkeypuzzle each map, and some evaluate, argument structure. A 2024 survey of 59
+argumentation tools [@persiani2024fantastic] found 47 with open code, 33
+shipped without any licence, 16 with documentation, 10 with tests and one
+with continuous integration. Argit ships a deterministic
+fixture replay and 80 tests. §8 compares features.
 
-**Interchange and provenance.** The Argument Interchange Format [Chesñevar et
-al. 2006] and Arguebuf address exchange; PROV-O [W3C 2013] and ClaimReview
+**Interchange and provenance.** The Argument Interchange Format [@chesnevar2006aif] and Arguebuf address exchange; PROV-O [@w3c2013provo] and ClaimReview
 address provenance of statements. Argit records provenance on every unit
 (human, imported or AI-proposed) and a lifecycle status (proposed, accepted,
 retracted), and a retracted source propagates to every claim that cited it.
 
-**Versioning structured knowledge.** Quit Store [Arndt et al.] versions RDF
+**Versioning structured knowledge.** Quit Store [@arndt2019quit] versions RDF
 with Git semantics; model differencing tools such as EMF Compare and GumTree
-[Falleri et al. 2014] compute structural diffs over trees. None attaches an
+[@falleri2014gumtree] compute structural diffs over trees. None attaches an
 *evaluation* diff to the structural one, which is the operation an analyst
 needs: not only "this premise was added" but "and that is why this argument
 now stands".
 
 **Fallacies and critical questions.** Walton, Reed and Macagno's schemes with
-critical questions [Walton, Reed and Macagno 2008] are the model for our
+critical questions [@walton2008schemes] are the model for our
 catalogue: each fallacy entry carries the test an analyst must answer before
 attaching the label, and the evaluator only checks that the label names a
 catalogue entry.
 
-**Fact verification as contrast.** FEVER [Thorne et al. 2018] and its
+**Fact verification as contrast.** FEVER [@thorne2018fever] and its
 successors produce a verdict over retrieved evidence with no argument
 structure and no history. Argit is complementary: it holds the structure and
 the history, and leaves verdicts about the world to people and to evidence.
@@ -372,9 +373,9 @@ Table 1 gives the sizes; the figures are the CLI outputs in
 
 ## 7.1 Pierson v. Post (externally authored)
 
-Pierson v. Post, 3 Cai. R. 175 (N.Y. Sup. Ct. 1805), is the fox-hunting case
+Pierson v. Post, 3 Cai. R. 175 (N.Y. Sup. Ct. 1805) [@pierson1805], is the fox-hunting case
 that computational argumentation has used as a worked example since Gordon
-and Walton's Carneades reconstruction [Gordon and Walton 2006]. Post was
+and Walton's Carneades reconstruction [@gordon2006pierson; see also @berman1993missing; @benchcapon2002missing; @benchcapon2003model; @atkinson2005legal]. Post was
 hunting a fox with hounds on an unowned beach; Pierson, seeing this, killed
 the fox and carried it off. The majority (Tompkins, J.) held that pursuit
 alone confers no property in a wild animal; the dissent (Livingston, J.)
@@ -479,16 +480,38 @@ encodings are paired by meaning, and agreement is reported at the
 proposition, argument, attack and evaluation levels using the tool's own
 diff. The result, whatever it is, goes here in one paragraph and one table.
 
-# 8 Comparison with existing tools **[PENDING verification]**
+# 8 Comparison with existing tools
 
-A feature table against Argdown, OVA3, Rationale, AGORA-net, Carneades,
-Kialo, DebateGraph, ArgueMapper/Arguebuf, PyArg and Monkeypuzzle on: formal
-semantics; logical evaluation of claim content; versioned history; semantic
-diff; branches; evaluation diff; grounding and equivocation detection;
-evidence provenance; fallacy or scheme annotation with critical questions;
-non-aggregated output; open-source license; tests shipped. Each cell is
-being verified against the tool's documentation and will carry a citation;
-"not documented" is used wherever absence cannot be shown.
+Table 2 compares documented features as of 2026-10-27. A cell reads *no*
+only where a tool's documentation shows absence or the feature is clearly
+out of scope; otherwise *n.d.* (not documented). The full table with a
+source URL for every cell is `docs/paper/COMPARISON.md`.
+
+| Tool | Formal semantics | Logic eval | History | Sem. diff | Branches | Eval diff | Grounding | Provenance | Schemes / fallacies + CQs | No scalar | Open source | Tests |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Argdown | no | no | n.d. | n.d. | n.d. | no | n.d. | n.d. | n.d. | yes (nothing scored) | yes, MIT | yes |
+| OVA3 | no | no | n.d. | n.d. | n.d. | no | n.d. | partial | partial | yes (nothing scored) | partial (CC-BY-SA) | n.d. |
+| Rationale | no (manual) | no | n.d. | n.d. | n.d. | no | n.d. | yes | partial | yes | no | no |
+| AGORA-net | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | yes, AGPL-3.0 | n.d. |
+| Carneades 4 | yes (grounded, complete, preferred, stable; CAES) | partial | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | partial | partial | yes, MPL-2.0 | n.d. |
+| Kialo | no (votes) | no | partial | n.d. | partial (clone) | no | n.d. | partial | n.d. | no | no | no |
+| DebateGraph | no (ratings) | no | partial (history tab) | n.d. | n.d. | no | n.d. | partial | n.d. | no | n.d. | n.d. |
+| ArgueMapper + Arguebuf | no | no | partial (undo; timestamps) | n.d. | n.d. | no | n.d. | yes | partial | yes (nothing scored) | yes, MIT | partial |
+| PyArg | yes (AF, ASPIC+, ABA) | partial | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | n.d. | yes | yes, MIT | yes |
+| Monkeypuzzle | no | no | n.d. | n.d. | n.d. | n.d. | n.d. | partial | partial | yes (nothing scored) | yes, GPL-3.0 | n.d. |
+| **Argit** | yes (grounded + premise support) | yes (first-order over the closed snapshot) | yes | yes | yes | yes | yes (exact match; W001, W002) | yes (source units; retraction propagates) | partial (22 fallacies with tests; schemes as a field) | yes, by design | yes (MIT License) | yes (80) |
+
+Three readings. First, formal semantics with an open implementation exist
+in Carneades 4 and PyArg; neither documents history, diff, branches or an
+evaluation diff. Second, the only version-like features found anywhere are
+Kialo's change tracking and discussion cloning, DebateGraph's History tab,
+and ArgueMapper's undo log and per-node timestamps; nothing documents a
+semantic diff, and nothing documents an evaluation diff. Third, the survey
+finding on tests [@persiani2024fantastic] holds in this sample: Argdown,
+PyArg and arguebuf-python ship tests; Carneades 4, OVA3, ArgueMapper,
+AGORA-net and Monkeypuzzle do not document any. Argit's own row is
+self-graded and should be read as a claim about this commit, not a
+comparison of quality.
 
 # 9 Limitations and threats to validity
 
@@ -545,14 +568,13 @@ On the oldest worked example in the field it shows, in two commits and a
 branch, which implicit premise a famous holding needs. It does not say who is
 right. It was built not to.
 
-# References **[PENDING: verified BibTeX in `references.bib`]**
+# References
 
-Keys used above: Dung 1995; Caminada 2006; Toulmin 1958; Pollock; Modgil and
-Prakken; Gordon, Prakken and Walton 2007; Chesñevar et al. 2006; Cayrol and
-Lagasquie-Schiex; Walton, Reed and Macagno 2008; Janier, Lawrence and Reed
-2014; Lenz et al. 2022; Hoffmann; van Gelder; Persiani et al.; Thorne et al.
-2018; W3C 2013; Arndt et al.; Falleri et al. 2014; Gordon and Walton 2006;
-Pierson v. Post (1805); Keeble v. Hickeringill (1707).
+Built by pandoc from `references.bib` (28 entries). Every DOI was checked
+against Crossref, the publisher, CEUR or OpenAlex on 2026-10-27. Three
+items carry a note for manual confirmation: the LNCS volume numbers for
+@caminada2006reinstatement and @cayrol2005bipolar, and the first name of the
+second author of @chesnevar2006aif.
 
 # Appendix A: Reproduction
 
