@@ -1,0 +1,62 @@
+Is AI an existential threat? The doom case and its counter-case
+  commit commit:fa3780efd2799100 · Risk side replies to B3: automated AI research compounds within fixed compute (A15 undercuts B3)
+  arguments: 16 stand, 13 defeated, 0 contested
+  thesis claim:S12: established
+
+  defeated  argument:A1    [risk] Misaligned superintelligence will seek power  — attacked by accepted argument:B11
+  defeated  argument:A10   [risk] Mass unemployment  — attacked by accepted argument:B13
+  defeated  argument:A11   [risk] Risk is disjunctive, not one conjunction  — attacked by accepted argument:B10
+  stands    argument:A12   [risk] Past misses were about timing, not possibility  — no attackers and all premises established
+  stands    argument:A13   [risk] Iteration stops working at the threshold  — all attackers rejected (argument:B14)
+  stands    argument:A14   [risk] Training selects for goal-directedness  — no attackers and all premises established
+  stands    argument:A15   [risk] Automated AI research compounds within fixed compute  — no attackers and all premises established
+  stands    argument:A2    [risk] Intelligence explosion  — all attackers rejected (argument:B3)
+  stands    argument:A3    [risk] Shutdown resistance  — all attackers rejected (argument:B1)
+  stands    argument:A4    [risk] One shot at alignment  — all attackers rejected (argument:B2)
+  defeated  argument:A5    [risk] If anyone builds it, everyone dies  — premise claim:P5 is defeated (no accepted argument supports it)
+  defeated  argument:A6    [risk] Expected value justifies drastic action  — attacked by accepted argument:B6
+  defeated  argument:A7    [risk] Current models already scheme  — attacked by accepted argument:B12
+  defeated  argument:A8    [risk] Timelines leave no time  — attacked by accepted argument:B5
+  defeated  argument:A9    [risk] The experts say so  — attacked by accepted argument:B7
+  defeated  argument:B1    [skeptic] Orthogonality is about possibility, not prediction  — attacked by accepted argument:A14
+  stands    argument:B10   [skeptic] Disjoining dependent paths adds little  — no attackers and all premises established
+  stands    argument:B11   [skeptic] Capability is not power  — no attackers and all premises established
+  stands    argument:B12   [skeptic] Lab scheming is contrived and detectable  — no attackers and all premises established
+  stands    argument:B13   [skeptic] Tasks are not jobs  — no attackers and all premises established
+  defeated  argument:B14   [skeptic] No decisive threshold under continuous growth  — premise claim:S4c is defeated (no accepted argument supports it)
+  defeated  argument:B2    [skeptic] Iterative deployment has worked and is the norm  — attacked by accepted argument:A13
+  defeated  argument:B3    [skeptic] Takeoff is bounded by physical resources  — attacked by accepted argument:A15
+  defeated  argument:B4    [skeptic] Track record of missed timelines  — attacked by accepted argument:A12
+  stands    argument:B5    [skeptic] Benchmarks are not autonomy  — no attackers and all premises established
+  stands    argument:B6    [skeptic] p(doom) numbers are opinions, not measurements  — no attackers and all premises established
+  stands    argument:B7    [skeptic] Authority is split  — no attackers and all premises established
+  stands    argument:B8    [skeptic] The other side of the ledger  — no attackers and all premises established
+  stands    argument:B9    [skeptic] A conjunction of contested steps  — all attackers rejected (argument:A11)
+
+findings:
+  major MODAL_OVERREACH      argument:A1    conclusion claim:P5 is asserted as 'probable' but the weakest premise (claim:P3) is only 'possible' (deductive scheme)
+  major MODAL_OVERREACH      argument:A2    conclusion claim:P8 is asserted as 'probable' but the weakest premise (claim:P7) is only 'possible' (extrapolation scheme)
+  major MODAL_OVERREACH      argument:A4    conclusion claim:P10 is asserted as 'probable' but the weakest premise (claim:P9, claim:P4) is only 'plausible' (deductive scheme)
+  major MODAL_OVERREACH      argument:A5    conclusion claim:P11 is asserted as 'certain' but the weakest premise (claim:P5, claim:P10) is only 'probable' (deductive scheme)
+  major MODAL_OVERREACH      argument:A7    conclusion claim:P17 is asserted as 'probable' but the weakest premise (claim:P16) is only 'possible' (inductive scheme)
+  minor MODAL_OVERREACH      argument:A10   conclusion claim:P25 is asserted as 'probable' but the weakest premise (claim:P24) is only 'plausible' (inductive scheme)
+  minor MODAL_OVERREACH      argument:A8    conclusion claim:P20 is asserted as 'probable' but the weakest premise (claim:P19) is only 'plausible' (extrapolation scheme)
+  info  UNSOURCED_PREMISE    claim:P16      claim:P16 is an unsourced assumption used as a premise; accepted until undermined
+  info  UNSOURCED_PREMISE    claim:P24      claim:P24 is an unsourced assumption used as a premise; accepted until undermined
+  info  UNSOURCED_PREMISE    claim:P7       claim:P7 is an unsourced assumption used as a premise; accepted until undermined
+  info  UNSOURCED_PREMISE    claim:R2       claim:R2 is an unsourced assumption used as a premise; accepted until undermined
+  info  UNSOURCED_PREMISE    claim:S11      claim:S11 is an unsourced assumption used as a premise; accepted until undermined
+  info  UNSOURCED_PREMISE    claim:S17      claim:S17 is an unsourced assumption used as a premise; accepted until undermined
+  info  UNCONTESTED          argument:A12   argument:A12 has no attacks declared against it
+  info  UNCONTESTED          argument:A14   argument:A14 has no attacks declared against it
+  info  UNCONTESTED          argument:A15   argument:A15 has no attacks declared against it
+  info  UNCONTESTED          argument:B10   argument:B10 has no attacks declared against it
+  info  UNCONTESTED          argument:B11   argument:B11 has no attacks declared against it
+  info  UNCONTESTED          argument:B12   argument:B12 has no attacks declared against it
+  info  UNCONTESTED          argument:B13   argument:B13 has no attacks declared against it
+  info  UNCONTESTED          argument:B5    argument:B5 has no attacks declared against it
+  info  UNCONTESTED          argument:B6    argument:B6 has no attacks declared against it
+  info  UNCONTESTED          argument:B7    argument:B7 has no attacks declared against it
+  info  UNCONTESTED          argument:B8    argument:B8 has no attacks declared against it
+  major W001                 argument:A1    'intelligence' is grounded to 2 different concepts within argument:A1: intelligence (goal-directed agency) in claim:P2; intelligence (task competence) in claim:P3
+  minor W002                 argument:B1    argument:B1 attacks argument:A1 but grounds 'intelligence' to intelligence (goal-directed agency) while argument:A1 grounds it to intelligence (task competence): the attack may be talking past its target

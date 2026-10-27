@@ -1,0 +1,26 @@
+Pierson v. Post (N.Y. Sup. Ct. 1805): does pursuit of a wild animal confer property in it?
+  commit commit:fe85594820a33c61 · The opinions answer each other: the majority undercuts Barbeyrac (A3) and distinguishes Keeble (A4); the dissent dismisses the ancient authorities (B3, tempora mutantur)
+  arguments: 2 stand, 3 defeated, 5 contested
+  thesis claim:H: defeated
+
+  defeated  argument:A1    [pierson] Pursuit alone vests no property (the authorities)  — attacked by accepted argument:B3
+  contested argument:A2    [pierson] Certainty and peace favour the strict rule  — standoff: attackers argument:B2 are not decided
+  contested argument:A3    [pierson] A commentator's dictum is not the law  — standoff: attackers none are not decided
+  stands    argument:A4    [pierson] Keeble distinguished  — no attackers and all premises established
+  defeated  argument:A6    [pierson] The holding  — premise claim:M5 is defeated (no accepted argument supports it)
+  contested argument:B1    [post] Reasonable prospect confers possession (Barbeyrac)  — standoff: attackers argument:A1, argument:A3 are not decided
+  contested argument:B2    [post] The chase should be encouraged  — standoff: attackers argument:A2 are not decided
+  stands    argument:B3    [post] Tempora mutantur: the custom of sportsmen should decide  — no attackers and all premises established
+  defeated  argument:B4    [post] Keeble protects the taker of wild animals  — attacked by accepted argument:A4
+  contested argument:B5    [post] Taking another's property is a wrong  — standoff: attackers none are not decided
+
+findings:
+  minor MODAL_OVERREACH      argument:A2    conclusion claim:M8 is asserted as 'probable' but the weakest premise (claim:M7) is only 'plausible' (expected-value scheme)
+  minor MODAL_OVERREACH      argument:B2    conclusion claim:D6 is asserted as 'probable' but the weakest premise (claim:D5) is only 'plausible' (expected-value scheme)
+  info  STANDOFF             argument:A2    argument:A2 and argument:B2 rebut each other and neither is defeated: contested
+  info  UNCONTESTED          argument:A3    argument:A3 has no attacks declared against it
+  info  UNCONTESTED          argument:A4    argument:A4 has no attacks declared against it
+  info  UNCONTESTED          argument:B3    argument:B3 has no attacks declared against it
+  info  UNCONTESTED          argument:B5    argument:B5 has no attacks declared against it
+  minor W002                 argument:A1    argument:A1 attacks argument:B1 but grounds 'possession' to possession (actual corporal control) while argument:B1 grounds it to possession (reasonable prospect of capture): the attack may be talking past its target
+  minor W002                 argument:B1    argument:B1 attacks argument:A1 but grounds 'possession' to possession (reasonable prospect of capture) while argument:A1 grounds it to possession (actual corporal control): the attack may be talking past its target

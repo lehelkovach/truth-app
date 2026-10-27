@@ -1,0 +1,23 @@
+Pierson v. Post (N.Y. Sup. Ct. 1805): does pursuit of a wild animal confer property in it?
+  commit commit:1cb6e4db8c909477 · Author Pierson v. Post: the two sides as argued, with the authorities, the policy arguments and the Keeble precedent
+  arguments: 1 stand, 0 defeated, 6 contested
+  thesis claim:H: open
+
+  contested argument:A1    [pierson] Pursuit alone vests no property (the authorities)  — standoff: attackers argument:B1 are not decided
+  contested argument:A2    [pierson] Certainty and peace favour the strict rule  — standoff: attackers argument:B2 are not decided
+  contested argument:A6    [pierson] The holding  — standoff: attackers none are not decided
+  contested argument:B1    [post] Reasonable prospect confers possession (Barbeyrac)  — standoff: attackers argument:A1 are not decided
+  contested argument:B2    [post] The chase should be encouraged  — standoff: attackers argument:A2 are not decided
+  stands    argument:B4    [post] Keeble protects the taker of wild animals  — no attackers and all premises established
+  contested argument:B5    [post] Taking another's property is a wrong  — standoff: attackers none are not decided
+
+findings:
+  minor MODAL_OVERREACH      argument:A2    conclusion claim:M8 is asserted as 'probable' but the weakest premise (claim:M7) is only 'plausible' (expected-value scheme)
+  minor MODAL_OVERREACH      argument:B2    conclusion claim:D6 is asserted as 'probable' but the weakest premise (claim:D5) is only 'plausible' (expected-value scheme)
+  info  STANDOFF             argument:A1    argument:A1 and argument:B1 rebut each other and neither is defeated: contested
+  info  STANDOFF             argument:A2    argument:A2 and argument:B2 rebut each other and neither is defeated: contested
+  info  UNCONTESTED          argument:A6    argument:A6 has no attacks declared against it
+  info  UNCONTESTED          argument:B4    argument:B4 has no attacks declared against it
+  info  UNCONTESTED          argument:B5    argument:B5 has no attacks declared against it
+  minor W002                 argument:A1    argument:A1 attacks argument:B1 but grounds 'possession' to possession (actual corporal control) while argument:B1 grounds it to possession (reasonable prospect of capture): the attack may be talking past its target
+  minor W002                 argument:B1    argument:B1 attacks argument:A1 but grounds 'possession' to possession (reasonable prospect of capture) while argument:A1 grounds it to possession (actual corporal control): the attack may be talking past its target

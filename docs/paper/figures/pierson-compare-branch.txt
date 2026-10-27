@@ -1,0 +1,37 @@
+main@2 (commit:fe85594820a33c61) → majority-answers-custom (commit:e04e58eb7b82785e)   classes: claim content, inference
++ argument:A7 (argument)
++ argument:A8 (argument)
++ claim:M12 (claim)
++ claim:M12c (claim)
++ claim:M13 (claim)
++ claim:M13c (claim)
++ rel:X8 argument:A7 undercut argument:B3
++ rel:X9 argument:A8 undercut argument:B2
+EVALUATION argument:A1 [argument]: rejected → accepted
+EVALUATION argument:A2 [argument]: undecided → accepted
+EVALUATION argument:A3 [argument]: undecided → accepted
+EVALUATION argument:A6 [argument]: rejected → accepted
+EVALUATION argument:A7 [argument]: — → accepted
+EVALUATION argument:A8 [argument]: — → accepted
+EVALUATION argument:B1 [argument]: undecided → rejected
+EVALUATION argument:B2 [argument]: undecided → rejected
+EVALUATION argument:B3 [argument]: accepted → rejected
+EVALUATION argument:B5 [argument]: undecided → rejected
+EVALUATION argument:A7 [logical logic.native]: — → outside_coverage
+EVALUATION argument:A8 [logical logic.native]: — → outside_coverage
+EVALUATION claim:D10 [claim]: open → defeated
+EVALUATION claim:D3 [claim]: open → defeated
+EVALUATION claim:D6 [claim]: open → defeated
+EVALUATION claim:D7c [claim]: established → defeated
+EVALUATION claim:H [claim]: defeated → established
+EVALUATION claim:M12 [claim]: — → established
+EVALUATION claim:M12c [claim]: — → established
+EVALUATION claim:M13 [claim]: — → established
+EVALUATION claim:M13c [claim]: — → established
+EVALUATION claim:M5 [claim]: defeated → established
+EVALUATION claim:M8 [claim]: open → established
+EVALUATION claim:M9c [claim]: open → established
+GROUNDING claim:M13
++ custom → concept:custom
+THESIS: defeated → established
+DIAGNOSTICS red 3→5 · yellow 20→16 · green 34→43

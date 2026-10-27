@@ -1,0 +1,9 @@
+main (commit:46254389b28271f3) → repair (commit:aa1a02b7ce44b299)   classes: claim content, inference
++ claim:C7 (claim)
+~ argument:A2 (argument) premiseRefs, warrant [inference]
+EVALUATION argument:A2 [logical logic.native]: not_entailed → entailed
+EVALUATION claim:C7 [claim]: — → established
+GROUNDING claim:C7
++ mammal → concept:mammal
++ has fur → concept:has_fur
+DIAGNOSTICS red 1→0 · yellow 2→3 · green 9→11

@@ -1,0 +1,631 @@
+{
+  "id": "pierson-post-1805",
+  "title": "Pierson v. Post (N.Y. Sup. Ct. 1805): does pursuit of a wild animal confer property in it?",
+  "question": "Did Post, by pursuing the fox with hounds on unowned land, acquire property in it, so that Pierson's killing and carrying it off was an actionable wrong?",
+  "description": "An externally authored case: the 1805 New York decision that is the standard worked example in computational argumentation. Every proposition is taken from the majority opinion (Tompkins, J.), the dissent (Livingston, J.) or the authorities they cite; modalities record how confidently each opinion asserts it, not the encoder's belief. Commit 1 encodes the two sides as argued. Commit 2 adds the court's answers to each other. The branch makes explicit the majority's implicit rejection of the custom-of-sportsmen argument. Fallacy annotations are the encoder's, attributed to the side whose opinion makes the point. Drafted with AI assistance from the opinion text and to be reviewed by the repository author before it is cited.",
+  "thesis": "H",
+  "parties": [
+    {
+      "id": "pierson",
+      "name": "Pierson (majority opinion, Tompkins J.)",
+      "description": "Property in animals ferae naturae is acquired only by occupancy; pursuit alone, without wounding, ensnaring or seizing, confers none. The rule is certain and keeps the peace."
+    },
+    {
+      "id": "post",
+      "name": "Post (dissenting opinion, Livingston J.)",
+      "description": "A pursuer within reach of, or with a reasonable prospect of taking, the animal has possession of it; foxes are noxious and the chase should be encouraged; the custom of sportsmen, not Justinian, should decide."
+    }
+  ],
+  "sources": {
+    "pierson1805": {
+      "title": "Pierson v. Post, 3 Cai. R. 175 (N.Y. Sup. Ct. 1805), opinion of the court",
+      "who": "Tompkins, J.",
+      "year": 1805,
+      "url": "https://en.wikipedia.org/wiki/Pierson_v._Post",
+      "note": "Public-domain opinion: the agreed facts and the majority's reasoning."
+    },
+    "livingston1805": {
+      "title": "Pierson v. Post, 3 Cai. R. 175 (N.Y. Sup. Ct. 1805), dissenting opinion",
+      "who": "Livingston, J.",
+      "year": 1805,
+      "url": "https://en.wikipedia.org/wiki/Pierson_v._Post"
+    },
+    "justinian": {
+      "title": "Institutes, lib. 2, tit. 1, §§12–13 (De rerum divisione)",
+      "who": "Justinian",
+      "year": 533,
+      "note": "Wild animals belong to no one until taken; pursuit alone, even with wounding, vests no property unless the animal is actually taken."
+    },
+    "fleta": {
+      "title": "Fleta, lib. 3, c. 2",
+      "year": 1290,
+      "note": "Cited by the majority with Justinian."
+    },
+    "bracton": {
+      "title": "De Legibus et Consuetudinibus Angliae, lib. 2, c. 1",
+      "who": "Henry de Bracton",
+      "year": 1250,
+      "note": "Cited by the majority with Justinian."
+    },
+    "puffendorf": {
+      "title": "De Jure Naturae et Gentium, lib. 4, c. 6, §§2, 10",
+      "who": "Samuel von Pufendorf",
+      "year": 1672,
+      "note": "Occupancy of beasts ferae naturae is actual corporal possession."
+    },
+    "bynkershoek": {
+      "title": "Cited by the majority for the proposition that mortal wounding by one who does not abandon the pursuit may be deemed possession",
+      "who": "Cornelius van Bynkershoek"
+    },
+    "barbeyrac": {
+      "title": "Notes to Pufendorf, De Jure Naturae et Gentium, lib. 4, c. 6, §10",
+      "who": "Jean Barbeyrac",
+      "year": 1706,
+      "note": "Actual bodily seizure is not in all cases necessary; a pursuer within reach or with a reasonable prospect of taking has possession."
+    },
+    "keeble1707": {
+      "title": "Keeble v. Hickeringill, 11 East 574 n., 103 Eng. Rep. 1127 (Q.B. 1707)",
+      "year": 1707,
+      "note": "Action lay against a defendant who fired guns to frighten wild fowl from the plaintiff's decoy pond."
+    },
+    "gordon-walton2006": {
+      "title": "Pierson vs. Post Revisited: A Reconstruction using the Carneades Argumentation Framework",
+      "who": "Thomas F. Gordon and Douglas Walton",
+      "year": 2006,
+      "note": "COMMA 2006. The structure here follows the standard computational-argumentation treatments of the case; the propositions are taken from the opinions. Citation to be verified before publication."
+    }
+  },
+  "concepts": {
+    "fox": {
+      "label": "the fox",
+      "kind": "entity",
+      "aliases": [
+        "fox"
+      ],
+      "definition": "The fox Post was hunting on the beach when Pierson killed and carried it off."
+    },
+    "ferae_naturae": {
+      "label": "ferae naturae",
+      "kind": "predicate",
+      "aliases": [
+        "wild by nature",
+        "wild animal",
+        "wild animals"
+      ],
+      "definition": "Animals wild by nature, owned by no one until taken."
+    },
+    "requires_occupancy": {
+      "label": "acquired only by occupancy",
+      "kind": "predicate",
+      "aliases": [
+        "requires_occupancy"
+      ],
+      "definition": "Property in the thing can be acquired only by occupancy (taking)."
+    },
+    "pursued_only": {
+      "label": "merely pursued",
+      "kind": "predicate",
+      "aliases": [
+        "pursued_only",
+        "pursuit alone"
+      ],
+      "definition": "Chased, but not wounded, ensnared or seized."
+    },
+    "not_acquired_by_pursuit": {
+      "label": "not acquired by pursuit alone",
+      "kind": "predicate",
+      "aliases": [
+        "not_acquired_by_pursuit"
+      ],
+      "definition": "No property vested in the pursuer by the pursuit."
+    },
+    "occupancy": {
+      "label": "occupancy",
+      "aliases": [
+        "occupation",
+        "taking"
+      ],
+      "definition": "The mode of acquiring property in things that belong to no one, by taking them (Justinian, Inst. 2.1.12–13)."
+    },
+    "possession": {
+      "label": "possession (unspecified sense)",
+      "definition": "Umbrella term; the two senses below are what the opinions use."
+    },
+    "possession-corporal": {
+      "label": "possession (actual corporal control)",
+      "senseOf": "possession",
+      "aliases": [
+        "corporal possession",
+        "actual possession",
+        "bodily seizure",
+        "manucaption"
+      ],
+      "definition": "Physical seizure, or mortal wounding or ensnaring that deprives the animal of its natural liberty and brings it within the certain control of the pursuer (Pufendorf, Bynkershoek)."
+    },
+    "possession-constructive": {
+      "label": "possession (reasonable prospect of capture)",
+      "senseOf": "possession",
+      "aliases": [
+        "constructive possession",
+        "reasonable prospect of taking"
+      ],
+      "definition": "Being within reach of, or having a reasonable prospect of taking, the animal while in pursuit (Barbeyrac)."
+    },
+    "pursuit": {
+      "label": "pursuit",
+      "aliases": [
+        "the chase",
+        "chase",
+        "pursuing"
+      ],
+      "definition": "Following a wild animal with intent to take it."
+    },
+    "property": {
+      "label": "property",
+      "aliases": [
+        "right of property",
+        "title"
+      ],
+      "definition": "A legal right in a thing good against others."
+    },
+    "custom": {
+      "label": "custom of sportsmen",
+      "aliases": [
+        "usage of sportsmen",
+        "custom",
+        "usage"
+      ],
+      "definition": "The practice among hunters as to whose the quarry is."
+    },
+    "certainty": {
+      "label": "legal certainty",
+      "aliases": [
+        "certainty"
+      ],
+      "definition": "A rule whose application is predictable and leaves little room for dispute."
+    },
+    "needs_corporal_possession": {
+      "label": "occupancy requires corporal possession",
+      "kind": "predicate",
+      "aliases": [
+        "needs_corporal_possession"
+      ],
+      "definition": "Occupancy of the thing requires actual corporal possession or its equivalent (mortal wounding, ensnaring)."
+    }
+  },
+  "propositions": [
+    {
+      "id": "M1",
+      "party": "pierson",
+      "kind": "empirical",
+      "modality": "certain",
+      "basis": "definition",
+      "sources": [
+        "justinian"
+      ],
+      "text": "A fox is an animal ferae naturae.",
+      "terms": [
+        "fox",
+        "ferae naturae"
+      ],
+      "logic": "ferae_naturae(fox)"
+    },
+    {
+      "id": "M2",
+      "party": "pierson",
+      "kind": "definitional",
+      "modality": "certain",
+      "basis": "evidence",
+      "sources": [
+        "justinian",
+        "fleta",
+        "bracton"
+      ],
+      "text": "Property in animals ferae naturae is acquired only by occupancy.",
+      "terms": [
+        "ferae naturae",
+        "occupancy",
+        "property"
+      ],
+      "logic": "forall x: ferae_naturae(x) -> requires_occupancy(x)"
+    },
+    {
+      "id": "M3",
+      "party": "pierson",
+      "kind": "definitional",
+      "modality": "certain",
+      "basis": "evidence",
+      "sources": [
+        "puffendorf",
+        "bynkershoek"
+      ],
+      "text": "Occupancy of a wild animal requires actual corporal possession, or at least mortal wounding or ensnaring that deprives it of its natural liberty and brings it within the certain control of the pursuer.",
+      "terms": [
+        "occupancy",
+        {
+          "symbol": "possession",
+          "concept": "possession-corporal"
+        }
+      ],
+      "logic": "forall x: requires_occupancy(x) -> needs_corporal_possession(x)"
+    },
+    {
+      "id": "F1",
+      "party": "pierson",
+      "kind": "empirical",
+      "modality": "certain",
+      "basis": "evidence",
+      "sources": [
+        "pierson1805"
+      ],
+      "text": "Post pursued the fox with hounds but had not wounded, ensnared or seized it when Pierson, in his view, killed and carried it off.",
+      "terms": [
+        "fox",
+        "pursuit"
+      ],
+      "logic": "pursued_only(fox)"
+    },
+    {
+      "id": "M4",
+      "party": "pierson",
+      "kind": "definitional",
+      "modality": "certain",
+      "basis": "evidence",
+      "sources": [
+        "justinian",
+        "fleta"
+      ],
+      "text": "Pursuit alone, without wounding, ensnaring or seizing, confers no property in an animal ferae naturae.",
+      "terms": [
+        "pursuit alone",
+        "ferae naturae",
+        "property"
+      ],
+      "logic": "forall x: requires_occupancy(x) & pursued_only(x) -> not_acquired_by_pursuit(x)"
+    },
+    {
+      "id": "M5",
+      "party": "pierson",
+      "kind": "empirical",
+      "modality": "certain",
+      "basis": "derived",
+      "text": "Post did not acquire property in the fox by his pursuit.",
+      "terms": [
+        "fox",
+        "property",
+        "pursuit"
+      ],
+      "logic": "not_acquired_by_pursuit(fox)"
+    },
+    {
+      "id": "M6",
+      "party": "pierson",
+      "kind": "normative",
+      "modality": "probable",
+      "basis": "assumption",
+      "sources": [
+        "pierson1805"
+      ],
+      "text": "A rule requiring capture, mortal wounding or ensnaring is certain and preserves peace and order in society.",
+      "terms": [
+        "certainty"
+      ]
+    },
+    {
+      "id": "M7",
+      "party": "pierson",
+      "kind": "predictive",
+      "modality": "plausible",
+      "basis": "assumption",
+      "sources": [
+        "pierson1805"
+      ],
+      "text": "A rule that pursuit alone confers property would be a fertile source of quarrels and litigation."
+    },
+    {
+      "id": "M8",
+      "party": "pierson",
+      "kind": "normative",
+      "modality": "probable",
+      "basis": "derived",
+      "text": "The law should hold that pursuit alone confers no property in a wild animal.",
+      "terms": [
+        "pursuit alone",
+        "property"
+      ]
+    },
+    {
+      "id": "H",
+      "party": "pierson",
+      "kind": "normative",
+      "modality": "certain",
+      "basis": "derived",
+      "text": "Post had no property in the fox, so Pierson's taking was no legal wrong and the judgment for Post must be reversed.",
+      "terms": [
+        "fox",
+        "property"
+      ]
+    },
+    {
+      "id": "D1",
+      "party": "post",
+      "kind": "definitional",
+      "modality": "probable",
+      "basis": "evidence",
+      "sources": [
+        "barbeyrac"
+      ],
+      "text": "A pursuer who is within reach of, or has a reasonable prospect of taking, a wild animal has possession of it, and property follows possession.",
+      "terms": [
+        {
+          "symbol": "possession",
+          "concept": "possession-constructive"
+        },
+        "property",
+        "pursuit"
+      ]
+    },
+    {
+      "id": "D2",
+      "party": "post",
+      "kind": "empirical",
+      "modality": "certain",
+      "basis": "evidence",
+      "sources": [
+        "pierson1805"
+      ],
+      "text": "Post, with his hounds, was in close pursuit with a reasonable prospect of taking the fox when Pierson intervened.",
+      "terms": [
+        "fox",
+        "pursuit",
+        "reasonable prospect of taking"
+      ]
+    },
+    {
+      "id": "D3",
+      "party": "post",
+      "kind": "empirical",
+      "modality": "probable",
+      "basis": "derived",
+      "text": "Post had acquired property in the fox by his pursuit.",
+      "terms": [
+        "fox",
+        "property",
+        "pursuit"
+      ]
+    },
+    {
+      "id": "D4",
+      "party": "post",
+      "kind": "empirical",
+      "modality": "certain",
+      "basis": "assumption",
+      "sources": [
+        "livingston1805"
+      ],
+      "text": "Foxes are wild and noxious beasts whose destruction is a public benefit."
+    },
+    {
+      "id": "D5",
+      "party": "post",
+      "kind": "predictive",
+      "modality": "plausible",
+      "basis": "assumption",
+      "sources": [
+        "livingston1805"
+      ],
+      "text": "If an interloper may carry off the fox from the pursuer, no one will keep hounds and horses for the chase, and foxes will go undestroyed."
+    },
+    {
+      "id": "D6",
+      "party": "post",
+      "kind": "normative",
+      "modality": "probable",
+      "basis": "derived",
+      "text": "The law should vest property in the pursuer who has a reasonable prospect of capture.",
+      "terms": [
+        "property",
+        "pursuit",
+        "reasonable prospect of taking"
+      ]
+    },
+    {
+      "id": "D9",
+      "party": "post",
+      "kind": "empirical",
+      "modality": "certain",
+      "basis": "evidence",
+      "sources": [
+        "keeble1707"
+      ],
+      "text": "In Keeble v. Hickeringill an action lay against a defendant who frightened wild fowl from the plaintiff's decoy pond, so the law protects one engaged in taking wild animals."
+    },
+    {
+      "id": "D11",
+      "party": "post",
+      "kind": "definitional",
+      "modality": "certain",
+      "basis": "definition",
+      "text": "Whoever takes another's property commits a wrong the law redresses.",
+      "terms": [
+        "property"
+      ]
+    },
+    {
+      "id": "D10",
+      "party": "post",
+      "kind": "normative",
+      "modality": "probable",
+      "basis": "derived",
+      "text": "Pierson's killing and carrying off the fox was an actionable wrong against Post.",
+      "terms": [
+        "fox"
+      ]
+    }
+  ],
+  "arguments": [
+    {
+      "id": "A1",
+      "party": "pierson",
+      "title": "Pursuit alone vests no property (the authorities)",
+      "scheme": "deductive",
+      "premises": [
+        "M1",
+        "M2",
+        "M3",
+        "F1",
+        "M4"
+      ],
+      "conclusion": "M5",
+      "sources": [
+        "justinian",
+        "fleta",
+        "bracton",
+        "puffendorf"
+      ],
+      "warrant": "A fox is ferae naturae (M1); such animals are acquired only by occupancy (M2), which needs corporal possession or its equivalent (M3); Post only pursued (F1), and pursuit alone confers nothing (M4); so Post acquired no property."
+    },
+    {
+      "id": "A2",
+      "party": "pierson",
+      "title": "Certainty and peace favour the strict rule",
+      "scheme": "expected-value",
+      "premises": [
+        "M6",
+        "M7"
+      ],
+      "conclusion": "M8",
+      "sources": [
+        "pierson1805"
+      ],
+      "warrant": "Between a rule that is certain and keeps the peace (M6) and one that breeds quarrels (M7), the law should choose the first."
+    },
+    {
+      "id": "A6",
+      "party": "pierson",
+      "title": "The holding",
+      "scheme": "deductive",
+      "premises": [
+        "M5"
+      ],
+      "conclusion": "H",
+      "sources": [
+        "pierson1805"
+      ],
+      "warrant": "Trespass on the case for taking the fox requires property or possession in Post; none was acquired (M5), so no wrong lies and the judgment below is reversed."
+    },
+    {
+      "id": "B1",
+      "party": "post",
+      "title": "Reasonable prospect confers possession (Barbeyrac)",
+      "scheme": "authority",
+      "premises": [
+        "D1",
+        "D2"
+      ],
+      "conclusion": "D3",
+      "sources": [
+        "barbeyrac"
+      ],
+      "warrant": "Barbeyrac's rule (D1) applied to the agreed facts (D2) gives Post possession, and property follows."
+    },
+    {
+      "id": "B2",
+      "party": "post",
+      "title": "The chase should be encouraged",
+      "scheme": "expected-value",
+      "premises": [
+        "D4",
+        "D5"
+      ],
+      "conclusion": "D6",
+      "sources": [
+        "livingston1805"
+      ],
+      "warrant": "Destroying foxes is a public good (D4); a rule that lets interlopers take the prize would end the chase (D5); so the law should protect the pursuer."
+    },
+    {
+      "id": "B4",
+      "party": "post",
+      "title": "Keeble protects the taker of wild animals",
+      "scheme": "analogical",
+      "premises": [
+        "D9",
+        "D2"
+      ],
+      "conclusion": "D10",
+      "sources": [
+        "keeble1707"
+      ],
+      "warrant": "As the decoy-pond owner in Keeble was protected against one who disturbed his taking of wild fowl (D9), so Post, engaged in taking the fox (D2), is protected against Pierson."
+    },
+    {
+      "id": "B5",
+      "party": "post",
+      "title": "Taking another's property is a wrong",
+      "scheme": "deductive",
+      "premises": [
+        "D3",
+        "D11"
+      ],
+      "conclusion": "D10",
+      "warrant": "If the fox was Post's (D3), Pierson's taking it was a wrong (D11)."
+    }
+  ],
+  "attacks": [
+    {
+      "id": "X1",
+      "attacker": "A1",
+      "target": "B1",
+      "type": "rebut",
+      "note": "M5 and D3 are contrary conclusions about property in the fox."
+    },
+    {
+      "id": "X2",
+      "attacker": "B1",
+      "target": "A1",
+      "type": "rebut",
+      "note": "Declared in both directions; the evaluator reports a standoff rather than breaking it."
+    },
+    {
+      "id": "X3",
+      "attacker": "A2",
+      "target": "B2",
+      "type": "rebut",
+      "note": "M8 and D6 are contrary rules."
+    },
+    {
+      "id": "X4",
+      "attacker": "B2",
+      "target": "A2",
+      "type": "rebut",
+      "note": "Declared in both directions."
+    }
+  ],
+  "fallacies": [
+    {
+      "argument": "B1",
+      "name": "equivocation",
+      "where": "inference",
+      "severity": "weakens",
+      "by": "pierson",
+      "explanation": "'Possession' in Barbeyrac's sense (a reasonable prospect of taking) is not the corporal possession the authorities require for occupancy; the argument reaches 'property' by moving between the two senses."
+    },
+    {
+      "argument": "B2",
+      "name": "unwarranted_extrapolation",
+      "where": "premise:D5",
+      "severity": "weakens",
+      "by": "pierson",
+      "explanation": "That one interloper may take one fox does not show the chase will be abandoned; nothing in the record supports the predicted collapse of fox hunting."
+    },
+    {
+      "argument": "A1",
+      "name": "appeal_to_authority",
+      "where": "inference",
+      "severity": "weakens",
+      "by": "post",
+      "explanation": "The authorities are divided (Pufendorf against Barbeyrac), and the dissent denies that civilian texts written for other times speak to the usage of sportsmen in New York."
+    }
+  ]
+}

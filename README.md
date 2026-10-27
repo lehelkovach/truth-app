@@ -201,3 +201,14 @@ seeded prototypes, ASP / Bayesian / LNN evaluators, multi-user auth. See
 ## License
 
 MIT © Lehel Kovach
+
+## Cases shipped as fixtures
+
+| Fixture | What it shows |
+|---|---|
+| `fixtures/ai-risk` | The AI existential-risk debate, 65 claims and 29 arguments across two commits; equivocation on "intelligence", modal overreach, a second commit that flips one chain while the thesis stands. |
+| `fixtures/pierson-post` | Pierson v. Post (N.Y. 1805), the standard worked example of computational argumentation, encoded from the two opinions. Commit 1: the sides as argued (two standoffs, equivocation on "possession"). Commit 2: the opinions answer each other and the holding is *defeated* because the dissent's custom argument goes unanswered. The `majority-answers-custom` branch makes the majority's implicit answer explicit and `truth compare main@2 majority-answers-custom` shows the holding flip to established. |
+| `fixtures/hermione` | The spec's three-claim example for the native logic evaluator, with a `repair` branch. |
+| `fixtures/exercise-depression` | A small scientific graph: evidence, a hypothesis with a falsification criterion, a replication and a scope narrowing. |
+
+`npm run coverage fixtures/<case>` prints, per dimension, how the evaluator classified every claim and argument, including how many claims carry a Logic IR expression and how many read `outside_coverage`. The paper package lives in [`docs/paper/`](docs/paper/README.md).

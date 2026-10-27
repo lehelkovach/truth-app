@@ -1,0 +1,23 @@
+main@1 (commit:033f09335618d589) → main@2 (commit:fa3780efd2799100)   classes: annotation, claim content, inference
++ argument:A15 (argument)
++ claim:R5 (claim)
++ claim:R5c (claim)
+~ argument:B3 (argument) notes [annotation]
++ rel:X19 argument:A15 undercut argument:B3
+EVALUATION argument:A13 [argument]: rejected → accepted
+EVALUATION argument:A15 [argument]: — → accepted
+EVALUATION argument:A2 [argument]: rejected → accepted
+EVALUATION argument:A4 [argument]: rejected → accepted
+EVALUATION argument:B14 [argument]: accepted → rejected
+EVALUATION argument:B2 [argument]: accepted → rejected
+EVALUATION argument:B3 [argument]: accepted → rejected
+EVALUATION argument:A15 [logical logic.native]: — → outside_coverage
+EVALUATION claim:P10 [claim]: defeated → established
+EVALUATION claim:P8 [claim]: defeated → established
+EVALUATION claim:R3c [claim]: defeated → established
+EVALUATION claim:R5 [claim]: — → established
+EVALUATION claim:R5c [claim]: — → established
+EVALUATION claim:S18c [claim]: established → defeated
+EVALUATION claim:S2c [claim]: established → defeated
+EVALUATION claim:S4c [claim]: established → defeated
+DIAGNOSTICS red 14→14 · yellow 16→16 · green 53→53
