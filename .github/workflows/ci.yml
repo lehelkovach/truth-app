@@ -20,6 +20,8 @@ jobs:
       - run: node src/cli.mjs demo fixtures/ai-risk
       - run: node src/cli.mjs demo fixtures/exercise-depression
       - run: node src/cli.mjs demo fixtures/hermione
+      - run: node src/cli.mjs demo fixtures/pierson-post
+      - run: npm run coverage fixtures/pierson-post
       - run: npm run bundles
       - name: KSG release-contract smoke (live push path over HTTP)
         run: npm run ksg:smoke
