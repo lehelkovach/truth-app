@@ -77,8 +77,8 @@
         "title": "Pierson v. Post, 3 Cai. R. 175 (N.Y. Sup. Ct. 1805), opinion of the court",
         "who": "Tompkins, J.",
         "year": 1805,
-        "url": "https://en.wikipedia.org/wiki/Pierson_v._Post",
-        "note": "Public-domain opinion: the agreed facts and the majority's reasoning."
+        "url": "https://static.case.law/cai/3/html/0175-01.html",
+        "note": "Public-domain opinion (Caselaw Access Project text): the agreed facts and the majority's reasoning."
       }
     },
     {
@@ -96,7 +96,7 @@
         "title": "Pierson v. Post, 3 Cai. R. 175 (N.Y. Sup. Ct. 1805), dissenting opinion",
         "who": "Livingston, J.",
         "year": 1805,
-        "url": "https://en.wikipedia.org/wiki/Pierson_v._Post"
+        "url": "https://static.case.law/cai/3/html/0175-01.html"
       }
     },
     {
@@ -236,7 +236,8 @@
         "title": "Pierson vs. Post Revisited: A Reconstruction using the Carneades Argumentation Framework",
         "who": "Thomas F. Gordon and Douglas Walton",
         "year": 2006,
-        "note": "COMMA 2006. The structure here follows the standard computational-argumentation treatments of the case; the propositions are taken from the opinions. Citation to be verified before publication."
+        "url": "https://ebooks.iospress.nl/publication/2948",
+        "note": "COMMA 2006, Frontiers in AI and Applications 144, pp. 208–219, IOS Press. The structure here follows the standard computational-argumentation treatments of the case (also Berman & Hafner 1993; Bench-Capon 2002; Atkinson & Bench-Capon 2005); the propositions are taken from the opinions."
       }
     },
     {

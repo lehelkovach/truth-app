@@ -6,12 +6,17 @@ repository keeps its name until the author decides.
 
 | File | What it is | Status |
 |---|---|---|
-| `argit-paper.md` | Full first draft, pandoc-ready Markdown | drafted; numbers come from the fixtures in this commit |
+| `argit-paper.md` | Full first draft, pandoc-ready Markdown with `[@key]` citations | drafted; numbers come from the fixtures in this commit |
+| `OUTLINE.md` | The plan the draft follows, with the verified venue table | current |
 | `figures/` | CLI outputs the figures and tables are built from; regenerate with the commands at the top of each file | current |
 | `figures/coverage-all.md` | `npm run coverage` on every fixture: Logic IR coverage and every dimension | current |
 | `ENCODING-RELIABILITY-PROTOCOL.md` | The second-encoder pilot (§7.5 of the draft) | protocol written; needs a second encoder |
-| `COMPARISON.md` | Feature table against existing tools, each cell cited | **pending**: being verified against each tool's documentation |
-| `references.bib` | BibTeX for every citation in the draft | **pending**: being verified; do not submit from memory |
+| `COMPARISON.md` | Feature table against ten existing tools, every cell with a source URL, read 2026-10-27 | current |
+| `references.bib` | 29 BibTeX entries, every DOI verified 2026-10-27; three fields flagged for manual confirmation | current |
+
+## Deadline that matters
+
+ArgMining 2027 (EACL, Athens): direct submission **15 December 2026**, 8 pages plus references. Everything else in reach has passed or is rolling; see `OUTLINE.md` §8.
 
 ## What is still the author's to do
 
@@ -23,8 +28,8 @@ repository keeps its name until the author decides.
 3. Recruit one second encoder and run `ENCODING-RELIABILITY-PROTOCOL.md`.
 4. Read every reference in `references.bib` before submission.
 5. Tag a release, archive it on Zenodo, put the DOI in the draft.
-6. Convert: `pandoc docs/paper/argit-paper.md -o argit.pdf` for a preprint, or
-   paste into the venue's LaTeX template.
+6. Convert: `cd docs/paper && pandoc argit-paper.md --citeproc -o argit.pdf` for a
+   preprint, or paste into the venue's LaTeX template.
 
 ## Regenerating the numbers
 
