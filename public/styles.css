@@ -36,4 +36,7 @@ a{color:var(--accent);cursor:pointer}.legend{display:flex;gap:10px;flex-wrap:wra
 .mark.red{text-decoration-color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}.mark.yellow{text-decoration-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 14%,transparent)}.mark.green{text-decoration-color:var(--green)}
 .mark:hover{outline:1px solid var(--accent)}
 .tip{position:fixed;z-index:9;max-width:420px;background:var(--card);border:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.15);border-radius:8px;padding:8px 10px;font:12px/1.4 system-ui,sans-serif;pointer-events:none}
+#propose-box{border:1px solid var(--line);border-radius:8px;background:var(--soft);padding:10px;margin-bottom:10px;display:grid;gap:8px}
+#propose-text{width:100%;min-height:90px;border:1px solid var(--line);border-radius:6px;padding:8px;font:13px/1.5 system-ui,sans-serif;background:var(--card);color:var(--fg);resize:vertical}
+#propose-run{font:12px system-ui,sans-serif;padding:5px 12px;border:1px solid var(--line);border-radius:6px;background:var(--accent);color:#fff;cursor:pointer}
 @media (max-width:1000px){.compose-grid{grid-template-columns:1fr}}

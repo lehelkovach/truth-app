@@ -286,6 +286,34 @@ $('#compose-text').addEventListener('scroll', () => { $('#compose-gutter').scrol
 $('#compose-example').onclick = async () => { $('#compose-text').value = await (await fetch('api/compose/example')).text(); runCompose(); };
 $('#compose-help').onclick = () => { const g = $('#compose-grammar'); g.hidden = !g.hidden; g.textContent = GRAMMAR; };
 
+/* Propose from prose: AI drafts composer text for the human to review and edit. */
+$('#compose-propose').onclick = () => { const b = $('#propose-box'); b.hidden = !b.hidden; if (!b.hidden) $('#propose-text').focus(); };
+$('#propose-cancel').onclick = () => { $('#propose-box').hidden = true; };
+$('#propose-run').onclick = async () => {
+  const text = $('#propose-text').value.trim();
+  const status = $('#propose-status');
+  if (!text) { status.textContent = 'paste some prose first'; return; }
+  status.textContent = 'asking the translator…';
+  let data;
+  try {
+    data = await (await fetch('api/translate', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) })).json();
+  } catch { status.innerHTML = `<span class="badge red">no translate endpoint</span> run <code>npm run serve</code>`; return; }
+  if (data.available === false) { status.innerHTML = `<span class="badge yellow">no AI provider</span> ${esc(data.message || 'set ANTHROPIC_API_KEY to enable this')}`; return; }
+  if (data.error || !data.proposal) { status.innerHTML = `<span class="badge red">failed</span> ${esc(data.error || 'no proposal')}`; return; }
+  const p = data.proposal;
+  // The proposal is advisory: drop it into the editor so the human reviews/edits before anything is real.
+  $('#compose-text').value = p.composer;
+  $('#propose-box').hidden = true;
+  const warn = [];
+  if (p.assumptions?.length) warn.push(`${p.assumptions.length} AI assumption(s)`);
+  if (p.ambiguities?.length) warn.push(`${p.ambiguities.length} flagged ambiguity(ies)`);
+  if (p.unverifiedAlignment?.length) warn.push(`${p.unverifiedAlignment.length} unverified source link(s)`);
+  if (p.unresolvedTerms?.length) warn.push(`${p.unresolvedTerms.length} ungrounded term(s)`);
+  status.textContent = '';
+  runCompose();
+  $('#compose-status').innerHTML = `<span class="badge yellow">AI proposal — review it</span> ${warn.join(' · ') || 'nothing flagged, but still your call'}`;
+};
+
 for (const b of document.querySelectorAll('#tabs button')) b.onclick = () => { for (const x of document.querySelectorAll('#tabs button')) x.classList.toggle('active', x === b); for (const p of document.querySelectorAll('.panel')) p.classList.toggle('active', p.id === `panel-${b.dataset.tab}`); if (b.dataset.tab === 'graph' && cy) { cy.resize(); cy.fit(undefined, 24); if (state.selected && cy.getElementById(state.selected).length) cy.center(cy.getElementById(state.selected)); } };
 
 loadIndex().catch((e) => { $('#issue').innerHTML = `<p class="badge red">failed to load bundle: ${esc(e.message)}</p>`; });

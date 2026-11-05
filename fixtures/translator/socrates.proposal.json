@@ -1,0 +1,13 @@
+{
+  "_comment": "Scripted provider output for socrates.prose.txt: a faithful, well-formed proposal. The translator still runs this through compose() before anyone can accept it.",
+  "composer": "issue: Is Socrates mortal?\nthesis: C3\npredicate man (man): A human being.\npredicate mortal (mortal): Subject to death.\nentity socrates (Socrates): The philosopher Socrates.\nC1 [certain, definition]: Every man is mortal.\n  logic: forall x: man(x) -> mortal(x)\n  terms: man, mortal\nC2 [certain, evidence]: Socrates is a man.\n  logic: man(socrates)\n  terms: Socrates, man\nC3 [certain, derived]: Socrates is mortal.\n  logic: mortal(socrates)\n  terms: Socrates, mortal\nA1 [deductive]: C1, C2 => C3\n  title: Socrates is mortal\n  warrant: Universal instantiation of C1 at Socrates, then modus ponens with C2.\n",
+  "alignment": [
+    { "unit": "claim:C1", "quote": "All men are mortal" },
+    { "unit": "claim:C2", "quote": "Socrates is a man" },
+    { "unit": "claim:C3", "quote": "Socrates is mortal" }
+  ],
+  "assumptions": [
+    "Read 'All men are mortal' as a universal over the predicate man(x)."
+  ],
+  "ambiguities": []
+}

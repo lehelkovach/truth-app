@@ -45,3 +45,21 @@ test('compare, logic, concept and bundle commands', () => {
   assert.equal(b.compares[0].to, 'repair');
   assert.ok(b.commits[0].logicText['claim:C1'].prolog);
 });
+
+test('translate (offline scripted provider) shows a reviewable, committable proposal and commits nothing', () => {
+  const out = run('translate', join(fixture('translator'), 'socrates.prose.txt'), '--script', join(fixture('translator'), 'socrates.proposal.json'));
+  assert.match(out, /COMMITTABLE \(awaiting human accept\)/);
+  assert.match(out, /thesis established/);
+  assert.match(out, /source alignment \(verified\)/);
+  assert.match(out, /Nothing has been committed/);
+});
+
+test('translate refuses a compromised provider whose output is not composer grammar', () => {
+  assert.throws(() => run('translate', join(fixture('translator'), 'injection-content.prose.txt'), '--script', join(fixture('translator'), 'injection-compromised.proposal.json')), (e) => {
+    const out = (e.stdout || '') + (e.stderr || '');
+    assert.equal(e.status, 1, 'exit code is non-zero');
+    assert.match(out, /NOT committable/);
+    assert.match(out, /RED\s+PARSE/);
+    return true;
+  });
+});

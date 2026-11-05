@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compose } from '../src/services/compose.mjs';
+import { translate, createAnthropicProvider } from '../src/services/translator.mjs';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..', 'public');
 const types = { '.html': 'text/html; charset=utf-8', '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' };
@@ -20,6 +21,21 @@ createServer(async (req, res) => {
       const { text } = JSON.parse(await readBody(req) || '{}');
       return json(res, 200, compose(String(text ?? '')));
     } catch (e) { return json(res, 400, { error: e.message }); }
+  }
+  // The AI translator (roadmap PR 3). Prose in, a *proposal* out: composer text
+  // the human reviews and edits in the editor. Nothing is committed here — the
+  // static UI has no store — so the proposal is purely advisory. A provider runs
+  // only when one is configured; we never fake AI (AGENTS.md).
+  if (url.pathname === '/api/translate' && req.method === 'POST') {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return json(res, 200, { available: false, proposal: null, message: "No AI provider is configured. Set ANTHROPIC_API_KEY to enable 'propose from prose'. You can always author directly in the composer." });
+    }
+    try {
+      const { text } = JSON.parse(await readBody(req) || '{}');
+      const provider = createAnthropicProvider({ model: process.env.TRUTH_TRANSLATE_MODEL || undefined });
+      const proposal = await translate({ text: String(text ?? ''), provider, sourceRef: 'ui' });
+      return json(res, 200, { available: true, proposal });
+    } catch (e) { return json(res, 400, { available: true, error: e.message }); }
   }
   if (url.pathname === '/api/compose/example') {
     try { res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' }); return res.end(await readFile(join(root, '..', 'fixtures', 'hermione', 'source', 'case.truth'))); } catch { res.writeHead(404); return res.end(''); }
