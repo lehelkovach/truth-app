@@ -15,6 +15,7 @@ export { makeEvaluation } from './domain/evaluation.mjs';
 export { compileCase } from './domain/authoring.mjs';
 export { createTruthStore } from './services/truth-store.mjs';
 export { compose, parseComposer } from './services/compose.mjs';
+export { reasoningReport, formatReasoning, VERDICT } from './services/reasoning.mjs';
 export { translate, createReview, createScriptedProvider, createAnthropicProvider, TranslatorError, ReviewError, COMPOSER_GRAMMAR_BRIEF } from './services/translator.mjs';
 export { registerEvaluator, getEvaluator, listEvaluators } from './services/evaluator-registry.mjs';
 export { createKsgAdapter, createFakeKsgClient, createKsgClientFromEnv } from './adapters/ksg.mjs';

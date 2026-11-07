@@ -1,0 +1,1850 @@
+{
+  "patchVersion": "0.1",
+  "id": "patch:reasoning-primer-initial",
+  "baseCommitRef": null,
+  "message": "Author the reasoning primer: classic syllogisms beside the fallacies that imitate them",
+  "provenance": {
+    "sourceType": "fixture",
+    "sourceRef": "case:reasoning-primer",
+    "method": "manual_authoring",
+    "actorRef": "actor:demo-user"
+  },
+  "operations": [
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "issue:reasoning-primer",
+        "kind": "issue",
+        "title": "Reasoning primer: syllogisms and the fallacies that imitate them",
+        "question": "Which of these arguments actually deduce their conclusions — and which only look like they do?",
+        "thesisRef": "claim:C3"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "position:author",
+        "kind": "position",
+        "issueRef": "issue:reasoning-primer",
+        "name": "Author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:human",
+        "kind": "concept",
+        "label": "human",
+        "aliases": [
+          "humans",
+          "man",
+          "men"
+        ],
+        "definition": "A member of the species Homo sapiens.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "A member of the species Homo sapiens."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:mortal",
+        "kind": "concept",
+        "label": "mortal",
+        "aliases": [
+          "mortals"
+        ],
+        "definition": "Subject to death.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Subject to death."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:greek",
+        "kind": "concept",
+        "label": "Greek",
+        "aliases": [
+          "Greeks"
+        ],
+        "definition": "A person from Greece.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "A person from Greece."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:philosopher",
+        "kind": "concept",
+        "label": "philosopher",
+        "aliases": [
+          "philosophers"
+        ],
+        "definition": "One who pursues wisdom by reasoned inquiry.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "One who pursues wisdom by reasoned inquiry."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:wise",
+        "kind": "concept",
+        "label": "wise",
+        "definition": "Having sound judgement grounded in knowledge.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Having sound judgement grounded in knowledge."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:raining",
+        "kind": "concept",
+        "label": "raining",
+        "aliases": [
+          "rain",
+          "it is raining"
+        ],
+        "definition": "Water is falling from clouds at the place and time in question.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Water is falling from clouds at the place and time in question."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:wet",
+        "kind": "concept",
+        "label": "wet",
+        "definition": "Covered or saturated with water.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Covered or saturated with water."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:fire",
+        "kind": "concept",
+        "label": "fire",
+        "definition": "Combustion producing flame and heat at the place in question.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Combustion producing flame and heat at the place in question."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:smoke",
+        "kind": "concept",
+        "label": "smoke",
+        "definition": "Visible suspended particles produced by combustion.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Visible suspended particles produced by combustion."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:bank_river",
+        "kind": "concept",
+        "label": "riverbank",
+        "aliases": [
+          "bank",
+          "river bank"
+        ],
+        "definition": "The sloping land alongside a river.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "The sloping land alongside a river."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:bank_finance",
+        "kind": "concept",
+        "label": "financial bank",
+        "aliases": [
+          "bank"
+        ],
+        "definition": "An institution that holds deposits and lends money.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "An institution that holds deposits and lends money."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:sloped",
+        "kind": "concept",
+        "label": "sloped",
+        "aliases": [
+          "has a slope",
+          "sloping"
+        ],
+        "definition": "Inclined; not level.",
+        "conceptKind": "predicate",
+        "ksgRef": null,
+        "text": "Inclined; not level."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:socrates",
+        "kind": "concept",
+        "label": "Socrates",
+        "definition": "The Athenian philosopher (c. 470–399 BC).",
+        "conceptKind": "entity",
+        "ksgRef": null,
+        "text": "The Athenian philosopher (c. 470–399 BC)."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:today",
+        "kind": "concept",
+        "label": "today",
+        "definition": "The present day.",
+        "conceptKind": "entity",
+        "ksgRef": null,
+        "text": "The present day."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:ground",
+        "kind": "concept",
+        "label": "the ground",
+        "aliases": [
+          "ground"
+        ],
+        "definition": "The surface of the earth at the place in question.",
+        "conceptKind": "entity",
+        "ksgRef": null,
+        "text": "The surface of the earth at the place in question."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:kitchen",
+        "kind": "concept",
+        "label": "the kitchen",
+        "aliases": [
+          "kitchen"
+        ],
+        "definition": "The kitchen in question.",
+        "conceptKind": "entity",
+        "ksgRef": null,
+        "text": "The kitchen in question."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "concept:first_national",
+        "kind": "concept",
+        "label": "First National",
+        "aliases": [
+          "First National Bank"
+        ],
+        "definition": "A particular financial institution.",
+        "conceptKind": "entity",
+        "ksgRef": null,
+        "text": "A particular financial institution."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C1",
+        "kind": "claim",
+        "text": "Every human is mortal.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "definition",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "human",
+            "conceptRef": "concept:human"
+          },
+          {
+            "symbol": "mortal",
+            "conceptRef": "concept:mortal"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:human"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:mortal"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: human(x) -> mortal(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C2",
+        "kind": "claim",
+        "text": "Socrates is a human.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Socrates",
+            "conceptRef": "concept:socrates"
+          },
+          {
+            "symbol": "human",
+            "conceptRef": "concept:human"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:human"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:socrates"
+            }
+          ]
+        },
+        "logicText": "human(socrates)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C3",
+        "kind": "claim",
+        "text": "Socrates is mortal.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Socrates",
+            "conceptRef": "concept:socrates"
+          },
+          {
+            "symbol": "mortal",
+            "conceptRef": "concept:mortal"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:mortal"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:socrates"
+            }
+          ]
+        },
+        "logicText": "mortal(socrates)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C4",
+        "kind": "claim",
+        "text": "Every Greek is a human.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "definition",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Greek",
+            "conceptRef": "concept:greek"
+          },
+          {
+            "symbol": "human",
+            "conceptRef": "concept:human"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:greek"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:human"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: greek(x) -> human(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C5",
+        "kind": "claim",
+        "text": "Every Greek is mortal.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Greek",
+            "conceptRef": "concept:greek"
+          },
+          {
+            "symbol": "mortal",
+            "conceptRef": "concept:mortal"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:greek"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:mortal"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: greek(x) -> mortal(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:C6",
+        "kind": "claim",
+        "text": "Socrates is a Greek.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Socrates",
+            "conceptRef": "concept:socrates"
+          },
+          {
+            "symbol": "Greek",
+            "conceptRef": "concept:greek"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:greek"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:socrates"
+            }
+          ]
+        },
+        "logicText": "greek(socrates)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:R1",
+        "kind": "claim",
+        "text": "If it is raining today, the ground is wet.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "raining",
+            "conceptRef": "concept:raining"
+          },
+          {
+            "symbol": "today",
+            "conceptRef": "concept:today"
+          },
+          {
+            "symbol": "wet",
+            "conceptRef": "concept:wet"
+          },
+          {
+            "symbol": "the ground",
+            "conceptRef": "concept:ground"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Implies",
+          "if": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:raining"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:today"
+              }
+            ]
+          },
+          "then": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:wet"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:ground"
+              }
+            ]
+          }
+        },
+        "logicText": "raining(today) -> wet(ground)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:R2",
+        "kind": "claim",
+        "text": "It is raining today.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "raining",
+            "conceptRef": "concept:raining"
+          },
+          {
+            "symbol": "today",
+            "conceptRef": "concept:today"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:raining"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:today"
+            }
+          ]
+        },
+        "logicText": "raining(today)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:R3",
+        "kind": "claim",
+        "text": "The ground is wet.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "wet",
+            "conceptRef": "concept:wet"
+          },
+          {
+            "symbol": "the ground",
+            "conceptRef": "concept:ground"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:wet"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:ground"
+            }
+          ]
+        },
+        "logicText": "wet(ground)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:S1",
+        "kind": "claim",
+        "text": "If Socrates is a philosopher, then Socrates is wise.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "assumption",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "philosopher",
+            "conceptRef": "concept:philosopher"
+          },
+          {
+            "symbol": "Socrates",
+            "conceptRef": "concept:socrates"
+          },
+          {
+            "symbol": "wise",
+            "conceptRef": "concept:wise"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Implies",
+          "if": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:philosopher"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:socrates"
+              }
+            ]
+          },
+          "then": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:wise"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:socrates"
+              }
+            ]
+          }
+        },
+        "logicText": "philosopher(socrates) -> wise(socrates)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:S2",
+        "kind": "claim",
+        "text": "Socrates is wise.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Socrates",
+            "conceptRef": "concept:socrates"
+          },
+          {
+            "symbol": "wise",
+            "conceptRef": "concept:wise"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:wise"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:socrates"
+            }
+          ]
+        },
+        "logicText": "wise(socrates)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:S3",
+        "kind": "claim",
+        "text": "Socrates is a philosopher.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Socrates",
+            "conceptRef": "concept:socrates"
+          },
+          {
+            "symbol": "philosopher",
+            "conceptRef": "concept:philosopher"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:philosopher"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:socrates"
+            }
+          ]
+        },
+        "logicText": "philosopher(socrates)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:F1",
+        "kind": "claim",
+        "text": "If there is a fire in the kitchen, there is smoke in the kitchen.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "assumption",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "fire",
+            "conceptRef": "concept:fire"
+          },
+          {
+            "symbol": "smoke",
+            "conceptRef": "concept:smoke"
+          },
+          {
+            "symbol": "the kitchen",
+            "conceptRef": "concept:kitchen"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Implies",
+          "if": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:fire"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:kitchen"
+              }
+            ]
+          },
+          "then": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:smoke"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:kitchen"
+              }
+            ]
+          }
+        },
+        "logicText": "fire(kitchen) -> smoke(kitchen)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:F2",
+        "kind": "claim",
+        "text": "There is no fire in the kitchen.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "fire",
+            "conceptRef": "concept:fire"
+          },
+          {
+            "symbol": "the kitchen",
+            "conceptRef": "concept:kitchen"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Not",
+          "of": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:fire"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:kitchen"
+              }
+            ]
+          }
+        },
+        "logicText": "~fire(kitchen)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:F3",
+        "kind": "claim",
+        "text": "There is no smoke in the kitchen.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "smoke",
+            "conceptRef": "concept:smoke"
+          },
+          {
+            "symbol": "the kitchen",
+            "conceptRef": "concept:kitchen"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Not",
+          "of": {
+            "kind": "Predicate",
+            "predicate": {
+              "kind": "ConceptRef",
+              "uuid": "concept:smoke"
+            },
+            "args": [
+              {
+                "kind": "EntityRef",
+                "uuid": "concept:kitchen"
+              }
+            ]
+          }
+        },
+        "logicText": "~smoke(kitchen)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:P1",
+        "kind": "claim",
+        "text": "Every philosopher is a human.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "definition",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "philosopher",
+            "conceptRef": "concept:philosopher"
+          },
+          {
+            "symbol": "human",
+            "conceptRef": "concept:human"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:philosopher"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:human"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: philosopher(x) -> human(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:U1",
+        "kind": "claim",
+        "text": "Every Greek is a philosopher.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "Greek",
+            "conceptRef": "concept:greek"
+          },
+          {
+            "symbol": "philosopher",
+            "conceptRef": "concept:philosopher"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:greek"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:philosopher"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: greek(x) -> philosopher(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:E1",
+        "kind": "claim",
+        "text": "Every bank has a slope.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "definition",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "bank",
+            "conceptRef": "concept:bank_river"
+          },
+          {
+            "symbol": "sloped",
+            "conceptRef": "concept:sloped"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "ForAll",
+          "variable": {
+            "kind": "Variable",
+            "name": "x"
+          },
+          "body": {
+            "kind": "Implies",
+            "if": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:bank_river"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            },
+            "then": {
+              "kind": "Predicate",
+              "predicate": {
+                "kind": "ConceptRef",
+                "uuid": "concept:sloped"
+              },
+              "args": [
+                {
+                  "kind": "Variable",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        },
+        "logicText": "forall x: bank_river(x) -> sloped(x)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:E2",
+        "kind": "claim",
+        "text": "First National is a bank.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "bank",
+            "conceptRef": "concept:bank_finance"
+          },
+          {
+            "symbol": "First National",
+            "conceptRef": "concept:first_national"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:bank_finance"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:first_national"
+            }
+          ]
+        },
+        "logicText": "bank_finance(first_national)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:E3",
+        "kind": "claim",
+        "text": "First National has a slope.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "derived",
+        "positionRef": "position:author",
+        "terms": [
+          {
+            "symbol": "First National",
+            "conceptRef": "concept:first_national"
+          },
+          {
+            "symbol": "sloped",
+            "conceptRef": "concept:sloped"
+          }
+        ],
+        "logicIr": {
+          "logicIrVersion": "0.0.1",
+          "kind": "Predicate",
+          "predicate": {
+            "kind": "ConceptRef",
+            "uuid": "concept:sloped"
+          },
+          "args": [
+            {
+              "kind": "EntityRef",
+              "uuid": "concept:first_national"
+            }
+          ]
+        },
+        "logicText": "sloped(first_national)"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:H1",
+        "kind": "claim",
+        "text": "Every swan observed in Europe has been white.",
+        "claimKind": "empirical",
+        "modality": "certain",
+        "basis": "evidence",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "claim:H2",
+        "kind": "claim",
+        "text": "All swans are white.",
+        "claimKind": "empirical",
+        "modality": "probable",
+        "basis": "derived",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A1",
+        "kind": "argument",
+        "title": "Barbara: Socrates is mortal",
+        "premiseRefs": [
+          "claim:C1",
+          "claim:C2"
+        ],
+        "conclusionRef": "claim:C3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Universal instantiation of C1 at Socrates, then modus ponens with C2.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A2",
+        "kind": "argument",
+        "title": "Modus ponens: the ground is wet",
+        "premiseRefs": [
+          "claim:R1",
+          "claim:R2"
+        ],
+        "conclusionRef": "claim:R3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "The conditional R1 and its antecedent R2 yield the consequent.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A3",
+        "kind": "argument",
+        "title": "Hypothetical syllogism: every Greek is mortal",
+        "premiseRefs": [
+          "claim:C4",
+          "claim:C1"
+        ],
+        "conclusionRef": "claim:C5",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Chaining two universal conditionals through the shared middle term 'human'.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A4",
+        "kind": "argument",
+        "title": "Two-step chain: Socrates is mortal via being Greek",
+        "premiseRefs": [
+          "claim:C4",
+          "claim:C1",
+          "claim:C6"
+        ],
+        "conclusionRef": "claim:C3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Greek(socrates) gives human(socrates) by C4, which gives mortal(socrates) by C1 — two rule applications, not one.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A5",
+        "kind": "argument",
+        "title": "Affirming the consequent",
+        "premiseRefs": [
+          "claim:S1",
+          "claim:S2"
+        ],
+        "conclusionRef": "claim:S3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Runs the conditional backwards: from the consequent to the antecedent.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A6",
+        "kind": "argument",
+        "title": "Denying the antecedent",
+        "premiseRefs": [
+          "claim:F1",
+          "claim:F2"
+        ],
+        "conclusionRef": "claim:F3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Infers the negation of the consequent from the negation of the antecedent.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A7",
+        "kind": "argument",
+        "title": "Undistributed middle",
+        "premiseRefs": [
+          "claim:P1",
+          "claim:C4"
+        ],
+        "conclusionRef": "claim:U1",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Both premises predicate 'human' of their subjects; the middle term is never taken universally, so Greeks and philosophers are never connected.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A8",
+        "kind": "argument",
+        "title": "Equivocation on 'bank'",
+        "premiseRefs": [
+          "claim:E1",
+          "claim:E2"
+        ],
+        "conclusionRef": "claim:E3",
+        "scheme": "deductive",
+        "strict": true,
+        "warrant": "Looks like Barbara, but 'bank' names a riverbank in E1 and a financial institution in E2.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "argument:A9",
+        "kind": "argument",
+        "title": "Hasty generalisation: all swans are white",
+        "premiseRefs": [
+          "claim:H1"
+        ],
+        "conclusionRef": "claim:H2",
+        "scheme": "inductive",
+        "strict": false,
+        "warrant": "Every observed swan was white, so all swans are white.",
+        "positionRef": "position:author"
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "annotation:fallacy-01",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A5",
+        "name": "affirming_the_consequent",
+        "where": "inference",
+        "severity": "fatal",
+        "text": "S1 licenses wise from philosopher, not philosopher from wise: Socrates could be wise for other reasons."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "annotation:fallacy-02",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A6",
+        "name": "denying_the_antecedent",
+        "where": "inference",
+        "severity": "fatal",
+        "text": "F1 says fire suffices for smoke, not that it is necessary: smoke could come from burnt toast."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "annotation:fallacy-03",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A7",
+        "name": "undistributed_middle",
+        "where": "inference",
+        "severity": "fatal",
+        "text": "'Human' is the predicate of both premises and distributed in neither, so nothing links Greeks to philosophers."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "annotation:fallacy-04",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A8",
+        "name": "equivocation",
+        "where": "inference",
+        "severity": "fatal",
+        "text": "The word 'bank' shifts sense between the premises; once each sense is written as its own predicate, the conclusion no longer follows."
+      }
+    },
+    {
+      "op": "addUnit",
+      "unit": {
+        "status": "accepted",
+        "provenance": {
+          "sourceType": "fixture",
+          "sourceRef": "case:reasoning-primer",
+          "method": "manual_authoring",
+          "actorRef": "actor:demo-user"
+        },
+        "id": "annotation:fallacy-05",
+        "kind": "annotation",
+        "annotationType": "fallacy",
+        "targetRef": "argument:A9",
+        "name": "hasty_generalization",
+        "where": "inference",
+        "severity": "weakens",
+        "text": "European observations do not cover the population the conclusion ranges over; black swans live in Australia."
+      }
+    }
+  ]
+}

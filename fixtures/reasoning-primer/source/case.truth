@@ -1,0 +1,133 @@
+# Reasoning primer — the same case in the composer grammar. Load it in the Compose tab.
+issue: Which of these arguments actually deduce their conclusions — and which only look like they do?
+thesis: C3
+party author: Author
+
+predicate human (human): A member of the species Homo sapiens.
+  aliases: humans, man, men
+predicate mortal (mortal): Subject to death.
+  aliases: mortals
+predicate greek (Greek): A person from Greece.
+  aliases: Greeks
+predicate philosopher (philosopher): One who pursues wisdom by reasoned inquiry.
+  aliases: philosophers
+predicate wise (wise): Having sound judgement grounded in knowledge.
+predicate raining (raining): Water is falling from clouds at the place and time in question.
+  aliases: rain, it is raining
+predicate wet (wet): Covered or saturated with water.
+predicate fire (fire): Combustion producing flame and heat at the place in question.
+predicate smoke (smoke): Visible suspended particles produced by combustion.
+predicate bank_river (riverbank): The sloping land alongside a river.
+  aliases: bank, river bank
+predicate bank_finance (financial bank): An institution that holds deposits and lends money.
+  aliases: bank
+predicate sloped (sloped): Inclined; not level.
+  aliases: has a slope, sloping
+entity socrates (Socrates): The Athenian philosopher (c. 470–399 BC).
+entity today (today): The present day.
+entity ground (the ground): The surface of the earth at the place in question.
+  aliases: ground
+entity kitchen (the kitchen): The kitchen in question.
+  aliases: kitchen
+entity first_national (First National): A particular financial institution.
+  aliases: First National Bank
+
+# --- valid forms ---
+C1 [certain, definition]: Every human is mortal.
+  logic: forall x: human(x) -> mortal(x)
+  terms: human, mortal
+C2 [certain, evidence]: Socrates is a human.
+  logic: human(socrates)
+  terms: Socrates, human
+C3 [certain, derived]: Socrates is mortal.
+  logic: mortal(socrates)
+  terms: Socrates, mortal
+C4 [certain, definition]: Every Greek is a human.
+  logic: forall x: greek(x) -> human(x)
+  terms: Greek, human
+C5 [certain, derived]: Every Greek is mortal.
+  logic: forall x: greek(x) -> mortal(x)
+  terms: Greek, mortal
+C6 [certain, evidence]: Socrates is a Greek.
+  logic: greek(socrates)
+  terms: Socrates, Greek
+R1 [probable, evidence]: If it is raining today, the ground is wet.
+  logic: raining(today) -> wet(ground)
+  terms: raining, today, wet, the ground
+R2 [certain, evidence]: It is raining today.
+  logic: raining(today)
+  terms: raining, today
+R3 [certain, derived]: The ground is wet.
+  logic: wet(ground)
+  terms: wet, the ground
+
+# --- fallacies that imitate them ---
+S1 [probable, assumption]: If Socrates is a philosopher, then Socrates is wise.
+  logic: philosopher(socrates) -> wise(socrates)
+  terms: philosopher, Socrates, wise
+S2 [certain, evidence]: Socrates is wise.
+  logic: wise(socrates)
+  terms: Socrates, wise
+S3 [certain, derived]: Socrates is a philosopher.
+  logic: philosopher(socrates)
+  terms: Socrates, philosopher
+F1 [probable, assumption]: If there is a fire in the kitchen, there is smoke in the kitchen.
+  logic: fire(kitchen) -> smoke(kitchen)
+  terms: fire, smoke, the kitchen
+F2 [certain, evidence]: There is no fire in the kitchen.
+  logic: ~fire(kitchen)
+  terms: fire, the kitchen
+F3 [certain, derived]: There is no smoke in the kitchen.
+  logic: ~smoke(kitchen)
+  terms: smoke, the kitchen
+P1 [certain, definition]: Every philosopher is a human.
+  logic: forall x: philosopher(x) -> human(x)
+  terms: philosopher, human
+U1 [certain, derived]: Every Greek is a philosopher.
+  logic: forall x: greek(x) -> philosopher(x)
+  terms: Greek, philosopher
+E1 [certain, definition]: Every bank has a slope.
+  logic: forall x: bank_river(x) -> sloped(x)
+  terms: bank=bank_river, sloped
+E2 [certain, evidence]: First National is a bank.
+  logic: bank_finance(first_national)
+  terms: bank=bank_finance, First National
+E3 [certain, derived]: First National has a slope.
+  logic: sloped(first_national)
+  terms: First National, sloped
+H1 [certain, evidence]: Every swan observed in Europe has been white.
+H2 [probable, derived]: All swans are white.
+
+A1 [deductive]: C1, C2 => C3
+  title: Barbara: Socrates is mortal
+  warrant: Universal instantiation of C1 at Socrates, then modus ponens with C2.
+A2 [deductive]: R1, R2 => R3
+  title: Modus ponens: the ground is wet
+  warrant: The conditional R1 and its antecedent R2 yield the consequent.
+A3 [deductive]: C4, C1 => C5
+  title: Hypothetical syllogism: every Greek is mortal
+  warrant: Chaining two universal conditionals through the shared middle term 'human'.
+A4 [deductive]: C4, C1, C6 => C3
+  title: Two-step chain: Socrates is mortal via being Greek
+  warrant: Greek(socrates) gives human(socrates) by C4, which gives mortal(socrates) by C1 — two rule applications, not one.
+A5 [deductive]: S1, S2 => S3
+  title: Affirming the consequent
+  warrant: Runs the conditional backwards: from the consequent to the antecedent.
+A6 [deductive]: F1, F2 => F3
+  title: Denying the antecedent
+  warrant: Infers the negation of the consequent from the negation of the antecedent.
+A7 [deductive]: P1, C4 => U1
+  title: Undistributed middle
+  warrant: Both premises predicate 'human' of their subjects; the middle term is never taken universally, so Greeks and philosophers are never connected.
+A8 [deductive]: E1, E2 => E3
+  title: Equivocation on 'bank'
+  warrant: Looks like Barbara, but 'bank' names a riverbank in E1 and a financial institution in E2.
+A9 [inductive]: H1 => H2
+  title: Hasty generalisation: all swans are white
+  warrant: Every observed swan was white, so all swans are white.
+
+fallacy A5 affirming_the_consequent [inference, fatal]: S1 licenses wise from philosopher, not philosopher from wise: Socrates could be wise for other reasons.
+fallacy A6 denying_the_antecedent [inference, fatal]: F1 says fire suffices for smoke, not that it is necessary: smoke could come from burnt toast.
+fallacy A7 undistributed_middle [inference, fatal]: 'Human' is the predicate of both premises and distributed in neither, so nothing links Greeks to philosophers.
+fallacy A8 equivocation [inference, fatal]: The word 'bank' shifts sense between the premises; once each sense is written as its own predicate, the conclusion no longer follows.
+fallacy A9 hasty_generalization [inference, weakens]: European observations do not cover the population the conclusion ranges over; black swans live in Australia.

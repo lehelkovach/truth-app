@@ -28,6 +28,7 @@ npm run serve                              # bundles + static UI + POST /api/com
 node src/cli.mjs compose fixtures/hermione/source/case.truth --show   # the composer from the terminal
 node src/cli.mjs translate fixtures/translator/socrates.prose.txt --script fixtures/translator/socrates.proposal.json
                                            # AI translator (offline scripted provider); add --live for Anthropic
+node src/cli.mjs reasoning fixtures/reasoning-primer   # Reasoning Explorer: verdict, inference rule, Prolog, proof per argument
 npm run vectors                            # regenerate Logic IR parity vectors from ../knowshowgo
 ```
 

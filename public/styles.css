@@ -40,3 +40,15 @@ a{color:var(--accent);cursor:pointer}.legend{display:flex;gap:10px;flex-wrap:wra
 #propose-text{width:100%;min-height:90px;border:1px solid var(--line);border-radius:6px;padding:8px;font:13px/1.5 system-ui,sans-serif;background:var(--card);color:var(--fg);resize:vertical}
 #propose-run{font:12px system-ui,sans-serif;padding:5px 12px;border:1px solid var(--line);border-radius:6px;background:var(--accent);color:#fff;cursor:pointer}
 @media (max-width:1000px){.compose-grid{grid-template-columns:1fr}}
+/* Reasoning Explorer */
+.valid{background:var(--green)}.invalid{background:var(--red)}.not_deducible{background:var(--yellow)}
+.badge.tiny{font-size:9px;padding:3px 6px;margin-left:4px}
+.rcard .headline{margin:6px 0 8px;color:var(--fg)}
+.rgrid{display:grid;grid-template-columns:auto 1fr auto auto;gap:4px 10px;align-items:baseline;font-size:12px;margin:6px 0}
+.rrow{display:contents}.rgrid .rid{color:var(--muted);white-space:nowrap}.rgrid .rtext{min-width:0}.rgrid code{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal;word-break:break-word}
+.engines{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0;padding:8px;background:var(--soft);border-radius:6px}.engines h4{margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.proof{margin:6px 0 0;padding-left:18px;font-size:12px}.proof li{margin:2px 0}
+.missing{color:var(--red)}.fallacy{margin:4px 0;padding-left:8px;border-left:3px solid var(--yellow)}.fallacy .muted{margin-top:2px}
+.terms div{margin:2px 0}
+.rtable{width:100%;border-collapse:collapse;font-size:12px}.rtable th,.rtable td{text-align:left;vertical-align:top;padding:6px;border-bottom:1px solid var(--line)}.rtable tr[data-id]{cursor:pointer}.rtable tr[data-id]:hover{background:var(--soft)}
+@media (max-width:1000px){.engines{grid-template-columns:1fr}.rgrid{grid-template-columns:auto 1fr}}

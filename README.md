@@ -119,6 +119,8 @@ A static page with issue, history, graph, arguments, diagnostics, logic,
 concepts and compare panels, and an inspector for any node. It renders a
 precomputed bundle and computes nothing itself.
 
+The **Reasoning** tab is the explorer: for every argument, a verdict (valid / invalid / not deducible) from two engines shown side by side — KnowShowGo's rule-based inference core (which rule fired) and the native forward-chaining prover (proof trace or missing condition) — with each claim's Logic IR and Prolog projection, the conclusion as a goal, fallacy annotations, equivocation findings, and the defined terms the argument rests on. See `docs/REASONING.md`.
+
 The **Compose** tab is the editor: write a case in the readable subset
 (`docs/COMPOSER.md`) and it is validated and evaluated as you type, with
 wavy underlines you hover for the reason and click for the full explanation,

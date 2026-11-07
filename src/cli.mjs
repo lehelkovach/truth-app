@@ -17,6 +17,7 @@
  *   truth compose   <file.truth> [--json] [--out patch.json] [--all] [--show]
  *   truth translate <prose.txt> --script <proposal.json> [--json] [--out patch.json]   # offline provider
  *                   <prose.txt> --live [--model M]        # Anthropic provider (needs ANTHROPIC_API_KEY)
+ *   truth reasoning <fixture-dir> [--ref R] [--all] [--json]   # Reasoning Explorer: verdict, rule, Prolog, proof per argument
  *   truth bundle    <fixture-dir> --out public/data/<name>.json
  *   truth demo      <fixture-dir>
  */
@@ -31,6 +32,7 @@ import { claimExpression } from './logic/kb.mjs';
 import { buildBundle } from './services/bundle.mjs';
 import { compose } from './services/compose.mjs';
 import { translate, createScriptedProvider, createAnthropicProvider } from './services/translator.mjs';
+import { reasoningReport, formatReasoning } from './services/reasoning.mjs';
 import { assertValidPatch, snapshotProblems } from './domain/validate.mjs';
 import { applyPatch, emptySnapshot } from './domain/truth-patch.mjs';
 import { createFakeKsgClient, createKsgAdapter, createKsgClientFromEnv } from './adapters/ksg.mjs';
@@ -227,6 +229,22 @@ const commands = {
     if (flags.out && proposal.patch && proposal.committable) { writeFileSync(flags.out, JSON.stringify(proposal.patch, null, 2) + '\n'); console.log(`\nwrote proposed patch to ${flags.out} (a proposal — not committed; commit it yourself after review)`); }
     console.log('\nThis is a proposal. Nothing has been committed. Accept it via the review API (createReview → accept) or the Compose tab.');
     return proposal.committable ? 0 : 1;
+  },
+
+  async reasoning({ positional, flags }) {
+    const [dir] = positional;
+    if (!dir) throw new Error('reasoning needs a fixture dir');
+    const { store, project } = await withFixture(dir);
+    const ref = flags.ref ?? 'main';
+    const commitId = store.resolveRef(ref);
+    const snapshot = store.getSnapshot(commitId);
+    const evaluation = store.evaluate(commitId);
+    const rep = reasoningReport(snapshot, evaluation.result);
+    if (flags.json) { console.log(JSON.stringify(rep, null, 2)); return 0; }
+    console.log(`Reasoning explorer · ${project.title}`);
+    console.log(`  ${ref} (${commitId}) · ${evaluation.evaluator}@${evaluation.evaluatorVersion} · KSG inference mirror ${rep.arguments[0]?.inference.revision ?? ''}`);
+    console.log(formatReasoning(rep, { all: !!flags.all }).split('\n').map((l) => '  ' + l).join('\n'));
+    return 0;
   },
 
   async bundle({ positional, flags }) {

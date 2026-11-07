@@ -63,3 +63,13 @@ test('translate refuses a compromised provider whose output is not composer gram
     return true;
   });
 });
+
+test("reasoning prints per-argument verdicts with the rule, proof and fallacy", () => {
+  const out = run("reasoning", fixture("reasoning-primer"), "--all");
+  assert.match(out, /Reasoning explorer/);
+  assert.match(out, /A1\s+VALID[\s\S]*universal modus ponens/);
+  assert.match(out, /A5\s+INVALID[\s\S]*fallacy: affirming_the_consequent/);
+  assert.match(out, /A9\s+NOT DEDUCIBLE/);
+  assert.match(out, /mortal\(X\) :- human\(X\)\./);
+  assert.match(out, /W001/);
+});

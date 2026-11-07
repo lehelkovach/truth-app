@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "lint": "node --check src/app.mjs && node --check src/cli.mjs && node --check src/services/translator.mjs && node --check public/app.mjs && node --check scripts/serve.mjs && node --check scripts/ksg-contract-server.mjs && node --check scripts/ksg-live-smoke.mjs",
+    "lint": "node --check src/app.mjs && node --check src/cli.mjs && node --check src/services/translator.mjs && node --check src/services/reasoning.mjs && node --check public/app.mjs && node --check scripts/serve.mjs && node --check scripts/ksg-contract-server.mjs && node --check scripts/ksg-live-smoke.mjs",
     "check": "npm run lint && npm test",
     "ksg:smoke": "node scripts/ksg-live-smoke.mjs",
     "ksg:server": "node scripts/ksg-contract-server.mjs",
