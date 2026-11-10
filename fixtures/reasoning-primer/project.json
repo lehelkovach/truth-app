@@ -1,0 +1,8 @@
+{
+  "id": "repo:reasoning-primer",
+  "title": "Reasoning primer: syllogisms and the fallacies that imitate them",
+  "question": "Which of these arguments actually deduce their conclusions — and which only look like they do?",
+  "description": "A teaching case for the Reasoning Explorer. Classic valid forms (Barbara, modus ponens, hypothetical syllogism, a two-step chain) sit beside the formal fallacies that imitate them (affirming the consequent, denying the antecedent, undistributed middle, equivocation) and one inductive leap. Every term is a defined concept, so both engines — KnowShowGo's rule-based inference core and the native forward-chaining prover — can show their work.",
+  "authorRef": "actor:demo-user",
+  "createdAt": "2026-11-07T00:00:00Z"
+}

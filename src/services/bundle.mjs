@@ -9,6 +9,7 @@ import { formatDiff, formatEvaluationDiff } from '../domain/semantic-diff.mjs';
 import { toProlog } from '../logic/text.mjs';
 import { render } from '../logic/ir.mjs';
 import { claimExpression } from '../logic/kb.mjs';
+import { reasoningReport } from './reasoning.mjs';
 
 export function buildBundle({ store, project }) {
   const branches = store.listBranches();
@@ -30,7 +31,7 @@ export function buildBundle({ store, project }) {
       }
       const prev = chain[i - 1] ?? null;
       const cmp = prev ? store.compare(prev.id, c.id) : null;
-      commits.push({ ...c, branch: b.name, index: i + 1, snapshot: { units: snapshot.units, relations: snapshot.relations, revisions: snapshot.revisions }, evaluation, logicText, diff: cmp ? { ...cmp.diff, text: formatDiff(cmp.diff), evaluation: cmp.evaluation, evaluationText: formatEvaluationDiff(cmp.evaluation) } : null });
+      commits.push({ ...c, branch: b.name, index: i + 1, snapshot: { units: snapshot.units, relations: snapshot.relations, revisions: snapshot.revisions }, evaluation, logicText, reasoning: reasoningReport(snapshot, evaluation.result), diff: cmp ? { ...cmp.diff, text: formatDiff(cmp.diff), evaluation: cmp.evaluation, evaluationText: formatEvaluationDiff(cmp.evaluation) } : null });
     });
   }
   const compares = branches.filter((b) => b.name !== 'main').map((b) => { const cmp = store.compare('main', b.name); return { from: 'main', to: b.name, fromCommit: cmp.from, toCommit: cmp.to, diff: { ...cmp.diff, text: formatDiff(cmp.diff) }, evaluation: cmp.evaluation, evaluationText: formatEvaluationDiff(cmp.evaluation) }; });

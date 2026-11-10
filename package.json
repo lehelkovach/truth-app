@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "lint": "node --check src/app.mjs && node --check src/cli.mjs && node --check public/app.mjs && node --check scripts/ksg-contract-server.mjs && node --check scripts/ksg-live-smoke.mjs",
+    "lint": "node --check src/app.mjs && node --check src/cli.mjs && node --check src/services/translator.mjs && node --check src/services/reasoning.mjs && node --check public/app.mjs && node --check scripts/serve.mjs && node --check scripts/translate-live.mjs && node --check scripts/ksg-contract-server.mjs && node --check scripts/ksg-live-smoke.mjs",
     "check": "npm run lint && npm test",
     "ksg:smoke": "node scripts/ksg-live-smoke.mjs",
     "ksg:server": "node scripts/ksg-contract-server.mjs",
@@ -23,7 +23,8 @@
     "demo": "node src/cli.mjs demo fixtures/ai-risk",
     "bundles": "node scripts/build-bundles.mjs",
     "serve": "node scripts/build-bundles.mjs && node scripts/serve.mjs",
-    "vectors": "node scripts/gen-logic-ir-vectors.mjs ../knowshowgo && node scripts/gen-infer-vectors.mjs ../knowshowgo"
+    "vectors": "node scripts/gen-logic-ir-vectors.mjs ../knowshowgo && node scripts/gen-infer-vectors.mjs ../knowshowgo",
+    "translate:live": "node scripts/translate-live.mjs"
   },
   "keywords": [
     "argumentation",
@@ -45,5 +46,8 @@
     "@lehelkovach/knowshowgo-client": "github:lehelkovach/knowshowgo-client#v0.2.20-client",
     "ajv": "^8.17.1",
     "cytoscape": "^3.30.2"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^1.7.0"
   }
 }

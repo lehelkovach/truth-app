@@ -184,14 +184,14 @@ function lineFor(spans, target, message = '') {
  * Full pipeline for the editor. Never throws for user mistakes: every problem
  * becomes a red diagnostic with a line.
  */
-export function compose(text, { evaluate = true } = {}) {
+export function compose(text, { evaluate = true, provenance = null } = {}) {
   const { case: c, spans, errors } = parseComposer(text);
   const out = { ok: false, stage: 'parse', diagnostics: [], spans, summary: null, evaluation: null, patch: null };
   const push = (state, code, message, target = null, extra = {}) => out.diagnostics.push({ state, code, message, target, evaluator: extra.evaluator ?? 'composer.parse@0.1.0', explanation: extra.explanation ?? { detected: message, why: extra.why ?? '', checked: [], options: extra.options ?? [] }, ...(extra.line ? { line: extra.line } : {}), scope: extra.scope ?? {} });
   for (const e of errors) push('red', 'PARSE', e.message, null, { line: { line: e.line, start: 0, end: 0 }, why: 'The composer could not read this line. See docs/COMPOSER.md for the grammar.', options: ['Fix the line'] });
   let patch;
   try {
-    patch = compileCase(c, { provenance: { sourceType: 'user', sourceRef: 'composer', method: 'manual_authoring' }, message: 'Composed' });
+    patch = compileCase(c, { provenance: provenance ?? { sourceType: 'user', sourceRef: 'composer', method: 'manual_authoring' }, message: 'Composed' });
     assertValidPatch(patch);
   } catch (e) {
     const problems = e instanceof ValidationError ? e.problems : [e.message];

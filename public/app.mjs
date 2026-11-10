@@ -44,7 +44,7 @@ function fillCommits() {
 function selectCommit(id) {
   state.commit = state.bundle.commits.find((c) => c.id === id);
   state.selected = null;
-  renderIssue(); renderHistory(); renderFilters(); renderGraph(); renderArguments(); renderDiagnostics(); renderLogic(); renderConcepts(); renderCompare(); renderInspector();
+  renderIssue(); renderHistory(); renderFilters(); renderGraph(); renderArguments(); renderReasoning(); renderDiagnostics(); renderLogic(); renderConcepts(); renderCompare(); renderInspector();
 }
 
 const units = () => state.commit.snapshot.units;
@@ -209,6 +209,43 @@ function renderInspector(diag = null) {
   for (const a of el.querySelectorAll('a[data-sel]')) a.onclick = () => select(a.dataset.sel);
 }
 
+
+/* ---------------- Reasoning Explorer: both engines, one honest verdict per argument ---------------- */
+const VERDICT_WORD = { valid: 'valid deduction', invalid: 'invalid', not_deducible: 'not deducible', contradicted: 'contradicted' };
+function proofHtml(steps) {
+  if (!steps?.length) return '';
+  return `<ol class="proof">${steps.map((s) => `<li><code>${esc(s.expression)}</code> <span class="small">${esc(s.rule.replace(/_/g, ' '))}${s.from?.length ? ' ← ' + esc(s.from.map((f) => f.replace(/^claim:/, '')).join(', ')) : ''}${s.substitution ? ' {' + esc(Object.entries(s.substitution).map(([k, v]) => `${k} = ${String(v).replace(/^concept:/, '')}`).join(', ')) + '}' : ''}</span></li>`).join('')}</ol>`;
+}
+function renderReasoning() {
+  const rep = state.commit.reasoning;
+  const el = $('#panel-reasoning');
+  if (!rep) { el.innerHTML = '<p class="small">This bundle predates the Reasoning Explorer. Run <code>npm run bundles</code>.</p>'; return; }
+  const s = rep.summary;
+  const groups = [['valid', 'Valid deductions — the conclusion follows necessarily'], ['invalid', 'Invalid — the premises do not license the conclusion'], ['contradicted', 'Contradicted — the premises entail the negation'], ['not_deducible', 'Not deducible — logic cannot settle it (inductive, informal, or ungrounded)']];
+  const head = `<p class="small"><span class="badge valid">${s.valid}</span>valid · <span class="badge invalid">${s.invalid}</span>invalid · <span class="badge not_deducible">${s.not_deducible}</span>not deducible${s.contradicted ? ` · <span class="badge contradicted">${s.contradicted}</span>contradicted` : ''} · ${s.formalClaims}/${s.claims} claims carry Logic IR, ${s.groundedClaims} fully grounded. Two engines are shown for every argument: KnowShowGo's rule-based inference core (one named rule) and the native forward-chaining prover (a proof trace). Validity is not truth — each premise's standing is a separate dimension.</p>`;
+  const card = (a) => {
+    const inf = a.inference;
+    const ent = a.entailment;
+    const row = (c, mark) => `<div class="rrow"><span class="rid"><a data-sel="${c.id}">${esc(mark ?? c.short)}</a></span><span class="rtext">${esc(c.text)}${c.standing ? ` <span class="badge ${esc(c.standing)} tiny">${esc(c.standing)}</span>` : ''}</span><code class="rir">${esc(c.ir ?? '— no Logic IR')}</code><code class="rpl">${esc(c.prolog ?? '')}</code></div>`;
+    return `<div class="card rcard" data-id="${a.id}"><div><span class="badge ${a.verdict}">${VERDICT_WORD[a.verdict]}</span><b>${esc(a.short)}.</b> ${esc(a.title ?? '')} <span class="small">· ${esc(a.scheme)}${a.standing.label ? ` · <span class="badge ${esc(a.standing.label)} tiny">${esc(LABEL_WORD[a.standing.label] ?? a.standing.label)}</span>` : ''}</span></div>
+<p class="small headline">${esc(a.headline)}</p>
+<div class="rgrid">${a.premises.map((p) => row(p)).join('')}${row(a.conclusion, '∴ ' + a.conclusion.short)}</div>
+${a.prolog.goal ? `<div class="small">goal <code>${esc(a.prolog.goal)}</code></div>` : ''}
+<div class="engines"><div><h4>KnowShowGo inference core</h4><span class="badge ${inf.decision === 'valid' ? 'green' : inf.decision === 'invalid' ? 'red' : 'yellow'}">${esc(inf.decision)}</span>${inf.rule ? `<span class="small">${esc(inf.rule.replace(/_/g, ' '))}${inf.from?.length ? ' from ' + esc(inf.from.join(', ')) : ''}</span>` : inf.diagnostics?.length ? `<span class="small">${esc(inf.diagnostics.map((d) => d.code + ' ' + d.message).join('; '))}</span>` : ''}</div>
+<div><h4>Native prover (forward chaining)</h4>${ent ? `<span class="badge ${ent.result}">${esc(ent.result.replace('_', ' '))}</span>${ent.proof?.length ? `<span class="small">${ent.proof.length} step${ent.proof.length === 1 ? '' : 's'}</span>` : ''}${proofHtml(ent.proof)}${ent.missingCondition?.hints?.length ? `<div class="small missing">missing condition: ${esc(ent.missingCondition.hints.join(' or '))}</div>` : ''}${ent.missing?.length ? `<div class="small">outside coverage: ${esc(ent.missing.map((m) => m.claim.replace(/^claim:/, '') + ' (' + m.reason + ')').join('; '))}</div>` : ''}` : '<span class="small">not evaluated</span>'}</div></div>
+${a.fallacies.length ? `<h4>Fallacies</h4>${a.fallacies.map((f) => `<div class="small fallacy"><b>${esc(f.name.replace(/_/g, ' '))}</b> <span class="badge ${f.severity === 'fatal' ? 'red' : f.severity === 'weakens' ? 'yellow' : 'grey'} tiny">${esc(f.severity)}</span> at ${esc(f.where)} — ${esc(f.explanation)}${f.catalogue ? `<div class="muted">${esc(f.catalogue.definition)} <i>Test:</i> ${esc(f.catalogue.test)}</div>` : ''}</div>`).join('')}` : ''}
+${a.groundingFindings.length ? a.groundingFindings.map((g) => `<div class="small fallacy"><b>${esc(g.code)} equivocation</b> — ${esc(g.message)}</div>`).join('') : ''}
+${a.notes.length ? a.notes.map((n) => `<div class="small muted">note: ${esc(n)}</div>`).join('') : ''}
+${(a.concepts.subjects.length || a.concepts.predicates.length) ? `<h4>Terms</h4><div class="small terms">${[...a.concepts.subjects.map((c) => ({ ...c, role: 'subject' })), ...a.concepts.predicates.map((c) => ({ ...c, role: c.kind }))].map((c) => `<div><a data-sel="${c.id}"><b>${esc(c.label)}</b></a> <span class="muted">${esc(c.role)}</span>${c.definition ? ` — ${esc(c.definition)}` : ' — <i>no definition yet</i>'} <span class="badge ${c.binding === 'knowshowgo' ? 'green' : 'grey'} tiny">${c.binding === 'knowshowgo' ? 'KSG ' + esc(c.ksgRef) : 'local'}</span></div>`).join('')}</div>` : ''}
+</div>`;
+  };
+  el.innerHTML = head + groups.map(([v, title]) => { const list = rep.arguments.filter((a) => a.verdict === v); return list.length ? `<h3>${esc(title)} <span class="muted">(${list.length})</span></h3>` + list.map(card).join('') : ''; }).join('')
+    + `<h3>Claims</h3><table class="rtable"><tr><th>Claim</th><th>Logic IR</th><th>Prolog</th><th>Grounding</th><th>Standing</th><th>KSG cast</th></tr>${rep.claims.map((c) => `<tr data-id="${c.id}"><td><b>${esc(c.short)}</b><br><span class="small">${esc(c.text)}</span></td><td>${c.ir ? `<code>${esc(c.ir)}</code>` : '<span class="small">—</span>'}</td><td>${c.prolog ? `<code>${esc(c.prolog)}</code>` : ''}</td><td><span class="badge ${c.grounding === 'resolved' ? 'green' : c.grounding === 'none' ? 'grey' : 'yellow'} tiny">${esc(c.grounding)}</span>${c.terms.filter((t) => t.status !== 'resolved').map((t) => `<div class="small">${esc(t.symbol)}: ${esc(t.status)}${t.candidates.length ? ' (' + esc(t.candidates.join(' | ')) + ')' : ''}</div>`).join('')}</td><td>${c.standing ? `<span class="badge ${esc(c.standing)} tiny">${esc(c.standing)}</span>` : ''}${c.concludedBy.length ? `<div class="small">from ${esc(c.concludedBy.join(', '))}</div>` : ''}</td><td><span class="small">${esc(c.ksgCast)}</span></td></tr>`).join('')}</table>`;
+  for (const a of el.querySelectorAll('a[data-sel]')) a.onclick = (e) => { e.stopPropagation(); select(a.dataset.sel); };
+  for (const c of el.querySelectorAll('.rcard')) c.onclick = () => select(c.dataset.id);
+  for (const tr of el.querySelectorAll('tr[data-id]')) tr.onclick = () => select(tr.dataset.id);
+}
+
 /* ---------------- Composer: text in, underlines out ---------------- */
 const GRAMMAR = `issue: <question>
 thesis: <claim id>
@@ -285,6 +322,34 @@ $('#compose-text').addEventListener('input', () => { clearTimeout(composeTimer);
 $('#compose-text').addEventListener('scroll', () => { $('#compose-gutter').scrollTop = $('#compose-text').scrollTop; });
 $('#compose-example').onclick = async () => { $('#compose-text').value = await (await fetch('api/compose/example')).text(); runCompose(); };
 $('#compose-help').onclick = () => { const g = $('#compose-grammar'); g.hidden = !g.hidden; g.textContent = GRAMMAR; };
+
+/* Propose from prose: AI drafts composer text for the human to review and edit. */
+$('#compose-propose').onclick = () => { const b = $('#propose-box'); b.hidden = !b.hidden; if (!b.hidden) $('#propose-text').focus(); };
+$('#propose-cancel').onclick = () => { $('#propose-box').hidden = true; };
+$('#propose-run').onclick = async () => {
+  const text = $('#propose-text').value.trim();
+  const status = $('#propose-status');
+  if (!text) { status.textContent = 'paste some prose first'; return; }
+  status.textContent = 'asking the translator…';
+  let data;
+  try {
+    data = await (await fetch('api/translate', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) })).json();
+  } catch { status.innerHTML = `<span class="badge red">no translate endpoint</span> run <code>npm run serve</code>`; return; }
+  if (data.available === false) { status.innerHTML = `<span class="badge yellow">no AI provider</span> ${esc(data.message || 'set ANTHROPIC_API_KEY to enable this')}`; return; }
+  if (data.error || !data.proposal) { status.innerHTML = `<span class="badge red">failed</span> ${esc(data.error || 'no proposal')}`; return; }
+  const p = data.proposal;
+  // The proposal is advisory: drop it into the editor so the human reviews/edits before anything is real.
+  $('#compose-text').value = p.composer;
+  $('#propose-box').hidden = true;
+  const warn = [];
+  if (p.assumptions?.length) warn.push(`${p.assumptions.length} AI assumption(s)`);
+  if (p.ambiguities?.length) warn.push(`${p.ambiguities.length} flagged ambiguity(ies)`);
+  if (p.unverifiedAlignment?.length) warn.push(`${p.unverifiedAlignment.length} unverified source link(s)`);
+  if (p.unresolvedTerms?.length) warn.push(`${p.unresolvedTerms.length} ungrounded term(s)`);
+  status.textContent = '';
+  runCompose();
+  $('#compose-status').innerHTML = `<span class="badge yellow">AI proposal — review it</span> ${warn.join(' · ') || 'nothing flagged, but still your call'}`;
+};
 
 for (const b of document.querySelectorAll('#tabs button')) b.onclick = () => { for (const x of document.querySelectorAll('#tabs button')) x.classList.toggle('active', x === b); for (const p of document.querySelectorAll('.panel')) p.classList.toggle('active', p.id === `panel-${b.dataset.tab}`); if (b.dataset.tab === 'graph' && cy) { cy.resize(); cy.fit(undefined, 24); if (state.selected && cy.getElementById(state.selected).length) cy.center(cy.getElementById(state.selected)); } };
 

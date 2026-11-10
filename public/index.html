@@ -27,6 +27,7 @@
     <nav id="tabs">
       <button data-tab="graph" class="active">Graph</button>
       <button data-tab="arguments">Arguments</button>
+      <button data-tab="reasoning">Reasoning</button>
       <button data-tab="diagnostics">Diagnostics</button>
       <button data-tab="logic">Logic</button>
       <button data-tab="concepts">Concepts</button>
@@ -35,12 +36,18 @@
     </nav>
     <div id="panel-graph" class="panel active"><div id="cy"></div></div>
     <div id="panel-arguments" class="panel"></div>
+    <div id="panel-reasoning" class="panel"></div>
     <div id="panel-diagnostics" class="panel"></div>
     <div id="panel-logic" class="panel"></div>
     <div id="panel-concepts" class="panel"></div>
     <div id="panel-compare" class="panel"></div>
     <div id="panel-compose" class="panel">
-      <div class="compose-bar"><span class="small">Write a case; it is validated and evaluated as you type. Red = demonstrable problem, yellow = review, green = verified. Hover or click a mark for the explanation. <a id="compose-example">Load example</a> · <a id="compose-help">Grammar</a></span><span id="compose-status" class="small"></span></div>
+      <div class="compose-bar"><span class="small">Write a case; it is validated and evaluated as you type. Red = demonstrable problem, yellow = review, green = verified. Hover or click a mark for the explanation. <a id="compose-example">Load example</a> · <a id="compose-help">Grammar</a> · <a id="compose-propose">Propose from prose</a></span><span id="compose-status" class="small"></span></div>
+      <div id="propose-box" hidden>
+        <div class="small">Paste prose (a treatise, an article, a claim). An AI proposes a draft in the composer grammar — <strong>a proposal you review and edit</strong>; nothing is committed. <a id="propose-cancel">cancel</a></div>
+        <textarea id="propose-text" spellcheck="false" placeholder="All men are mortal. Socrates is a man. Therefore, Socrates is mortal."></textarea>
+        <div><button id="propose-run">Propose draft</button> <span id="propose-status" class="small"></span></div>
+      </div>
       <div class="compose-grid">
         <div class="compose-editor"><div id="compose-gutter"></div><textarea id="compose-text" spellcheck="false" placeholder="issue: …&#10;C1 [certain]: Every mammal is warm-blooded.&#10;  logic: forall x: mammal(x) -> warm_blooded(x)"></textarea></div>
         <div id="compose-review"></div>

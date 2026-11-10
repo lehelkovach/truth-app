@@ -15,6 +15,9 @@
  *   truth logic     <fixture-dir> [claim id] [--ref R] [--datalog] [--json]
  *   truth concept   <fixture-dir> [concept id] [--ref R]
  *   truth compose   <file.truth> [--json] [--out patch.json] [--all] [--show]
+ *   truth translate <prose.txt> --script <proposal.json> [--json] [--out patch.json]   # offline provider
+ *                   <prose.txt> --live [--model M]        # Anthropic provider (needs ANTHROPIC_API_KEY)
+ *   truth reasoning <fixture-dir> [--ref R] [--all] [--json]   # Reasoning Explorer: verdict, rule, Prolog, proof per argument
  *   truth bundle    <fixture-dir> --out public/data/<name>.json
  *   truth demo      <fixture-dir>
  */
@@ -28,6 +31,8 @@ import { toProlog, toDatalog } from './logic/text.mjs';
 import { claimExpression } from './logic/kb.mjs';
 import { buildBundle } from './services/bundle.mjs';
 import { compose } from './services/compose.mjs';
+import { translate, createScriptedProvider, createAnthropicProvider } from './services/translator.mjs';
+import { reasoningReport, formatReasoning } from './services/reasoning.mjs';
 import { assertValidPatch, snapshotProblems } from './domain/validate.mjs';
 import { applyPatch, emptySnapshot } from './domain/truth-patch.mjs';
 import { createFakeKsgClient, createKsgAdapter, createKsgClientFromEnv } from './adapters/ksg.mjs';
@@ -194,6 +199,52 @@ const commands = {
       if (d.line && flags.show) console.log(`         > ${lines[d.line.line - 1]}`);
     }
     return result.ok ? 0 : 1;
+  },
+
+  async translate({ positional, flags }) {
+    const file = positional[0];
+    if (!file) throw new Error('translate needs a prose file (and --script for the offline provider, or --live for Anthropic)');
+    const text = readFileSync(file, 'utf8');
+    let provider;
+    if (flags.live || flags.provider === 'anthropic') {
+      provider = createAnthropicProvider({ model: flags.model ?? undefined });
+    } else {
+      if (!flags.script) throw new Error('offline translate needs --script <proposal.json> (the provider response); pass --live to call Anthropic instead');
+      const scriptObj = JSON.parse(readFileSync(flags.script, 'utf8'));
+      provider = createScriptedProvider(() => scriptObj, { name: 'scripted', model: flags.model ?? 'scripted' });
+    }
+    const proposal = await translate({ text, provider, sourceRef: flags.ref ?? file });
+    if (flags.json) { console.log(JSON.stringify(proposal, null, 2)); return proposal.committable ? 0 : 1; }
+    console.log(`proposal from ${proposal.provider}${proposal.model ? ' · ' + proposal.model : ''} — ${proposal.committable ? 'COMMITTABLE (awaiting human accept)' : 'NOT committable'} · stage ${proposal.stage}`);
+    console.log('\n--- proposed composer (review before accepting) ---');
+    process.stdout.write(proposal.composer.endsWith('\n') ? proposal.composer : proposal.composer + '\n');
+    console.log('---');
+    if (proposal.summary) console.log(`\nsummary: ${proposal.summary.units} units · ${proposal.summary.accepted} stand / ${proposal.summary.rejected} defeated · red ${proposal.summary.red} yellow ${proposal.summary.yellow} green ${proposal.summary.green}${proposal.summary.thesis ? ' · thesis ' + proposal.summary.thesis : ''}`);
+    if (proposal.blocking.length) { console.log('\nblocking (must fix or edit before accept):'); for (const d of proposal.blocking) console.log(`  RED  ${d.code.padEnd(16)} ${d.message}${d.line ? ` (line ${d.line.line})` : ''}`); }
+    if (proposal.alignment.length) { console.log('\nsource alignment (verified):'); for (const a of proposal.alignment) console.log(`  ${a.unit.padEnd(16)} “${a.quote}”`); }
+    if (proposal.unverifiedAlignment.length) { console.log('\nUNVERIFIED alignment (do not trust):'); for (const a of proposal.unverifiedAlignment) console.log(`  ${(a.unit || '?').padEnd(16)} “${a.quote}” — ${a.reasons.join('; ')}`); }
+    if (proposal.assumptions.length) { console.log('\nassumptions the AI supplied:'); for (const a of proposal.assumptions) console.log(`  - ${a}`); }
+    if (proposal.ambiguities.length) { console.log('\nambiguities the AI flagged:'); for (const a of proposal.ambiguities) console.log(`  - ${a}`); }
+    if (proposal.unresolvedTerms.length) { console.log('\nunresolved / ambiguous terms (ground these before relying on logic):'); for (const u of proposal.unresolvedTerms) console.log(`  ${u.claim}: '${u.symbol}' (${u.status})`); }
+    if (flags.out && proposal.patch && proposal.committable) { writeFileSync(flags.out, JSON.stringify(proposal.patch, null, 2) + '\n'); console.log(`\nwrote proposed patch to ${flags.out} (a proposal — not committed; commit it yourself after review)`); }
+    console.log('\nThis is a proposal. Nothing has been committed. Accept it via the review API (createReview → accept) or the Compose tab.');
+    return proposal.committable ? 0 : 1;
+  },
+
+  async reasoning({ positional, flags }) {
+    const [dir] = positional;
+    if (!dir) throw new Error('reasoning needs a fixture dir');
+    const { store, project } = await withFixture(dir);
+    const ref = flags.ref ?? 'main';
+    const commitId = store.resolveRef(ref);
+    const snapshot = store.getSnapshot(commitId);
+    const evaluation = store.evaluate(commitId);
+    const rep = reasoningReport(snapshot, evaluation.result);
+    if (flags.json) { console.log(JSON.stringify(rep, null, 2)); return 0; }
+    console.log(`Reasoning explorer · ${project.title}`);
+    console.log(`  ${ref} (${commitId}) · ${evaluation.evaluator}@${evaluation.evaluatorVersion} · KSG inference mirror ${rep.arguments[0]?.inference.revision ?? ''}`);
+    console.log(formatReasoning(rep, { all: !!flags.all }).split('\n').map((l) => '  ' + l).join('\n'));
+    return 0;
   },
 
   async bundle({ positional, flags }) {

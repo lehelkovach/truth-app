@@ -31,7 +31,11 @@ const entries = [
   ['straw_man', 'relevance', "Attacking a weaker version of the opponent's argument.", 'Would the opponent recognise the version being attacked as their own?'],
   ['burden_shift', 'presumption', 'Demanding the other side disprove a claim the proponent has not supported.', 'Who asserted, and who is being asked to prove?'],
   ['base_rate_neglect', 'probability', 'Ignoring the prior frequency of an outcome when weighing new evidence.', 'What is the base rate, and does the argument say why this case differs?'],
-  ['tu_quoque', 'relevance', "Dismissing a claim because the speaker does not act consistently with it.", "Does the speaker's behaviour bear on whether the claim is true?"]
+  ['tu_quoque', 'relevance', "Dismissing a claim because the speaker does not act consistently with it.", "Does the speaker's behaviour bear on whether the claim is true?"],
+  ['affirming_the_consequent', 'formal', "From 'if P then Q' and 'Q', concluding 'P'. A conditional does not run backwards: Q may hold for reasons other than P.", 'Could the consequent be true while the antecedent is false? If so the conclusion is not licensed.'],
+  ['denying_the_antecedent', 'formal', "From 'if P then Q' and 'not P', concluding 'not Q'. Failing the antecedent says nothing about the consequent.", 'Could the consequent hold even though the antecedent fails? Then nothing follows about it.'],
+  ['undistributed_middle', 'formal', "Two premises share a middle term that is never taken universally, so the extremes are never connected ('all A are B; all C are B; therefore all C are A').", 'Is the middle term distributed (said of its whole class) in at least one premise? If not, the syllogism is invalid.'],
+  ['non_sequitur', 'formal', 'The conclusion does not follow from the premises by any valid inference rule; the general formal gap.', 'Name the rule (modus ponens, universal instantiation, hypothetical syllogism, …) that licenses the step. If none does, the step is a non sequitur.', 'LOGIC_NOT_ENTAILED']
 ];
 
 export const FALLACIES = Object.freeze(Object.fromEntries(entries.map(([name, category, definition, test, code]) => [name, Object.freeze({ name, category, definition, test, code: code ?? null })])));
