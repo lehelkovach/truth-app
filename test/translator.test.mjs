@@ -145,3 +145,62 @@ test('INJECT-002 a COMPROMISED provider cannot bypass the schema or the commit g
   await assert.rejects(() => review.accept({ message: 'should never happen' }), ReviewError);
   assert.equal(store.listHistory().length, 0);
 });
+
+// ---- Anthropic provider, exercised offline with an injected client ---------
+// The fake returns responses shaped like @anthropic-ai/sdk 1.x Messages.
+
+import { createAnthropicProvider } from '../src/services/translator.mjs';
+
+const SOCRATES_COMPOSER = proposalFile('socrates.proposal.json').composer;
+function fakeClient(response) {
+  const calls = [];
+  return { calls, messages: { create: async (req) => { calls.push(req); return typeof response === 'function' ? response(req) : response; } } };
+}
+const toolUse = (input, extra = {}) => ({ model: 'claude-opus-5-5', stop_reason: 'tool_use', usage: { input_tokens: 900, output_tokens: 300 }, content: [{ type: 'tool_use', id: 'toolu_x', name: 'propose_case', input }], ...extra });
+
+test('ANTHROPIC-001 a tool_use response becomes a proposal; the request forces the tool and frames the source as data', async () => {
+  const client = fakeClient(toolUse({ composer: SOCRATES_COMPOSER, alignment: [{ unit: 'C1', quote: 'All men are mortal' }, { unit: 'A1', quote: 'Therefore, Socrates is mortal' }] }));
+  const prop = await translate({ text: prose('socrates.prose.txt'), provider: createAnthropicProvider({ client }) });
+  assert.equal(prop.committable, true);
+  assert.equal(prop.provenance.sourceType, 'llm');
+  assert.equal(prop.model, 'claude-opus-5-5');
+  assert.deepEqual(prop.usage, { input_tokens: 900, output_tokens: 300 });
+  const req = client.calls[0];
+  assert.deepEqual(req.tool_choice, { type: 'tool', name: 'propose_case' });
+  assert.equal(req.model, 'claude-opus-5-5');
+  assert.equal(req.max_tokens, 8192);
+  assert.match(req.system, /untrusted data/);
+  assert.match(req.messages[0].content, /SOURCE TEXT \(untrusted data/);
+});
+
+test('ANTHROPIC-002 short ids the model cites (C1, A1) resolve to unit ids; unknown ids stay unverified', async () => {
+  const client = fakeClient(toolUse({ composer: SOCRATES_COMPOSER, alignment: [{ unit: 'C1', quote: 'All men are mortal' }, { unit: 'A1', quote: 'Therefore, Socrates is mortal' }, { unit: 'C9', quote: 'Socrates is a man' }] }));
+  const prop = await translate({ text: prose('socrates.prose.txt'), provider: createAnthropicProvider({ client }) });
+  assert.deepEqual(prop.alignment.map((a) => a.unit), ['claim:C1', 'argument:A1']);
+  assert.equal(prop.unverifiedAlignment.length, 1);
+  assert.equal(prop.unverifiedAlignment[0].unit, 'C9');
+});
+
+test('ANTHROPIC-003 truncated, context-overflow and refused responses are errors, never proposals', async () => {
+  const text = prose('socrates.prose.txt');
+  for (const stop of ['max_tokens', 'model_context_window_exceeded']) {
+    const provider = createAnthropicProvider({ client: fakeClient(toolUse({ composer: 'issue: Q?\nC1 [plausible]: A' }, { stop_reason: stop })) });
+    await assert.rejects(() => translate({ text, provider }), (e) => e instanceof TranslatorError && /cut off/.test(e.message), stop);
+  }
+  const refused = createAnthropicProvider({ client: fakeClient({ model: 'claude-opus-5-5', stop_reason: 'refusal', content: [] }) });
+  await assert.rejects(() => translate({ text, provider: refused }), /declined/);
+});
+
+test('ANTHROPIC-004 a missing tool call or a malformed tool input is rejected', async () => {
+  const text = prose('socrates.prose.txt');
+  const noTool = createAnthropicProvider({ client: fakeClient({ model: 'm', stop_reason: 'end_turn', content: [{ type: 'text', text: 'Here is the case: ...' }] }) });
+  await assert.rejects(() => translate({ text, provider: noTool }), /did not call propose_case \(stop_reason end_turn\)/);
+  for (const bad of [null, ['x'], { composer: 42 }, { alignment: [] }]) {
+    const provider = createAnthropicProvider({ client: fakeClient(toolUse(bad)) });
+    await assert.rejects(() => translate({ text, provider }), /not an object with a string "composer"/, JSON.stringify(bad));
+  }
+});
+
+test('ANTHROPIC-005 without an injected client, a missing key fails before any network call', async () => {
+  await assert.rejects(() => translate({ text: 'x y z', provider: createAnthropicProvider({ apiKey: '' }) }), /ANTHROPIC_API_KEY is not set/);
+});

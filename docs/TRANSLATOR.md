@@ -83,3 +83,38 @@ if (proposal.committable) await review.accept({ message: 'Accepted after review'
 In the UI (`npm run serve`), the Compose tab's **Propose from prose** drops an
 AI draft into the editor for the human to review and edit; `/api/translate` runs
 a provider only when one is configured, and never fakes AI.
+
+## Running it live
+
+```bash
+ANTHROPIC_API_KEY=… npm run translate:live              # every passage in fixtures/translator/live
+ANTHROPIC_API_KEY=… npm run translate:live -- good-1965 # one passage
+TRUTH_TRANSLATE_MODEL=claude-sonnet-5-5 …               # a different model (default claude-opus-5-5)
+```
+
+For each passage it prints whether the proposal is committable, red diagnostics,
+the Reasoning Explorer's verdict per argument (valid / invalid / not deducible,
+with the scheme), verified vs. unverified source alignment, the assumptions the
+model supplied, and token usage. Drafts and full proposals land in
+`out/translate-live/` (gitignored) with a `summary.md`. **Nothing is committed** —
+these are proposals for a human to review. There is no offline fallback: without
+a key it exits 2 rather than printing simulated results.
+
+`@anthropic-ai/sdk` is an optional dependency, so `npm ci` installs it; the
+translator still lazy-imports it, and the test suite never touches the network
+(the provider is tested with an injected client shaped like SDK 1.x responses).
+
+In a cloud session the key cannot be stored through the network-secret form for
+Anthropic's own hosts; add `ANTHROPIC_API_KEY` as an environment variable on the
+session's environment and start a new session.
+
+The provider refuses, rather than half-trusts, a response that was cut off
+(`max_tokens`, `model_context_window_exceeded`), refused, missing the tool call,
+or carrying a malformed tool input. Alignment entries may cite ids the way the
+grammar writes them (`C1`, `A1`); a short id is resolved to its unit only when it
+maps to exactly one.
+
+The passages in `fixtures/translator/live/` are short, widely quoted AI-risk
+texts (I. J. Good 1965, Turing 1951, the 2023 CAIS statement). Their wording was
+transcribed from memory and is marked unverified — check it against the
+originals before citing.

@@ -29,6 +29,7 @@ node src/cli.mjs compose fixtures/hermione/source/case.truth --show   # the comp
 node src/cli.mjs translate fixtures/translator/socrates.prose.txt --script fixtures/translator/socrates.proposal.json
                                            # AI translator (offline scripted provider); add --live for Anthropic
 node src/cli.mjs reasoning fixtures/reasoning-primer   # Reasoning Explorer: verdict, inference rule, Prolog, proof per argument
+ANTHROPIC_API_KEY=… npm run translate:live     # translator against real AI-risk prose; proposals only, no offline fallback
 npm run vectors                            # regenerate Logic IR parity vectors from ../knowshowgo
 ```
 
